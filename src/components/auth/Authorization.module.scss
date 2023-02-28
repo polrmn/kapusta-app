@@ -1,0 +1,19 @@
+.authContainer {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  margin: 0 auto;
+}
+.authSectionLogo {
+  width: 183px;
+  height: 63px;
+  background-image: url('../../images/authorization/authorization-logo.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
