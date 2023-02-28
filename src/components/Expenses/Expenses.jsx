@@ -21,7 +21,7 @@ export const Expenses = () => {
     }
   }
   //git -am 'save'
-  //git push
+
   //git checkout dev
   //git fetch
   // git pull
