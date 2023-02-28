@@ -64,6 +64,7 @@ export const refreshThunk = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       return null;
+      // eslint-disable-next-line
     } catch (error) {
       return rejectWithValue(error.message);
     }
