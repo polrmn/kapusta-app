@@ -7,12 +7,12 @@ import { privateAPI, publicAPI } from './http/http';
 
 // Utility to add JWT
 export const setAuthHeader = token => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  privateAPI.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 // Utility to remove JWT
 export const clearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = '';
+  privateAPI.defaults.headers.common.Authorization = '';
 };
 
 export const registerUserApi = async user => {
