@@ -1,7 +1,7 @@
 import { Calendar } from './Calendar/Calendar';
 
 const App = () => {
-  return <Calendar />;
+  return <></>;
 };
 
 export default App;
