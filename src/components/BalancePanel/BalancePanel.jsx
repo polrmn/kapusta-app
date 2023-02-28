@@ -12,6 +12,7 @@ function BalancePanel() {
   const dispatch = useDispatch();
 
   // const filterBalance = useSelector(selectBalance);
+  
   // const onClickConfirm = (e) => {
   //   e.preventDefault();
   //   const data = { balance, id: nanoid() };
