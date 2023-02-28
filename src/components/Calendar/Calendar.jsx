@@ -6,7 +6,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import css from './calendar.module.scss';
 
-export const Calendar = () => {
+export const Calendar = ({ onClick }) => {
   const [startDate, setStartDate] = useState(new Date());
   const dispatch = useDispatch();
 
@@ -18,6 +18,10 @@ export const Calendar = () => {
     const result = getDate.format('YYYY-MM-DD');
 
     dispatch(setDate(result));
+    if (onClick) {
+      onClick(result);
+      return;
+    }
     dispatch(getTransactionsThunk(result));
     return;
   };
