@@ -1,0 +1,61 @@
+.modalHeaderBackDrop{
+    z-index: 777;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modalHeader{
+    position: relative;
+    background-color: white;
+    max-width:380px;
+    max-height: 194px;
+    padding: 50px 57px 60px 58px;
+    box-shadow: 10px 10px 30px rgba(82, 85, 95, 0.4);
+    border-radius: 30px;
+
+
+    &Question{
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 16px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        letter-spacing: 0.02em;
+        color: #52555F;
+    }
+}
+.closeButton {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border: none;
+    &::before {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            content: "";
+            background-color: black;
+            width: 15px;
+            height: 2px;
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+    &::after {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            content: "";
+            background-color: black;
+            width: 15px;
+            height: 2px;
+            transform: translate(-50%, -50%) rotate(45deg);
+    }
+}
