@@ -1,12 +1,11 @@
-import BalancePanel from './BalancePanel/BalancePanel';
+import Authorization from './auth/Authorization';
 
 const App = () => {
   return (
-  <>
-      test
-      <BalancePanel />
-  </>
+    <>
+      <Authorization />
+    </>
   );
 };
 
-export default App
+export default App;
