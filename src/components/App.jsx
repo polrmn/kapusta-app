@@ -1,7 +1,10 @@
+import BalancePanel from './BalancePanel/BalancePanel';
+
 const App = () => {
   return (
   <>
-  test
+      test
+      <BalancePanel />
   </>
   );
 };
