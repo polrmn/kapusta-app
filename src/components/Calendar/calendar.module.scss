@@ -1,0 +1,28 @@
+.calendarWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+
+.calendarInput {
+  width: 74px;
+  height: 40px;
+
+  color: #52555f;
+
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 1.167;
+
+  align-items: center;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  border-color: transparent;
+
+  cursor: pointer;
+}
+
+

@@ -1,9 +1,9 @@
-import { Expenses } from './Expenses/Expenses';
+import Authorization from './auth/Authorization';
 
 const App = () => {
   return (
     <>
-      <Expenses />
+      <Authorization />
     </>
   );
 };
