@@ -1,9 +1,11 @@
+import { Expenses } from './Expenses/Expenses';
+
 const App = () => {
   return (
-  <>
-  test
-  </>
+    <>
+      <Expenses />
+    </>
   );
 };
 
-export default App
+export default App;

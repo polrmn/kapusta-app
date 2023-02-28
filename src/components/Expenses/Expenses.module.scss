@@ -1,0 +1,22 @@
+.expensesNav {
+  &__Link {
+    margin: 20px;
+
+    display: inline-block;
+    background: #fefefe;
+    width: 138px;
+    height: 40px;
+    border-radius: 16px 16px 0 0;
+    outline: 1px solid black;
+    text-align: center;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 11.166;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+
+    color: #ff751d;
+  }
+}
