@@ -1,7 +1,11 @@
-import { Calendar } from './Calendar/Calendar';
+import Authorization from './auth/Authorization';
 
 const App = () => {
-  return <></>;
+  return (
+    <>
+      <Authorization />
+    </>
+  );
 };
 
 export default App;

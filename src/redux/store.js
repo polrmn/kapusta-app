@@ -18,7 +18,7 @@ import { dateReducer } from './dateSlice';
 const persistConfig = {
   key: 'persisted-token',
   storage,
-  whitelist: ['token'],
+  whitelist: ['accessToken'],
 };
 
 const persistedReducer = persistReducer(persistConfig, authReducer);
