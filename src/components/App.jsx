@@ -1,9 +1,7 @@
+import { Calendar } from './Calendar/Calendar';
+
 const App = () => {
-  return (
-  <>
-  test
-  </>
-  );
+  return <></>;
 };
 
-export default App
+export default App;
