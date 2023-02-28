@@ -4,7 +4,15 @@
   gap: 8px;
 }
 
+.calendarIcon {
+  width: 20px;
+  height: 20px;
 
+  background-image: url('../../images/icons/calendar.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
 
 .calendarInput {
   width: 74px;
@@ -24,5 +32,3 @@
 
   cursor: pointer;
 }
-
-
