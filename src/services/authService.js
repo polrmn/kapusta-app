@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { privateAPI, publicAPI } from './http/http';
 
 // export const instance = axios.create({
