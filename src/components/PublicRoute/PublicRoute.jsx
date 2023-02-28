@@ -1,9 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router-dom';
-
+import { getIsLogin } from '../../redux/auth/authSelectors';
+// export const getIsLogin = state => state.auth.isLogin;
 export const PublicRoute = () => {
-  const token = useSelector(/*Select token */);
+  const isLogin = useSelector(getIsLogin);
 
-  return token ? <Navigate to="/home" /> : <Outlet />;
+  return isLogin ? <Navigate to="/home" /> : <Outlet />;
 };
