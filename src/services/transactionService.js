@@ -35,7 +35,9 @@ export const getExpenseCategoriesAPI = async () => {
 };
 
 export const getPeriodDataAPI = async period => {
-  const { data } = await privateAPI.get(`transaction/period-data/${period}`);
+  const { data } = await privateAPI.get(
+    `transaction/period-data?date=${period}`
+  );
   return data;
 };
 
