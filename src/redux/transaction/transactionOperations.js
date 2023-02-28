@@ -27,8 +27,8 @@ export const addBalanceThunk = createAsyncThunk(
   'user/balance',
   async (balance, thunkApi) => {
     try {
-      const newBalance = await addBalanceRequest(balance);
-      return newBalance;
+      // const newBalance = await addBalanceRequest(balance);
+      // return newBalance;
     } catch (e) {
       return thunkApi.rejectWithValue(e);
     }
