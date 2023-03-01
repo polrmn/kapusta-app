@@ -1,0 +1,14 @@
+/* .bar{
+border-radius: 10px 10px 0px 0px;
+} */
+body{
+    background-color: #52555F;
+}
+.chartContainer{
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+    background: #FFFFFF;
+    box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
+     border-radius: 30px;
+}

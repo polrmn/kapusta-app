@@ -25,7 +25,7 @@ export const SharedLayout = () => {
     <>
       <header className={css.header}>
         {openModal && <ModalHeader closeModalHandler={closeModalHandler} logoutConfirmHandler={logoutConfirmHandler} />}
-        <div className={css.container}>
+        <div className='container'>
           <div className={css.containerHeader}>
             <div className={css.logo}>
               <Link to='/home' className={css.headerLogo}>
@@ -46,9 +46,7 @@ export const SharedLayout = () => {
         </div>
       </header>
       <main>
-        <div className={css.container}>
           <Outlet />
-        </div>
       </main>
     </>
   );
