@@ -1,45 +1,50 @@
 import { Calendar } from 'components/Calendar/Calendar';
 import React, { useEffect, useReducer } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { privateAPI } from '../../services/http/http';
-import { logoutThunk } from './../../redux/auth/authOperations';
-import scss from './Expenses.module.scss';
+import { selectCategory } from 'redux/transaction/transactionSelectors';
+import { getAccessToken } from '../../redux/auth/authSelectors';
 import {
+  getExpenseCategoriesThunk,
   addTransactionThunk,
   delateTransactionThunk,
-  getExpenseCategoriesThunk,
-} from './../../redux/Expenses/expensesThunk';
+} from '../../redux/transaction/transactionOperations';
+import { setAuthHeader } from '../../services/http/http';
+import scss from './Expenses.module.scss';
+
+const initialState = {
+  description: '',
+  amount: '',
+  categories: '',
+  date: '',
+};
+function formReducer(state, action) {
+  switch (action.type) {
+    case 'description':
+      return { ...state, description: action.payload };
+    case 'amount':
+      return { ...state, amount: action.payload };
+    case 'categories':
+      return { ...state, categories: action.payload };
+    case 'date':
+      return { ...state, date: action.payload };
+    case 'reset':
+      return initialState;
+    default:
+      return state;
+  }
+}
 
 export const Expenses = () => {
   const dispatch = useDispatch();
+  console.log(selectCategory());
+  //const categoriesArray = useSelector();
+  const token = useSelector(getAccessToken);
   useEffect(() => {
-    console.log('1111', privateAPI.defaults.headers.common);
+    if (token) {
+      setAuthHeader(token);
+    }
     dispatch(getExpenseCategoriesThunk());
   }, [dispatch]);
-
-  const initialState = {
-    description: '',
-    amount: '',
-    category: '',
-    date: '',
-  };
-
-  function formReducer(state, action) {
-    switch (action.type) {
-      case 'description':
-        return { ...state, description: action.payload };
-      case 'amount':
-        return { ...state, amount: action.payload };
-      case 'category':
-        return { ...state, category: action.payload };
-      case 'date':
-        return { ...state, date: action.payload };
-      case 'reset':
-        return initialState;
-      default:
-        return state;
-    }
-  }
 
   //const balance = useSelector(selectBalance);
   //amountarray useselector
@@ -64,9 +69,13 @@ export const Expenses = () => {
     dispatchData({ type: 'date', payload: date });
   };
 
-  const handleChange = event => {
-    const { value } = event.target;
-    dispatchData({ type: 'category', payload: value });
+  // const handleChangeSelect = event => {
+  //   const { value } = event.target;
+  //   dispatchData({ type: 'category', payload: value });
+  // };
+  const handleChange = e => {
+    const { name, value } = e.target;
+    dispatchData({ type: name, payload: value });
   };
 
   const { description, amount, category } = state;
@@ -77,13 +86,7 @@ export const Expenses = () => {
           <div className={scss.calendar}>
             <Calendar onClick={handleDate} />
           </div>
-          <button
-            onClick={() => {
-              dispatch(logoutThunk());
-            }}
-          >
-            logout
-          </button>
+
           <form onSubmit={handleSubmit} className={scss.form}>
             <input
               name="description"
@@ -91,6 +94,7 @@ export const Expenses = () => {
               placeholder="Product description"
               type="text"
               className={scss.formContainer__description}
+              onChange={handleChange}
             />
             <select
               name="category"
@@ -98,10 +102,9 @@ export const Expenses = () => {
               onChange={handleChange}
               className={scss.formContainer__select}
             >
-              <option value="category" selected>
-                Product category
-              </option>
+              <option value="category">Product category</option>
               <option value="category">...list.map...</option>
+              {/* <button type="button" onClick={()=>{delateContact()}}>delate</button> */}
             </select>
 
             <input
@@ -110,6 +113,7 @@ export const Expenses = () => {
               placeholder="0.00"
               type="number"
               className={scss.formContainer__calculator}
+              onChange={handleChange}
             />
             <div className={scss.buttons}>
               <button type="submit">Input</button>
@@ -151,10 +155,3 @@ export const Expenses = () => {
     </>
   );
 };
-
-//{ onClick }
-// dispatch(setDate(result));
-// if (onClick) {
-//   onClick(result);
-//   return;
-// }
