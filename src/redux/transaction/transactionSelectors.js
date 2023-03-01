@@ -1,5 +1,5 @@
-export const selectIncomeSummary = store =>
-  store.transactions.incomes.monthsStats;
+export const selectIncomeSummary = state =>
+  state.transaction.incomes.monthStats;
 
-export const selectExpensesSummary = store =>
-  store.transactions.expences.monthsStats;
+export const selectExpenseSummary = state =>
+  state.transaction.expenses.monthStats;

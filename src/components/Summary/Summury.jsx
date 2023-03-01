@@ -1,50 +1,66 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
-let dataExp = {
-  Январь: 5,
-  Февраль: 100,
-  Март: 'N/A',
-  Апрель: 'N/A',
-  Май: 1,
-  Июнь: 'N/A',
-  Июль: 3,
-  Август: 'N/A',
-  Сентябрь: 'N/A',
-  Октябрь: 77,
-  Ноябрь: 'N/A',
-  Декабрь: 123,
-};
+import { getIsLogin } from 'redux/auth/authSelectors';
+import { getExpense, getIncome } from 'redux/transaction/transactionOperations';
+import {
+  selectExpenseSummary,
+  // selectIncomeSummary,
+} from 'redux/transaction/transactionSelectors';
+import { monthTranslate } from './monthTranslatе';
+
+let dataSum;
+
 const Summury = () => {
-  let data = [];
+  const dispatch = useDispatch();
+  const user = useSelector(getIsLogin);
+  // const incomeData = useSelector(selectIncomeSummary);
+  const expenseData = useSelector(selectExpenseSummary);
+
+  useEffect(() => {
+    if (user) dispatch(getIncome());
+    if (user) dispatch(getExpense());
+  }, [dispatch, user]);
+
   const location = useLocation();
-  if (location.pathname === '/expenses') {
-    const data = Object.entries(dataExp) ?? [];
-    console.log(data);
-  }
-  if (location.pathname === '/income') {
-    const data = Object.entries(dataExp) ?? [];
-    console.log(data);
+
+  // if (location.pathname === '/login') {
+  // const dataSum = Object.entries(incomeData) ?? [];
+
+  // }
+
+  if (location.pathname === '/login') {
+    dataSum = Object.entries(expenseData) ?? [];
   }
 
   return (
     <div>
-      summary
       <div className="">
         <table className="">
           <thead>
             <tr className="">
               <th className="" colSpan="2">
-                Summury
+                SUMMARY
               </th>
             </tr>
           </thead>
           <tbody>
-            {data?.map(item => (
-              <tr className="" key="">
-                <td className="">{}</td>
-                <td className="">{}</td>
-              </tr>
-            ))}
+            {dataSum?.reverse().map(
+              item => (
+                // {
+                //   if (item[1] === 'N/A') {
+                //     return false;
+                //   } else {
+                //     return (
+                <tr className="" key={`${item[0]}`}>
+                  <td className="">{monthTranslate(item[0])}</td>
+                  <td className="">{item[1]}</td>
+                </tr>
+              )
+              //     );
+              //   }
+              // }
+            )}
           </tbody>
         </table>
       </div>
