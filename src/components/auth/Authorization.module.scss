@@ -6,7 +6,11 @@
   margin: 0 auto;
   padding-top: 80px;
   padding-bottom: 100px;
-  background-color: var(--bgColor-secondary);
+  // background-color: var(--bgColor-secondary);
+  background-image: url('../../images/backgrounds/mobile/mobileAuth.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center
 }
 
 .authSectionLogo {
@@ -111,6 +115,7 @@
 @media screen and (min-width: 768px) {
   .authContainer {
     padding-bottom: 150px;
+    background-image: url('../../images/backgrounds/tablet/tabletAuth.png');
   }
   .authFormWrapper {
     width: 430px;
@@ -121,6 +126,7 @@
     width: 310px;
     height: 100px;
   }
+  
 }
 
 
@@ -130,6 +136,7 @@
     justify-content: center;
     height: calc(100vh - 77px);
     padding: 0;
+    background-image: url('../../images/backgrounds/desktop/desktopAuth.png');
   }
   .authSectionLogo {
     width: 380px;
