@@ -14,6 +14,7 @@ import { transactionReducer } from './transaction/transactionSlice';
 import { userReducer } from './user/userSlice';
 import { authReducer } from './auth/authSlice';
 import { dateReducer } from './dateSlice';
+import { summaryReducer } from './summary/summarySlice';
 
 const persistConfig = {
   key: 'persisted-token',
@@ -29,6 +30,7 @@ export const store = configureStore({
     transaction: transactionReducer,
     user: userReducer,
     date: dateReducer,
+    summary: summaryReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
