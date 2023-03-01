@@ -1,13 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getExpense, getIncome } from './transactionOperations';
+import {
+  getExpense,
+  getIncome,
+  getTransactionsThunk,
+} from './transactionOperations';
 
 const initialState = {
   isLoading: false,
   incomes: {
     monthStats: {},
+    incomes: { incomeTotal: 0, incomesData: {} },
   },
   expenses: {
     monthStats: {},
+    expenses: { expenseTotal: 0, expensesData: {} },
   },
 };
 
@@ -37,6 +43,19 @@ export const transactionSlice = createSlice({
         state.expenses.monthStats = action.payload.monthsStats;
       })
       .addCase(getExpense.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+
+      .addCase(getTransactionsThunk.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(getTransactionsThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.expenses.expenses = action.payload.expenses;
+        state.incomes.incomes = action.payload.incomes;
+      })
+      .addCase(getTransactionsThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       }),

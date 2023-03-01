@@ -2,8 +2,11 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 // import { PublicRoute } from './PublicRoute/PublicRoute';
 import { SharedLayout } from './SharedLayout/SharedLayout';
 import Authorization from './auth/Authorization';
+import { ExpensesReport } from './ExpensesReport/ExpensesReport';
 
 const App = () => {
+  
+
   return (
     <Routes>
       <Route path="/" element={<SharedLayout />}>
@@ -16,9 +19,9 @@ const App = () => {
           <Route path="expenses" element={<ExpensesHome />} />
           <Route path="income" element={<IncomeHome />} />
         </Route>
-        <Route path="/reports">
-          <Route path="expenses" element={<ExpensesReports />} />
-          <Route path="income" element={<IncomeReports />} /> 
+        <Route path="/reports"> */}
+          <Route path="expenses" element={<ExpensesReport />} />
+          {/* <Route path="income" element={<IncomeReports />} /> 
         </Route> */}
         {/* </Route> */}
       </Route>
