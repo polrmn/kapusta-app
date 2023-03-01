@@ -1,21 +1,21 @@
-import { ModalContext } from 'context/ ModalContext';
-import React, { useContext } from 'react';
-import css from './modalHeader.module.scss';
+import SharedButton from '../../commons/sharedButton/SharedButton';
+import style from './modalHeader.module.scss'
 
-export const ModalHeader = () => {
-  const [isOpen, setIsOpen] = useContext(ModalContext);
 
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-  return isOpen ? (
-    <div className={css.modalHeaderBackDrop}>
-      <div className={css.modalHeader}>
-        <button className={css.closeButton} onClick={handleClose}></button>
-        <p className={css.modalHeaderQuestion}>Are you sure?</p>
-        <button>YES</button>
-        <button>NO</button>
+function ModalHeader({ closeModalHandler, logoutConfirmHandler }) {
+
+  return (
+    <div className={style.backdrop}>
+      <div className={style.modal}>
+        <button onClick={closeModalHandler} className={style.modalCloseButton} />
+        <span className={style.modalText}>Are you sure?</span>
+        <div className={style.modalButtonWrapper}>
+          <SharedButton onClick={logoutConfirmHandler} active={true}>YES</SharedButton>
+          <SharedButton type='button' onClick={closeModalHandler}>NO</SharedButton>
+        </div>
       </div>
     </div>
-  ) : null;
-};
+  );
+}
+
+export default ModalHeader;

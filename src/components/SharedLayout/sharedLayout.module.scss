@@ -1,7 +1,7 @@
 .container{
     margin: 0 auto;
     padding: 0 20px;
-    
+
 }
 .logo{
     padding-top: 13px;
@@ -40,7 +40,7 @@
     color: #52555F;
     display: flex;
     align-items: center;
-    
+
     &::after{
         content: "";
         background-color:#E0E5EB;
@@ -48,7 +48,7 @@
         width: 1px;
         height: 20px;
         margin-left: 20px;
-       
+
     }
     }
 }
