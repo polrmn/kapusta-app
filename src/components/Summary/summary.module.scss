@@ -1,0 +1,72 @@
+.summary {
+  min-width: 213px;
+  margin: 20px;
+}
+
+.summaryTable {
+  display: none;
+}
+
+.summaryTitle {
+  min-width: 213px;
+  text-align: center;
+  height: 38px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.02em;
+}
+.summaryItem {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 20px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.04em;
+  border-top: 2px solid var(--bgColor-primary);
+  @media screen and (min-width: 1280px) {
+    padding: 12px 12px;
+  }
+}
+
+.summaryItemMonth {
+  width: 84px;
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 1.17;
+  letter-spacing: 0.04em;
+  text-align: left;
+}
+
+.summaryItemValue {
+  width: 84px;
+  font-size: 12px;
+  line-height: 1.17;
+  letter-spacing: 0.04em;
+  text-align: right;
+}
+@media screen and (min-width: 768px) {
+  .summaryTable {
+    min-width: 230px;
+    min-height: 280px;
+    height: 100%;
+    background-color: var(--bgColor-table);
+    display: inline-flex;
+    flex-direction: column;
+    text-align: center;
+    border-radius: 16px;
+    border-bottom-left-radius: 0px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .summaryTable {
+    min-width: 213px;
+  }
+}

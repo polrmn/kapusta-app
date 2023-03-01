@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
+import scss from './summary.module.scss';
 import { getIsLogin } from 'redux/auth/authSelectors';
 import { getExpense, getIncome } from 'redux/transaction/transactionOperations';
 import {
@@ -26,20 +27,18 @@ const Summury = () => {
 
   // if (location.pathname === '/login') {
   // const dataSum = Object.entries(incomeData) ?? [];
-
   // }
-
   if (location.pathname === '/login') {
     dataSum = Object.entries(expenseData) ?? [];
   }
 
   return (
     <div>
-      <div className="">
-        <table className="">
+      <div className={scss.summary}>
+        <table className={scss.summaryTable}>
           <thead>
             <tr className="">
-              <th className="" colSpan="2">
+              <th className={scss.summaryTitle} colSpan="2">
                 SUMMARY
               </th>
             </tr>
@@ -52,9 +51,11 @@ const Summury = () => {
                 //     return false;
                 //   } else {
                 //     return (
-                <tr className="" key={`${item[0]}`}>
-                  <td className="">{monthTranslate(item[0])}</td>
-                  <td className="">{item[1]}</td>
+                <tr className={scss.summaryItem} key={`${item[0]}`}>
+                  <td className={scss.summaryItemMonth}>
+                    {monthTranslate(item[0])}
+                  </td>
+                  <td className={scss.summaryItemValue}>{item[1]}</td>
                 </tr>
               )
               //     );
