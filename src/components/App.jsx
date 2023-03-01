@@ -5,6 +5,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { ModalHeader } from './ModalHeader/ModalHeader';
 // import { PublicRoute } from './PublicRoute/PublicRoute';
 import { SharedLayout } from './SharedLayout/SharedLayout';
+import BalancePanel from './BalancePanel/BalancePanel';
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <ModalHeader />
+      <BalancePanel />
     </ModalContextProvider>
   );
 };
