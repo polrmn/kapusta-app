@@ -2,6 +2,8 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 // import { PublicRoute } from './PublicRoute/PublicRoute';
 import { SharedLayout } from './SharedLayout/SharedLayout';
 import Authorization from './auth/Authorization';
+import { Expenses } from './Expenses/Expenses';
+import Home from './../pages/HomePage/HomePage';
 
 const App = () => {
   return (
@@ -12,11 +14,11 @@ const App = () => {
         <Route path="/register" element={<Authorization type="signup" />} />
         {/* </Route> */}
         {/* <Route path="/" element={<PrivateRoute />}> */}
-        {/* <Route path="/home">
-          <Route path="expenses" element={<ExpensesHome />} />
-          <Route path="income" element={<IncomeHome />} />
+        <Route path="/home" element={<Home />}>
+          <Route path="expenses" element={<Expenses />} />
+          {/* <Route path="income" element={<IncomeHome />} /> */}
         </Route>
-        <Route path="/reports">
+        {/* <Route path="/reports">
           <Route path="expenses" element={<ExpensesReports />} />
           <Route path="income" element={<IncomeReports />} /> 
         </Route> */}

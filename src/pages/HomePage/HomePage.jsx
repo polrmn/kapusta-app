@@ -1,15 +1,15 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import scss from './Expenses.module.scss';
 
-export const Home = () => {
+const Home = () => {
   return (
     <>
-      <div className={scss.homeNav}>
-        <NavLink className={scss.homeNavLink}>Expenses</NavLink>
-        <NavLink className={scss.homeNavLink}>Income</NavLink>
+      <div className="homeNav">
+        <NavLink className="homeNavLink">Expenses</NavLink>
+        <NavLink className="homeNavLink">Income</NavLink>
       </div>
       <Outlet />
     </>
   );
 };
+export default Home;

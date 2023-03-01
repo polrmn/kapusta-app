@@ -1,7 +1,8 @@
 import { Calendar } from 'components/Calendar/Calendar';
 import React, { useEffect, useReducer } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { privateAPI } from '../../services/http/http';
+import { logoutThunk } from './../../redux/auth/authOperations';
 import scss from './Expenses.module.scss';
 import {
   addTransactionThunk,
@@ -12,6 +13,7 @@ import {
 export const Expenses = () => {
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log('1111', privateAPI.defaults.headers.common);
     dispatch(getExpenseCategoriesThunk());
   }, [dispatch]);
 
@@ -38,18 +40,19 @@ export const Expenses = () => {
         return state;
     }
   }
-  const balanse = 1000;
+
   //const balance = useSelector(selectBalance);
   //amountarray useselector
 
   const [state, dispatchData] = useReducer(formReducer, initialState);
   const handleSubmit = e => {
     e.preventDefault();
-    // if (balance > state.amount) {
-    //   dispatch(addTransactionThunk(state));
-    // } else {
-    //   console.log('недостатньо коштів');
-    // }
+    const balanse = 1000;
+    if (balanse > state.amount) {
+      dispatch(addTransactionThunk(state));
+    } else {
+      console.log('недостатньо коштів');
+    }
   };
   const handleClear = () => {
     dispatchData({ type: 'reset' });
@@ -74,7 +77,13 @@ export const Expenses = () => {
           <div className={scss.calendar}>
             <Calendar onClick={handleDate} />
           </div>
-
+          <button
+            onClick={() => {
+              dispatch(logoutThunk());
+            }}
+          >
+            logout
+          </button>
           <form onSubmit={handleSubmit} className={scss.form}>
             <input
               name="description"
@@ -111,7 +120,7 @@ export const Expenses = () => {
           </form>
         </div>
         <div>
-          <div className={scss.table}>
+          {/* <div className={scss.table}>
             <table className={scss.transaction}>
               <thead>
                 <tr className={scss.titleList}>
@@ -124,7 +133,7 @@ export const Expenses = () => {
               </thead>
               <tbody className={scss.container}>
                 <td className={scss.listColumn}>IconDel</td>
-                {/* {items.map(({ _id, date, description, category, amount }) => (
+                 {items.map(({ _id, date, description, category, amount }) => (
                   <tr key={_id} className={scss.listRow}>
                     <td className={scss.listColumn}>{date}</td>
                     <td className={scss.listColumn}>{description}</td>
@@ -132,10 +141,10 @@ export const Expenses = () => {
                     <td className={scss.listColumn}>{amount}</td>
                     <td className={scss.listColumn}>IconDel</td>
                   </tr>
-                ))} */}
+                ))} 
               </tbody>
             </table>
-          </div>
+          </div> */}
           <div className={scss.summery}></div>
         </div>
       </div>
