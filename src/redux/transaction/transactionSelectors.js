@@ -1,6 +1,3 @@
-// const selectAmount = state => console.log(state);
-export const selectCategory = state => state;
-//state.transaction.transactions.categories;
-
-//state.auth.isLogin;
-// const selectTransactions = state => console.log(state);
+//export const selectAmount = state => state;
+export const selectCategory = state => state.transaction.category;
+export const selectTransactions = state => state.transaction.transactions;

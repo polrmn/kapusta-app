@@ -8,7 +8,7 @@ import {
 
 const initialState = {
   transactions: [],
-  categories: [],
+  category: [],
   isLoading: false,
   error: null,
 };
@@ -64,7 +64,7 @@ export const transactionSlice = createSlice({
       })
       .addCase(getExpenseCategoriesThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.categories = payload;
+        state.category = payload;
       })
       .addCase(getExpenseCategoriesThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
