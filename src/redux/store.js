@@ -13,11 +13,12 @@ import storage from 'redux-persist/lib/storage';
 import { transactionReducer } from './transaction/transactionSlice';
 import { userReducer } from './user/userSlice';
 import { authReducer } from './auth/authSlice';
+import { dateReducer } from './dateSlice';
 
 const persistConfig = {
   key: 'persisted-token',
   storage,
-  whitelist: ['token'],
+  whitelist: ['accessToken','userSid','refreshToken'],
 };
 
 const persistedReducer = persistReducer(persistConfig, authReducer);
@@ -27,6 +28,7 @@ export const store = configureStore({
     auth: persistedReducer,
     transaction: transactionReducer,
     user: userReducer,
+    date: dateReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

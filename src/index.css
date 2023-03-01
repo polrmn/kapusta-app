@@ -1,4 +1,17 @@
 @import-normalize; /* bring in normalize.css styles */
+:root {
+  --bgColor-primary: #FFFFFF;
+  --bgColor-secondary: #F2F5FC;
+  --bgColor-table: #F5F6FB;
+  --color-active: #FF751D;
+  --textColor-primary: #000000;
+  --textColor-secondary: #52555F;
+  --textColor-red: #E53935;
+  --textColor-green: #407946;
+  --textColor-placeholder: #C7CCDC;
+
+
+}
 
 body {
  
