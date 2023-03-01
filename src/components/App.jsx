@@ -4,7 +4,6 @@ import { SharedLayout } from './SharedLayout/SharedLayout';
 import Authorization from './auth/Authorization';
 
 const App = () => {
-  return <>test</>;
   return (
     <Routes>
       <Route path="/" element={<SharedLayout />}>
