@@ -123,3 +123,10 @@ export const Expenses = () => {
     </>
   );
 };
+
+//{ onClick }
+// dispatch(setDate(result));
+// if (onClick) {
+//   onClick(result);
+//   return;
+// }
