@@ -1,9 +1,20 @@
 import { Calendar } from 'components/Calendar/Calendar';
-import React, { useReducer } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useReducer } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import scss from './Expenses.module.scss';
+import {
+  addTransactionThunk,
+  delateTransactionThunk,
+  getExpenseCategoriesThunk,
+} from './../../redux/Expenses/expensesThunk';
 
 export const Expenses = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getExpenseCategoriesThunk());
+  }, [dispatch]);
+
   const initialState = {
     description: '',
     amount: '',
@@ -13,9 +24,9 @@ export const Expenses = () => {
 
   function formReducer(state, action) {
     switch (action.type) {
-      case 'email':
+      case 'description':
         return { ...state, description: action.payload };
-      case 'password':
+      case 'amount':
         return { ...state, amount: action.payload };
       case 'category':
         return { ...state, category: action.payload };
@@ -27,24 +38,32 @@ export const Expenses = () => {
         return state;
     }
   }
+  const balanse = 1000;
+  //const balance = useSelector(selectBalance);
+  //amountarray useselector
 
-  const dispatch = useDispatch();
   const [state, dispatchData] = useReducer(formReducer, initialState);
+  const handleSubmit = e => {
+    e.preventDefault();
+    // if (balance > state.amount) {
+    //   dispatch(addTransactionThunk(state));
+    // } else {
+    //   console.log('недостатньо коштів');
+    // }
+  };
+  const handleClear = () => {
+    dispatchData({ type: 'reset' });
+  };
+  const delateContact = id => dispatch(delateTransactionThunk(id));
 
   /*date with calendar */
   const handleDate = date => {
     dispatchData({ type: 'date', payload: date });
   };
-  const handleSubmit = e => {
-    e.preventDefault();
-    //dispatch(transactionThunk(state));
-  };
-  const handleClear = () => {
-    dispatchData({ type: 'reset' });
-  };
+
   const handleChange = event => {
     const { value } = event.target;
-    //dispatch(selectThunk(value));
+    dispatchData({ type: 'category', payload: value });
   };
 
   const { description, amount, category } = state;
@@ -83,13 +102,13 @@ export const Expenses = () => {
               type="number"
               className={scss.formContainer__calculator}
             />
+            <div className={scss.buttons}>
+              <button type="submit">Input</button>
+              <button type="button" onClick={handleClear}>
+                Clear
+              </button>
+            </div>
           </form>
-          <div className={scss.buttons}>
-            <button type="submit">Input</button>
-            <button type="submit" onClick={handleClear}>
-              Clear
-            </button>
-          </div>
         </div>
         <div>
           <div className={scss.table}>
