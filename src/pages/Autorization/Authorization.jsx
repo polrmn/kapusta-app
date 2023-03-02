@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './Authorization.module.scss';
-import AuthorizationForm from './AuthorizationForm';
+import AuthorizationForm from '../../components/auth/AuthorizationForm';
 
 const Authorization = ({ type }) => {
   return (

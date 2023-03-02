@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes, useNavigate, useSearchParams } from 'react-router-dom';
 import { SharedLayout } from './SharedLayout/SharedLayout';
-import Authorization from './auth/Authorization';
+import Authorization from '../pages/Autorization/Authorization';
 import { Expenses } from './Expenses/Expenses';
 import Home from './../pages/HomePage/HomePage';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
@@ -22,6 +22,7 @@ const App = () => {
   useEffect(() => {
     token && dispatch(getUserThunk());
     googleAuth(token, searchParams, dispatch, navigate);
+    // eslint-disable-next-line
   }, []);
 
   return (
