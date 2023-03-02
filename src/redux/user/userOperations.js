@@ -19,7 +19,7 @@ export const addBalance = createAsyncThunk(
       const newBalance = await updateBalanceAPI(balance);
       return newBalance;
     } catch (e) {
-      return thunkApi.rejectWithValue(e);
+      return thunkApi.rejectWithValue(e.message);
     }
   }
 );

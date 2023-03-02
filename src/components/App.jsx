@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 // import { PublicRoute } from './PublicRoute/PublicRoute';
 import { SharedLayout } from './SharedLayout/SharedLayout';
 import Authorization from './auth/Authorization';
+import BalancePanel from './BalancePanel/BalancePanel';
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
         {/* <Route path="/" element={<PublicRoute />}> */}
         <Route path="/login" element={<Authorization type="login" />} />
         <Route path="/register" element={<Authorization type="signup" />} />
+        <Route path="/balance" element={<BalancePanel />} />
         {/* </Route> */}
         {/* <Route path="/" element={<PrivateRoute />}> */}
         {/* <Route path="/home">

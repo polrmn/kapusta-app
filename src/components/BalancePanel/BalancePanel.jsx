@@ -1,8 +1,12 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAccessToken } from 'redux/auth/authSelectors';
 import { addBalance } from 'redux/user/userOperations';
+import { setAuthHeader } from 'services/http/http';
+// import { updateBalanceAPI } from 'services/transactionService';
 // import { selectBalance } from 'redux/transaction/transactionSelectors';
 import Modal from './BalanceModal';
+// import { privateAPI } from '../../services/http/http'
 import style from './BalancePanel.module.scss';
 
 function BalancePanel() {
@@ -10,13 +14,23 @@ function BalancePanel() {
   const [showModal, setShowModal] = React.useState(false);
   const dispatch = useDispatch();
 
+  const token = useSelector(getAccessToken);
+  useEffect(() => {
+    if (token) {
+      setAuthHeader(token);
+    }
+    // dispatch(updateBalanceAPI());
+  }, [dispatch]);
+
   const onClickConfirm = (e) => {
     e.preventDefault();
     const data = {
       newBalance: balance,
     };
+    // console.log(privateAPI.defaults.headers.common)
     dispatch(addBalance(data));
     resetInput();
+    setShowModal(false);
   };
 
   const resetInput = () => {
@@ -28,30 +42,39 @@ function BalancePanel() {
   // };
 
   const balanceChange = (e) => {
-    const { balance, value } = e.target;
-    if (balance === "balance") {
+    const { value } = e.target;
+    // if (balance === "balance") {
       setBalance(value);
-    } else {
-      alert(`Something happen (-_-)`);
-    }
+    // } else {
+    //   alert(`Something happen (-_-)`);
+    // }
   };
 
   return (
     <section className={style.balance}>
       <div className={style.balanceBack}>
         <button type="button" className={style.balanceBtnBack}>to transaction</button>
+        {/* <button type="button" className={style.balanceBtnMain}>Main page</button> */}
       </div>
       <div className={style.balanceReports}>
         <button type='button' className={style.balanceBtnReport}>Reports</button>
       </div>
+      {/* <div className={style.balanceCal}>
+        <p className={style.balanceCalPara}>Current period:</p>
+        <div className={style.balanceCalInner}>
+          <button type='button' className={style.balanceCalDec}></button>
+          <p className={style.balanceCalProp}>November 2019</p>
+          <button type='button' className={style.balanceCalInc}></button>
+        </div>
+      </div> */}
       <div className={style.balanceInnerBlock}>
         <p className={style.balancePara}>Balance:</p>
         <div className={style.balanceAdd}>
-          <p className={style.balanceProp}>9000 coins</p>
+          <p className={style.balanceProp}>{balance} coins</p>
           <button onClick={() => (setShowModal(true))} className={style.balanceBtnAdd}>Add balance</button>
         </div>
         <Modal active={showModal} setActive={setShowModal}>
-          <form action="" className={style.balanceForm}>
+          <form action="" onSubmit={onClickConfirm} className={style.balanceForm}>
             <label>
               <p className={style.balanceModalPara}>Balance:</p>
               <input
@@ -62,7 +85,7 @@ function BalancePanel() {
                 onChange={balanceChange}
               />
             </label>
-            <button className={style.balanceModalBtn} type="submit" onClick={() => (onClickConfirm())}>Confirm</button>
+            <button className={style.balanceModalBtn} type="submit">Confirm</button>
           </form>
         </Modal>
         {/* {showModal && (
