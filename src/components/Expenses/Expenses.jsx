@@ -13,6 +13,7 @@ import {
 } from '../../redux/transaction/transactionOperations';
 import { setAuthHeader } from '../../services/http/http';
 import scss from './Expenses.module.scss';
+import Summury from 'components/Summary/Summary';
 
 const initialState = {
   description: '',
@@ -174,7 +175,9 @@ export const Expenses = () => {
               </tbody>
             </table>
           </div>
-          <div className={scss.summery}></div>
+          <div className={scss.summery}>
+            <Summury/>
+          </div>
         </div>
       </div>
     </>

@@ -45,22 +45,21 @@ const Summury = () => {
           </thead>
           <tbody>
             {dataSum?.reverse().map(
-              item => (
-                // {
-                //   if (item[1] === 'N/A') {
-                //     return false;
-                //   } else {
-                //     return (
+              item => 
+                {
+                  if (item[1] === 'N/A') {
+                    return false;
+                  } else {
+                    return (
                 <tr className={scss.summaryItem} key={`${item[0]}`}>
                   <td className={scss.summaryItemMonth}>
                     {monthTranslate(item[0])}
                   </td>
                   <td className={scss.summaryItemValue}>{item[1]}</td>
                 </tr>
-              )
-              //     );
-              //   }
-              // }
+                  )
+                }
+              }
             )}
           </tbody>
         </table>
