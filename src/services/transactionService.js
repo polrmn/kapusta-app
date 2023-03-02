@@ -43,6 +43,6 @@ export const getPeriodDataAPI = async period => {
 };
 
 export const updateBalanceAPI = async newBalance => {
-  const { data } = await privateAPI.get('user/balance', newBalance);
+  const { data } = await privateAPI.patch('user/balance', newBalance);
   return data;
 };
