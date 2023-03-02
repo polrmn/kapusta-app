@@ -7,9 +7,11 @@ import { selectDate, selectIsLoading } from 'redux/selectors';
 import { getTransactionsThunk } from 'redux/transaction/transactionOperations';
 import { selectExpenses } from 'redux/transaction/transactionSelectors';
 import { setAuthHeader } from 'services/http/http';
-import symbol from '../../images/symbol-defs.svg'
+// import symbol from '../../images/svg-reports/alcohol.svg';
 import { Chart } from 'components/Chart';
-
+import { ReactComponent as ReportAlcohol } from '../../images/svg-reports/alcohol.svg';
+import { ReactComponent as ReportProducts } from '../../images/svg-reports/products.svg';
+import { ReactComponent as ReportOther } from '../../images/svg-reports/other.svg';
 export const ExpensesReport = () => {
   const reportDate = useSelector(selectDate);
   const expenses = useSelector(selectExpenses);
@@ -25,7 +27,7 @@ export const ExpensesReport = () => {
     } else {
       dispatch(setDate('2023-03'));
     }
-  }, [reportDate, dispatch]);
+  }, [reportDate, dispatch, persistedToken]);
 
   const categories = [
     'Продукты',
@@ -45,6 +47,20 @@ export const ExpensesReport = () => {
     category => expenses.expensesData[category]
   );
 
+  const getSvg = category => {
+    switch (category) {
+      case 'Продукты':
+        return <ReportProducts />;
+
+      case 'Алкоголь':
+        return <ReportAlcohol />;
+
+      case 'Прочее':
+      default:
+        return <ReportOther />;
+    }
+  };
+
   return isLoading ? (
     <p>Loading...</p>
   ) : (
@@ -55,15 +71,13 @@ export const ExpensesReport = () => {
           {filteredCategories.map(category => (
             <li className={css.category} key={category}>
               <p>{expenses.expensesData[category].total}</p>
-              <symbol href={`../../images/Продукты.svg`}>
-              
-              </symbol>
+                {getSvg(category)}
               <p>{category}</p>
             </li>
           ))}
         </ul>
       )}
-      <Chart/>
+      <Chart />
     </>
   );
 };
