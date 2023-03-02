@@ -1,4 +1,4 @@
-// import BalancePanel from 'components/BalancePanel/BalancePanel';
+import BalancePanel from 'components/BalancePanel/BalancePanel';
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ const Home = () => {
           Reports
         </NavLink>
       </div>
-      {/* <BalancePanel/> */}
+      <BalancePanel/>
       <Outlet />
     </>
   );

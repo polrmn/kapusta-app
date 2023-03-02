@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAccessToken } from 'redux/auth/authSelectors';
+import { Link } from 'react-router-dom';
 import { addBalance } from 'redux/user/userOperations';
-import { setAuthHeader } from 'services/http/http';
+import { getBalance } from 'redux/user/userSelectors';
+import { privateAPI } from 'services/http/http';
 // import { updateBalanceAPI } from 'services/transactionService';
 // import { selectBalance } from 'redux/transaction/transactionSelectors';
 import Modal from './BalanceModal';
@@ -13,21 +14,15 @@ function BalancePanel() {
   const [balance, setBalance] = React.useState(0);
   const [showModal, setShowModal] = React.useState(false);
   const dispatch = useDispatch();
+  const balAnce = useSelector(getBalance)
 
-  const token = useSelector(getAccessToken);
-  useEffect(() => {
-    if (token) {
-      setAuthHeader(token);
-    }
-    // dispatch(updateBalanceAPI());
-  }, [dispatch]);
 
   const onClickConfirm = (e) => {
     e.preventDefault();
     const data = {
       newBalance: balance,
     };
-    // console.log(privateAPI.defaults.headers.common)
+    console.log(privateAPI.defaults.headers.common)
     dispatch(addBalance(data));
     resetInput();
     setShowModal(false);
@@ -54,7 +49,9 @@ function BalancePanel() {
     <section className={style.balance}>
       <div className={style.balanceBack}>
         <button type="button" className={style.balanceBtnBack}>
-          <a className={style.balanceLinkBack} href="/kapusta">to transaction</a>
+          <a className={style.balanceLinkBack} href="/kapusta">
+            to transaction
+          </a>
         </button>
       </div>
       {/* <div className={style.balanceMain}>
@@ -63,8 +60,13 @@ function BalancePanel() {
         </button>
       </div> */}
       <div className={style.balanceReports}>
-        <button type='button' className={style.balanceBtnReport}>
-          <a className={style.balanceLinkReport} href="/kapusta">Reports</a>
+        <button type="button" className={style.balanceBtnReport}>
+          {/* <a className={style.balanceLinkReport} href="/kapusta">
+            Reports
+          </a> */}
+          <Link className={style.balanceLinkReport} to="/reports">
+            Report
+          </Link>
         </button>
       </div>
       {/* <div className={style.balanceCal}>
@@ -78,11 +80,20 @@ function BalancePanel() {
       <div className={style.balanceInnerBlock}>
         <p className={style.balancePara}>Balance:</p>
         <div className={style.balanceAdd}>
-          <p className={style.balanceProp}>{balance} coins</p>
-          <button onClick={() => (setShowModal(true))} className={style.balanceBtnAdd}>Add balance</button>
+          <p className={style.balanceProp}>{balAnce} coins</p>
+          <button
+            onClick={() => setShowModal(true)}
+            className={style.balanceBtnAdd}
+          >
+            Add balance
+          </button>
         </div>
         <Modal active={showModal} setActive={setShowModal}>
-          <form action="" onSubmit={onClickConfirm} className={style.balanceForm}>
+          <form
+            action=""
+            onSubmit={onClickConfirm}
+            className={style.balanceForm}
+          >
             <label>
               <p className={style.balanceModalPara}>Balance:</p>
               <input
@@ -93,12 +104,14 @@ function BalancePanel() {
                 onChange={balanceChange}
               />
             </label>
-            <button className={style.balanceModalBtn} type="submit">Confirm</button>
+            <button className={style.balanceModalBtn} type="submit">
+              Confirm
+            </button>
           </form>
         </Modal>
       </div>
     </section>
-  )
+  );
 };
 
 export default BalancePanel;
