@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import css from './sharedLayout.module.scss';
 import { ReactComponent as ReactLogo } from '../../images/logo-header.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutThunk } from '../../redux/auth/authOperations';
+import { getUserThunk, logoutThunk } from '../../redux/auth/authOperations';
 import ModalHeader from '../ModalHeader/ModalHeader';
-import { getIsLogin, getUserEmail } from '../../redux/auth/authSelectors';
+import { getAccessToken, getIsLogin, getUserEmail } from '../../redux/auth/authSelectors';
+import { setAuthHeader } from '../../services/http/http';
 
 export const SharedLayout = () => {
   const dispatch = useDispatch();
   const [openModal, setOpenModal] = useState(false);
   const email = useSelector(getUserEmail);
   const isLogin = useSelector(getIsLogin);
+  const token = useSelector(getAccessToken);
   const closeModalHandler = () => setOpenModal(!openModal);
   const logoutConfirmHandler = () => {
     dispatch(logoutThunk());
@@ -20,6 +22,18 @@ export const SharedLayout = () => {
   const handleOpenModal = () => {
     setOpenModal(!openModal);
   };
+
+  const resetPage = async () => {
+    await token
+    if(token){
+      await setAuthHeader(token)
+      await dispatch(getUserThunk())
+    }
+  }
+
+  useEffect(()=>{
+    resetPage().then()
+  },[])
 
   return (
     <>
