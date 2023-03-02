@@ -7,6 +7,7 @@ import { selectDate, selectIsLoading } from 'redux/selectors';
 import { getTransactionsThunk } from 'redux/transaction/transactionOperations';
 import { selectExpenses } from 'redux/transaction/transactionSelectors';
 import { setAuthHeader } from 'services/http/http';
+import symbol from '../../images/symbol-defs.svg'
 import { Chart } from 'components/Chart';
 
 export const ExpensesReport = () => {
@@ -54,9 +55,9 @@ export const ExpensesReport = () => {
           {filteredCategories.map(category => (
             <li className={css.category} key={category}>
               <p>{expenses.expensesData[category].total}</p>
-              <svg>
-                <use href={`../../images/symbol-defs.svg#Продукты`}></use>
-              </svg>
+              <symbol href={`../../images/Продукты.svg`}>
+              
+              </symbol>
               <p>{category}</p>
             </li>
           ))}
