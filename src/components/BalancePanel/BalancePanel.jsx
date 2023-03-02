@@ -63,7 +63,7 @@ function BalancePanel() {
           </div>
           <div className={style.balanceInnerBlock}>
               <p className={style.balancePara}>Balance:</p>
-              <p className={style.balanceProp}>{props}</p>
+              <p className={style.balanceProp}></p>
         <button onClick={() => (onClickConfirm())} className={style.balanceBtn}>Confirm</button>
         <div id="modal"></div>
         {showModal && (
