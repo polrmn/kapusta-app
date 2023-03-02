@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  addExpenseTransactionThunk,
-  delateTransactionThunk,
-  getExpenseTransactionsByThunk,
-  getExpenseCategoriesThunk,
-  addIncomeTransactionThunk,
-} from './transactionOperations';
-import { getTransactionsThunk } from './transactionOperations';
 import { getExpense, getIncome } from './transactionOperations';
-import { getUserThunk, loginThunk } from '../auth/authOperations';
+import { 
+  addExpenseTransactionThunk, 
+  delateTransactionThunk, 
+  getExpenseTransactionsByThunk, 
+  getExpenseCategoriesThunk, 
+  addIncomeTransactionThunk,
+  getTransactionsThunk, 
+} from './transactionOperations'; 
+
 const initialState = {
   transactions: [],
   category: [],
@@ -16,9 +16,11 @@ const initialState = {
   error: null,
   incomes: {
     monthStats: {},
+    incomes: { incomeTotal: 0, incomesData: {} },
   },
   expenses: {
     monthStats: {},
+    expenses: { expenseTotal: 0, expensesData: {} },
   },
 };
 
@@ -129,7 +131,20 @@ export const transactionSlice = createSlice({
       .addCase(getExpense.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
-      });
+      })
+
+      // .addCase(getTransactionsThunk.pending, state => {
+      //   state.isLoading = true;
+      // })
+      // .addCase(getTransactionsThunk.fulfilled, (state, action) => {
+      //   state.isLoading = false;
+      //   state.expenses.expenses = action.payload.expenses;
+      //   state.incomes.incomes = action.payload.incomes;
+      // })
+      // .addCase(getTransactionsThunk.rejected, (state, action) => {
+      //   state.isLoading = false;
+      //   state.error = action.payload;
+      // });
     // ============================ 2 санки после логина/рефреша которые нужны для передачи транзакций
     // .addCase(loginThunk.fulfilled, (state, { payload }) => {
     //   state.transactions = payload.userData.transactions;
