@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import Notiflix from 'notiflix';
 import { clearAuthHeader, setAuthHeader } from '../../services/http/http';
-import { loginUserApi, logoutUserApi, registerUserApi } from '../../services/authService';
+import { getUserInfoApi, loginUserApi, logoutUserApi, registerUserApi } from '../../services/authService';
 
 export const signUpThunk = createAsyncThunk(
   'auth/signUp',
@@ -42,6 +42,17 @@ export const logoutThunk = createAsyncThunk(
       return res;
     } catch (error) {
       Notiflix.Notify.failure(`${error.message}`);
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
+export const getUserThunk = createAsyncThunk(
+  'auth/getUser',
+  async (data, { rejectWithValue }) => {
+    try {
+      return await getUserInfoApi();
+    } catch (error) {
       return rejectWithValue(error.message);
     }
   },
