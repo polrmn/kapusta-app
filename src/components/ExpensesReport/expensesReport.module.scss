@@ -1,3 +1,4 @@
+$linear: linear-gradient(90.03deg, #00C5EB -1.97%, #B544FE 89.43%);
 li {
   list-style: none;
 }
@@ -12,3 +13,13 @@ li {
   margin: 0;
   padding: 0;
 }
+
+.category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.category:hover .category__svg,
+    .category:focus .category__svg{
+        stroke: url(#gradient);}

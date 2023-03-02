@@ -4,13 +4,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAccessToken } from 'redux/auth/authSelectors';
 import { setDate } from 'redux/dateSlice';
 import { selectDate, selectIsLoading } from 'redux/selectors';
-import { getExpenseCategoriesThunk, getTransactionsThunk } from 'redux/transaction/transactionOperations';
-import { selectCategory, selectExpenses } from 'redux/transaction/transactionSelectors';
+import {
+  getExpenseCategoriesThunk,
+  getTransactionsThunk,
+} from 'redux/transaction/transactionOperations';
+import {
+  selectCategory,
+  selectExpenses,
+} from 'redux/transaction/transactionSelectors';
 import { setAuthHeader } from 'services/http/http';
 import { Chart } from 'components/Chart';
 import { ReactComponent as ReportAlcohol } from '../../images/svg-reports/alcohol.svg';
 import { ReactComponent as ReportProducts } from '../../images/svg-reports/products.svg';
+import { ReactComponent as ReportCommunal } from '../../images/svg-reports/communal.svg';
+import { ReactComponent as ReportEducation } from '../../images/svg-reports/education.svg';
+import { ReactComponent as ReportEntertainment } from '../../images/svg-reports/entertainment.svg';
+import { ReactComponent as ReportHealth } from '../../images/svg-reports/health.svg';
+import { ReactComponent as ReportHousing } from '../../images/svg-reports/housing.svg';
+import { ReactComponent as ReportSports } from '../../images/svg-reports/sports.svg';
+import { ReactComponent as ReportTechnique } from '../../images/svg-reports/technique.svg';
+import { ReactComponent as ReportTransport } from '../../images/svg-reports/transport.svg';
 import { ReactComponent as ReportOther } from '../../images/svg-reports/other.svg';
+import { setCategoryFilter } from 'redux/categoryFilter/categoryFilterSlice';
 
 export const ExpensesReport = () => {
   const reportDate = useSelector(selectDate);
@@ -43,10 +58,38 @@ export const ExpensesReport = () => {
       case 'Алкоголь':
         return <ReportAlcohol />;
 
+      case 'Коммуналка и связь':
+        return <ReportCommunal />;
+
+      case 'Образование':
+        return <ReportEducation />;
+
+      case 'Здоровье':
+        return <ReportHealth />;
+
+      case 'Всё для дома':
+        return <ReportHousing />;
+
+      case 'Спорт и хобби':
+        return <ReportSports />;
+
+      case 'Развлечения':
+        return <ReportEntertainment />;
+
+      case 'Техника':
+        return <ReportTechnique />;
+
+      case 'Транспорт':
+        return <ReportTransport />;
+
       case 'Прочее':
       default:
         return <ReportOther />;
     }
+  };
+
+  const handleCategoryClick = event => {
+    dispatch(setCategoryFilter(event.currentTarget.dataset['category']));
   };
 
   return isLoading ? (
@@ -57,9 +100,14 @@ export const ExpensesReport = () => {
       {expenses.expenseTotal > 0 && (
         <ul className={css.container}>
           {filteredCategories.map(category => (
-            <li className={css.category} key={category}>
+            <li
+              className={css.category}
+              key={category}
+              data-category={category}
+              onClick={handleCategoryClick}
+            >
               <p>{expenses.expensesData[category].total}</p>
-                {getSvg(category)}
+              <svg className={css.category__svg} height={'56px'} width={'56px'}>{getSvg(category)}</svg>
               <p>{category}</p>
             </li>
           ))}

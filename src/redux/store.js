@@ -15,11 +15,12 @@ import { transactionReducer } from './transaction/transactionSlice';
 import { userReducer } from './user/userSlice';
 import { authReducer } from './auth/authSlice';
 import { dateReducer } from './dateSlice';
+import { categoryFilterReducer } from './categoryFilter/categoryFilterSlice';
 
 const persistConfig = {
   key: 'persisted-token',
   storage,
-  whitelist: ['accessToken','userSid','refreshToken'],
+  whitelist: ['accessToken', 'userSid', 'refreshToken'],
 };
 
 const persistedReducer = persistReducer(persistConfig, authReducer);
@@ -30,6 +31,7 @@ export const store = configureStore({
     transaction: transactionReducer,
     user: userReducer,
     date: dateReducer,
+    categoryFilter: categoryFilterReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
