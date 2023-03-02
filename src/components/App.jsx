@@ -5,6 +5,7 @@ import PrivateRoute from './PrivateRoute/PrivateRoute';
 import PublicRoute from './PublicRoute/PublicRoute';
 
 const App = () => {
+
   return (
     <Routes>
       <Route path="/" element={<SharedLayout />}>
