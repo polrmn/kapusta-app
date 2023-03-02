@@ -1,4 +1,3 @@
-// import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -7,7 +6,6 @@ import style from './Authorization.module.scss';
 import SharedButton from '../../commons/sharedButton/SharedButton';
 import { validate } from '../../helpers/authValidate';
 import { getIsLogin } from '../../redux/auth/authSelectors';
-// import Notiflix from 'notiflix';
 
 const AuthorizationForm = ({ type }) => {
 
@@ -17,16 +15,8 @@ const AuthorizationForm = ({ type }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
-  // useEffect(() => {
-  //   if (isLogin) {
-  //     Notiflix.Notify.success('Already logged in');
-  //   }
-  // }, []);
-
   const loginButtonHandler = () => navigate('/login');
   const registerButtonHandler = () => navigate('/register');
-  const googleButtonHandler = () => alert('пока что так');
 
   const formik = useFormik({
     initialValues: {
@@ -57,10 +47,11 @@ const AuthorizationForm = ({ type }) => {
       </div>
       {type === formType.LOGIN && <div className={style.loginWithGoogleWrapper}>
         <span className={style.authFormSubText}>You can log in with your Google Account:</span>
-        <SharedButton onClick={googleButtonHandler} className={style.loginWithGoogleButton} type='button'>
-          <div className={style.googleLogo} />
-          GOOGLE</SharedButton>
-
+        <a href='https://kapusta-backend.goit.global/auth/google'>
+          <SharedButton className={style.loginWithGoogleButton} type='button'>
+            <div className={style.googleLogo} />
+            GOOGLE</SharedButton>
+        </a>
         <span className={style.authFormSubText}>Or log in using an email and password</span>
       </div>}
       {type === formType.SIGNUP &&

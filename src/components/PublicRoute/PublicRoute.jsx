@@ -1,10 +1,15 @@
-import React from 'react';
+import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Navigate, Outlet } from 'react-router-dom';
-import { getIsLogin } from '../../redux/auth/authSelectors';
-// export const getIsLogin = state => state.auth.isLogin;
-export const PublicRoute = () => {
-  const isLogin = useSelector(getIsLogin);
+import { getAccessToken } from '../../redux/auth/authSelectors';
 
-  return isLogin ? <Navigate to="/home" /> : <Outlet />;
+const PublicRoute = ({ component }) => {
+  const token = useSelector(getAccessToken);
+  return token ? <Navigate to={'/'} /> : component;
 };
+
+export default PublicRoute;
+
+
+
+
+
