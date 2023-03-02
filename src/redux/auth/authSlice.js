@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginThunk, logoutThunk, refreshThunk, signUpThunk } from './authOperations';
+import { getUserThunk, loginThunk, logoutThunk, refreshThunk, signUpThunk } from './authOperations';
 
 
 const initialState = {
@@ -7,7 +7,6 @@ const initialState = {
   isLogin: false,
   error: null,
   userEmail: null,
-  userId: null,
   userSid: null,
   accessToken: null,
   refreshToken: null,
@@ -26,6 +25,7 @@ export const authSlice = createSlice({
     });
     addCase(signUpThunk.fulfilled, (state, { payload }) => {
       console.log('signUpThunk.fulfilled');
+      state.error = null;
     });
     addCase(signUpThunk.rejected, (state, { payload }) => {
       state.error = payload;
@@ -42,10 +42,10 @@ export const authSlice = createSlice({
       state.refreshToken = payload.refreshToken;
       state.userSid = payload.sid;
       state.userEmail = payload.userData.email;
-      state.userId = payload.userData.id;
       state.transactions = payload.userData.transactions;
       state.isLoading = false;
       state.isLogin = true;
+      state.error = null;
       console.log('loginThunk.fulfilled');
     });
     addCase(loginThunk.rejected, (state, { payload }) => {
@@ -63,10 +63,10 @@ export const authSlice = createSlice({
       state.refreshToken = null;
       state.userSid = null;
       state.userEmail = null;
-      state.userId = null;
       state.transactions = null;
       state.isLoading = false;
       state.isLogin = false;
+      state.error = null;
       console.log('logoutThunk.fulfilled');
     });
     addCase(logoutThunk.rejected, (state, { payload }) => {
@@ -80,11 +80,32 @@ export const authSlice = createSlice({
     });
     addCase(refreshThunk.fulfilled, (state, { payload }) => {
       console.log('refreshThunk.fulfilled');
+      state.error = null;
     });
     addCase(refreshThunk.rejected, (state, { payload }) => {
       state.error = payload;
       state.isLoading = false;
       console.log('refreshThunk.rejected', payload);
+    });
+    // get User
+    addCase(getUserThunk.pending, (state, { payload }) => {
+      state.isLoading = true;
+      console.log('getUserThunk.pending');
+
+    });
+    addCase(getUserThunk.fulfilled, (state, { payload }) => {
+      state.userEmail = payload.email
+      state.isLogin = true
+      state.isLoading = false;
+      state.transactions = payload.transactions
+      state.error = null;
+      console.log('getUserThunk.fulfilled');
+
+    });
+    addCase(getUserThunk.rejected, (state, { payload }) => {
+      state.error = payload;
+      state.isLoading = false;
+      console.log('getUserThunk.rejected', payload);
     });
   },
 });
