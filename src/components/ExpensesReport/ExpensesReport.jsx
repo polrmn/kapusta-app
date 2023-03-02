@@ -43,7 +43,7 @@ export const ExpensesReport = () => {
     } else {
       dispatch(setDate('2023-03'));
     }
-  }, [reportDate, dispatch, persistedToken]);
+  }, [reportDate, dispatch]);
 
   const filteredCategories = categories.filter(
     category => expenses.expensesData[category]
