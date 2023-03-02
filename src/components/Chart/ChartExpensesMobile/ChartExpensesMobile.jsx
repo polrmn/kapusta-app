@@ -7,7 +7,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
-import css from '../ChartExpensesMobile/ChartExpensesMobile.module.css';
+import css from '../ChartExpensesMobile/ChartExpensesMobile.module.scss';
 
 export const ChartExpensesMobile = () => {
   const data = [
@@ -85,14 +85,30 @@ export const ChartExpensesMobile = () => {
     return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
   };
 
+  const fillRender = index => {
+    if (index % 2 === 0) {
+      return '#FF751D';
+    } else {
+      return '#FFDAC0';
+    }
+  };
+
+  const dataForRender = data => {
+    return data.map((elem, index) => ({ ...elem, fill: fillRender(index) }));
+  };
+
+  const dataSort = data => {
+    return data.sort();
+  };
+
   return (
     <div className={css.chartContainer}>
-      <ResponsiveContainer width={800} height="100%">
+      <ResponsiveContainer width={500} height={500}>
         <ComposedChart
           layout="vertical"
           width={500}
           height={400}
-          data={data}
+          data={dataForRender(data)}
           margin={{
             top: 20,
             right: 20,
@@ -100,7 +116,6 @@ export const ChartExpensesMobile = () => {
             left: 20,
           }}
         >
-          <CartesianGrid stroke="#f5f5f5" />
           <XAxis type="number" />
           <YAxis dataKey="name" type="category" scale="band" />
           <Tooltip />
