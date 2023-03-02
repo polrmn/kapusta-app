@@ -6,7 +6,7 @@ import { getIsLogin } from 'redux/auth/authSelectors';
 import { getExpense, getIncome } from 'redux/transaction/transactionOperations';
 import {
   selectExpenseSummary,
-  // selectIncomeSummary,
+  selectIncomeSummary,
 } from 'redux/transaction/transactionSelectors';
 import { monthTranslate } from './monthTranslatе';
 
@@ -15,7 +15,7 @@ let dataSum;
 const Summury = () => {
   const dispatch = useDispatch();
   const user = useSelector(getIsLogin);
-  // const incomeData = useSelector(selectIncomeSummary);
+  const incomeData = useSelector(selectIncomeSummary);
   const expenseData = useSelector(selectExpenseSummary);
 
   useEffect(() => {
@@ -25,10 +25,10 @@ const Summury = () => {
 
   const location = useLocation();
 
-  // if (location.pathname === '/login') {
-  // const dataSum = Object.entries(incomeData) ?? [];
-  // }
-  if (location.pathname === '/login') {
+  if (location.pathname === '/incomes') {
+    dataSum = Object.entries(incomeData) ?? [];
+  }
+  if (location.pathname === '/expenses') {
     dataSum = Object.entries(expenseData) ?? [];
   }
 
