@@ -53,11 +53,19 @@ function BalancePanel() {
   return (
     <section className={style.balance}>
       <div className={style.balanceBack}>
-        <button type="button" className={style.balanceBtnBack}>to transaction</button>
-        {/* <button type="button" className={style.balanceBtnMain}>Main page</button> */}
+        <button type="button" className={style.balanceBtnBack}>
+          <a className={style.balanceLinkBack} href="/kapusta">to transaction</a>
+        </button>
       </div>
+      {/* <div className={style.balanceMain}>
+        <button type="button" className={style.balanceBtnMain}>
+          <a className={style.balanceLinkMain} href="/kapusta">Main page</a>
+        </button>
+      </div> */}
       <div className={style.balanceReports}>
-        <button type='button' className={style.balanceBtnReport}>Reports</button>
+        <button type='button' className={style.balanceBtnReport}>
+          <a className={style.balanceLinkReport} href="/kapusta">Reports</a>
+        </button>
       </div>
       {/* <div className={style.balanceCal}>
         <p className={style.balanceCalPara}>Current period:</p>
@@ -88,22 +96,6 @@ function BalancePanel() {
             <button className={style.balanceModalBtn} type="submit">Confirm</button>
           </form>
         </Modal>
-        {/* {showModal && (
-                <Modal onClose={runModal}>
-                  <label>
-                    <p className={style.balancePara}>Balance:</p>
-                    <input
-                      className={style.balanceFormInput}
-                      type="text"
-                      name="balance"
-                      value={balance}
-                      onChange={balanceChange}
-                      // required
-                    />
-                  </label>
-                  <button className={style.balanceBtn} type="submit" onClick={() => (onClickConfirm())}>Confirm</button>
-                </Modal>
-            )} */}
       </div>
     </section>
   )
