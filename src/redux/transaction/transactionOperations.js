@@ -84,7 +84,7 @@ export const getIncomeTransactionsByThunk = createAsyncThunk(
   }
 );
 export const getIncomeCategoriesThunk = createAsyncThunk(
-  'income/getExpenseCategories',
+  'income/getIncomeCategories',
   async (_, { rejectWithValue }) => {
     try {
       const data = await getIncomeCategoriesAPI();
