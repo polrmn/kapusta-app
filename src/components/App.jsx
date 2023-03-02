@@ -2,12 +2,10 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 // import { PublicRoute } from './PublicRoute/PublicRoute';
 import { SharedLayout } from './SharedLayout/SharedLayout';
 import Authorization from './auth/Authorization';
-import Summary from './Summary/Summary';
 
 const App = () => {
   return (
     <>
-      <Summary />
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           {/* <Route path="/" element={<PublicRoute />}> */}
