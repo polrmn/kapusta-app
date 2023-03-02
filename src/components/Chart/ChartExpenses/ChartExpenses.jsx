@@ -1,13 +1,33 @@
 import {
-  BarChart,
   Bar,
   XAxis,
   Tooltip,
-  CartesianGrid,
   LabelList,
+  ResponsiveContainer,
+  ComposedChart,
 } from 'recharts';
-import css from '../ChartExpenses/chart.module.css';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { getTransactionsThunk } from '../../../redux/transaction/transactionOperations';
+// import { nanoid } from '@reduxjs/toolkit';
+import css from '../ChartExpenses/chart.module.scss';
+import { selectItems } from '../../../redux/transaction/transactionSelectors';
+import { useEffect } from 'react';
+
+// import { useWindowSize } from 'react-use';
+
 export const ChartExpenses = () => {
+  // const { width, height } = useWindowSize();
+  const items = useSelector(selectItems);
+  const dispatch = useDispatch();
+  const handleButtonClick = () => {
+    dispatch(getTransactionsThunk());
+  };
+
+  // useEffect(() => {
+  //   dispatch(getTransactionsThunk());
+  // },[dispatch]);
+
   const data = [
     {
       name: 'Page A',
@@ -86,18 +106,42 @@ export const ChartExpenses = () => {
   // if (maxDataLength >= 10) {
   //   barWidth += 2 * (maxDataLength - 10);
   // }
-
+  const fillRender = index => {
+    if (index % 2 === 0) {
+      return '#FF751D';
+    } else {
+      return '#FFDAC0';
+    }
+  };
+  const dataForRender = data => {
+    return data.map((elem, index) => ({ ...elem, fill: fillRender(index) }));
+  };
   return (
-    <div className={css.chartContainer}>
-      <BarChart width={800} height={400} data={data} margin={{ top: 20 }}>
-        <XAxis dataKey="name" stroke="false" />
+    <>
+      <button className={css.btn} type="button" onClick={handleButtonClick}>
+        Products
+      </button>
+      <button className={css.btn} type="button" onClick={handleButtonClick}>
+        Salary
+      </button>
+      <div className={css.chartContainer}>
+        <ResponsiveContainer width="100%" height={500}>
+          <ComposedChart
+            width={150}
+            height={400}
+            data={dataForRender(data)}
+            margin={{ top: 20 }}
+          >
+            <XAxis dataKey="name" stroke="false" />
 
-        <Tooltip />
-        <CartesianGrid stroke="false" strokeDasharray="5 5" />
-        <Bar dataKey="uv" fill="#FF751D" barSize={38} shape={<TriangleBar />}>
-          <LabelList dataKey="UAH" position="top"></LabelList>
-        </Bar>
-      </BarChart>
-    </div>
+            <Tooltip />
+
+            <Bar dataKey="uv" fill="fill" barSize={38} shape={<TriangleBar />}>
+              <LabelList dataKey="UAH" position="top"></LabelList>
+            </Bar>
+          </ComposedChart>
+        </ResponsiveContainer>
+      </div>
+    </>
   );
 };

@@ -1,6 +1,7 @@
 import { privateAPI } from './http/http';
 
 export const addIncomeAPI = async incData => {
+  console.log();
   const { data } = await privateAPI.post('transaction/income', incData);
   return data;
 };
