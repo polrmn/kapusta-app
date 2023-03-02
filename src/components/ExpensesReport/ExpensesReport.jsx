@@ -1,23 +1,23 @@
 import { useEffect } from 'react';
 import css from './expensesReport.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAccessToken } from 'redux/auth/authSelectors';
+// import { getAccessToken } from 'redux/auth/authSelectors';
 import { setDate } from 'redux/dateSlice';
 import { selectDate, selectIsLoading } from 'redux/selectors';
 import { getTransactionsThunk } from 'redux/transaction/transactionOperations';
 import { selectExpenses } from 'redux/transaction/transactionSelectors';
-import { setAuthHeader } from 'services/http/http';
-import { Chart } from 'components/Chart';
+// import { setAuthHeader } from 'services/http/http';
+import { Chart } from 'components/Chart/Chart';
 
 export const ExpensesReport = () => {
   const reportDate = useSelector(selectDate);
   const expenses = useSelector(selectExpenses);
   const dispatch = useDispatch();
-  const persistedToken = useSelector(getAccessToken);
+  // const persistedToken = useSelector(getAccessToken);
   const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
-    setAuthHeader(persistedToken);
+    // setAuthHeader(persistedToken);
 
     if (reportDate) {
       dispatch(getTransactionsThunk(reportDate));
@@ -62,7 +62,7 @@ export const ExpensesReport = () => {
           ))}
         </ul>
       )}
-      <Chart/>
+      <Chart />
     </>
   );
 };

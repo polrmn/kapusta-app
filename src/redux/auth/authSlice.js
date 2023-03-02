@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getUserThunk, loginThunk, logoutThunk, refreshThunk, signUpThunk } from './authOperations';
+import { getUserThunk, googleAuthThunk, loginThunk, logoutThunk, refreshThunk, signUpThunk } from './authOperations';
 
 
 const initialState = {
@@ -91,7 +91,6 @@ export const authSlice = createSlice({
     addCase(getUserThunk.pending, (state, { payload }) => {
       state.isLoading = true;
       console.log('getUserThunk.pending');
-
     });
     addCase(getUserThunk.fulfilled, (state, { payload }) => {
       state.userEmail = payload.email
@@ -106,6 +105,17 @@ export const authSlice = createSlice({
       state.error = payload;
       state.isLoading = false;
       console.log('getUserThunk.rejected', payload);
+    });
+    // google auth
+    addCase(googleAuthThunk.fulfilled, (state, { payload }) => {
+      state.accessToken = payload.accessToken;
+      state.userSid = payload.sid;
+      state.refreshToken = payload.refreshToken;
+      state.userEmail = null;
+      state.transactions = null;
+      state.isLoading = false;
+      state.isLogin = false;
+      state.error = null;
     });
   },
 });
