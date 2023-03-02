@@ -116,8 +116,6 @@ export const Expenses = () => {
                   {item}
                 </option>
               ))}
-              {/* <option value="category">...list.map...</option> */}
-              {/* <button type="button" onClick={()=>{delateContact()}}>delate</button> */}
             </select>
 
             <input
@@ -148,6 +146,7 @@ export const Expenses = () => {
                   <th></th>
                 </tr>
               </thead>
+              {/* <button type="button"onClick={() => {delateContact(item)}}>delate</button> */}
               <tbody className={scss.container}>
                 {transactionsArray.map(
                   ({
@@ -158,7 +157,16 @@ export const Expenses = () => {
                       <td className={scss.listColumn}>{description}</td>
                       <td className={scss.listColumn}>{category}</td>
                       <td className={scss.listColumn}>{amount}</td>
-                      <td className={scss.listColumn}>IconDel</td>
+                      <td className={scss.listColumn}>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            delateContact(_id);
+                          }}
+                        >
+                          delate
+                        </button>
+                      </td>
                     </tr>
                   )
                 )}
