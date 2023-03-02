@@ -6,7 +6,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import css from './calendar.module.scss';
 
-export const Calendar = () => {
+export const Calendar = ({ onClick }) => {
   const [startDate, setStartDate] = useState(new Date());
   const dispatch = useDispatch();
 
@@ -17,14 +17,14 @@ export const Calendar = () => {
     const getDate = moment(parseData);
     const result = getDate.format('YYYY-MM-DD');
 
-    dispatch(setDate(result));
-    dispatch(getTransactionsThunk(result));
+    onClick(result);
+    //dispatch(getTransactionsThunk(result));
     return;
   };
 
   return (
     <div className={css['calendarWrapper']}>
-    <div className={css['calendarIcon']}></div>
+      <div className={css['calendarIcon']}></div>
 
       <DatePicker
         dateFormat="dd.MM.yyyy"
