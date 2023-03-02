@@ -148,28 +148,29 @@ export const Expenses = () => {
               </thead>
               {/* <button type="button"onClick={() => {delateContact(item)}}>delate</button> */}
               <tbody className={scss.container}>
-                {transactionsArray.map(
-                  ({
-                    transaction: { _id, date, description, category, amount },
-                  }) => (
-                    <tr key={_id} className={scss.listRow}>
-                      <td className={scss.listColumn}>{date}</td>
-                      <td className={scss.listColumn}>{description}</td>
-                      <td className={scss.listColumn}>{category}</td>
-                      <td className={scss.listColumn}>{amount}</td>
-                      <td className={scss.listColumn}>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            delateContact(_id);
-                          }}
-                        >
-                          delate
-                        </button>
-                      </td>
-                    </tr>
-                  )
-                )}
+                {transactionsArray &&
+                  transactionsArray.map(
+                    ({
+                      transaction: { _id, date, description, category, amount },
+                    }) => (
+                      <tr key={_id} className={scss.listRow}>
+                        <td className={scss.listColumn}>{date}</td>
+                        <td className={scss.listColumn}>{description}</td>
+                        <td className={scss.listColumn}>{category}</td>
+                        <td className={scss.listColumn}>{amount}</td>
+                        <td className={scss.listColumn}>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              delateContact(_id);
+                            }}
+                          >
+                            delate
+                          </button>
+                        </td>
+                      </tr>
+                    )
+                  )}
               </tbody>
             </table>
           </div>
