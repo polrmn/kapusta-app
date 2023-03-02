@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getExpense, getIncome } from './transactionOperations';
+import { getExpense, getIncome, getTransactionsThunkHome } from './transactionOperations';
 import { 
   addExpenseTransactionThunk, 
   delateTransactionThunk, 
@@ -97,14 +97,14 @@ export const transactionSlice = createSlice({
         state.isLoading = false;
         state.error = payload;
       })
-      .addCase(getTransactionsThunk.pending, state => {
+      .addCase(getTransactionsThunkHome.pending, state => {
         state.isLoading = true;
       })
-      .addCase(getTransactionsThunk.fulfilled, (state, { payload }) => {
+      .addCase(getTransactionsThunkHome.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.items = payload;
       })
-      .addCase(getTransactionsThunk.rejected, (state, { payload }) => {
+      .addCase(getTransactionsThunkHome.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
       })
@@ -133,18 +133,18 @@ export const transactionSlice = createSlice({
         state.error = action.payload;
       })
 
-      // .addCase(getTransactionsThunk.pending, state => {
-      //   state.isLoading = true;
-      // })
-      // .addCase(getTransactionsThunk.fulfilled, (state, action) => {
-      //   state.isLoading = false;
-      //   state.expenses.expenses = action.payload.expenses;
-      //   state.incomes.incomes = action.payload.incomes;
-      // })
-      // .addCase(getTransactionsThunk.rejected, (state, action) => {
-      //   state.isLoading = false;
-      //   state.error = action.payload;
-      // });
+      .addCase(getTransactionsThunk.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(getTransactionsThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.expenses.expenses = action.payload.expenses;
+        state.incomes.incomes = action.payload.incomes;
+      })
+      .addCase(getTransactionsThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
     // ============================ 2 санки после логина/рефреша которые нужны для передачи транзакций
     // .addCase(loginThunk.fulfilled, (state, { payload }) => {
     //   state.transactions = payload.userData.transactions;

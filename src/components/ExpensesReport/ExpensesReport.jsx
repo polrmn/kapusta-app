@@ -7,6 +7,7 @@ import { selectDate, selectIsLoading } from 'redux/selectors';
 import { getTransactionsThunk } from 'redux/transaction/transactionOperations';
 import { selectExpenses } from 'redux/transaction/transactionSelectors';
 import { setAuthHeader } from 'services/http/http';
+import { Chart } from 'components/Chart';
 
 export const ExpensesReport = () => {
   const reportDate = useSelector(selectDate);
@@ -61,6 +62,7 @@ export const ExpensesReport = () => {
           ))}
         </ul>
       )}
+      <Chart/>
     </>
   );
 };

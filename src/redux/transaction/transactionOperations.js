@@ -130,6 +130,18 @@ export const getTransactionsThunk = createAsyncThunk(
     }
   }
 );
+
+export const getTransactionsThunkHome = createAsyncThunk(
+  'transaction/byDateHome',
+  async (date, { rejectWithValue }) => {
+    try {
+      const data = await getPeriodDataAPI(date);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 // export const addBalance = createAsyncThunk(
 //   'user/balance',
 //   async (balance, thunkApi) => {

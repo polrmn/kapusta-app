@@ -69,8 +69,13 @@ export const logoutThunk = createAsyncThunk(
 
 export const getUserThunk = createAsyncThunk(
   'auth/getUser',
-  async (data, { rejectWithValue }) => {
+  async (_, { rejectWithValue, getState }) => {
     try {
+      const token = getState().auth.accessToken;
+      if (!token) {
+        return rejectWithValue('no token');
+      }
+      setAuthHeader(token)
       return await getUserInfoApi();
     } catch (error) {
       Notiflix.Notify.failure(`${error.message}`, notlifixOptions.failure);

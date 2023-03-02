@@ -5,8 +5,15 @@ const Home = () => {
   return (
     <>
       <div className="homeNav">
-        <NavLink className="homeNavLink">Expenses</NavLink>
-        <NavLink className="homeNavLink">Income</NavLink>
+        <NavLink to="/expenses" className="homeNavLink">
+          Expenses
+        </NavLink>
+        <NavLink to="/income" className="homeNavLink">
+          Income
+        </NavLink>
+        <NavLink to="/reports" className="homeNavLink">
+          Reports
+        </NavLink>
       </div>
       <Outlet />
     </>
