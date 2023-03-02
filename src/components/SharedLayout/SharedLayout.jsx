@@ -23,17 +23,17 @@ export const SharedLayout = () => {
     setOpenModal(!openModal);
   };
 
-  const resetPage = async () => {
-    await token
-    if(token){
-      await setAuthHeader(token)
-      await dispatch(getUserThunk())
-    }
-  }
-
-  useEffect(()=>{
-    resetPage().then()
-  },[])
+  
+  useEffect(() => {
+    const resetPage = async () => {
+      await token;
+      if (token) {
+        await setAuthHeader(token);
+        await dispatch(getUserThunk());
+      }
+    };
+    resetPage().then();
+  }, [dispatch, token]);
 
   return (
     <>
