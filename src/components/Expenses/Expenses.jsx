@@ -8,7 +8,7 @@ import {
 } from 'redux/transaction/transactionSelectors';
 import {
   getExpenseCategoriesThunk,
-  addTransactionThunk,
+  addExpenseTransactionThunk,
   delateTransactionThunk,
 } from '../../redux/transaction/transactionOperations';
 import { setAuthHeader } from '../../services/http/http';
@@ -61,7 +61,7 @@ export const Expenses = () => {
     e.preventDefault();
     const balanse = 1000;
     if (balanse > state.amount) {
-      dispatch(addTransactionThunk(state));
+      dispatch(addExpenseTransactionThunk(state));
       //console.log(state);
     } else {
       console.log('недостатньо коштів');

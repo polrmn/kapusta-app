@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  addTransactionThunk,
+  addExpenseTransactionThunk,
   delateTransactionThunk,
-  getTransactionsByThunk,
+  getExpenseTransactionsByThunk,
   getExpenseCategoriesThunk,
+  addIncomeTransactionThunk,
 } from './transactionOperations';
 
 const initialState = {
@@ -20,26 +21,29 @@ export const transactionSlice = createSlice({
   extraReducers: builder => {
     builder
       /*addTransactionThunk*/
-      .addCase(addTransactionThunk.pending, state => {
+      .addCase(addExpenseTransactionThunk.pending, state => {
         state.isLoading = true;
       })
-      .addCase(addTransactionThunk.fulfilled, (state, { payload }) => {
+      .addCase(addExpenseTransactionThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.transactions = [...state.transactions, payload];
       })
-      .addCase(addTransactionThunk.rejected, (state, { payload }) => {
+      .addCase(addExpenseTransactionThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
       })
       /*getTransactionsByThunk */
-      .addCase(getTransactionsByThunk.pending, state => {
+      .addCase(getExpenseTransactionsByThunk.pending, state => {
         state.isLoading = true;
       })
-      .addCase(getTransactionsByThunk.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.transactions = payload;
-      })
-      .addCase(getTransactionsByThunk.rejected, (state, { payload }) => {
+      .addCase(
+        getExpenseTransactionsByThunk.fulfilled,
+        (state, { payload }) => {
+          state.isLoading = false;
+          state.transactions = payload;
+        }
+      )
+      .addCase(getExpenseTransactionsByThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
       })
@@ -67,6 +71,19 @@ export const transactionSlice = createSlice({
         state.category = payload;
       })
       .addCase(getExpenseCategoriesThunk.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
+
+      /*income */
+      .addCase(addIncomeTransactionThunk.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(addIncomeTransactionThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.transactions = [...state.transactions, payload];
+      })
+      .addCase(addIncomeTransactionThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
       });

@@ -1,14 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
+  addIncomeAPI,
   deleteTransactionAPI,
   getExpenseAPI,
   getExpenseCategoriesAPI,
+  getIncomeAPI,
+  getIncomeCategoriesAPI,
   getPeriodDataAPI,
 } from 'services/transactionService';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { addExpenseAPI } from './../../services/transactionService';
 
-export const addTransactionThunk = createAsyncThunk(
+export const addExpenseTransactionThunk = createAsyncThunk(
   'expenses/addTransaction',
   async (transactionData, { rejectWithValue }) => {
     try {
@@ -20,11 +23,11 @@ export const addTransactionThunk = createAsyncThunk(
     }
   }
 );
-export const getTransactionsByThunk = createAsyncThunk(
+export const getExpenseTransactionsByThunk = createAsyncThunk(
   'expenses/getTransaction',
-  async (credentials, { rejectWithValue }) => {
+  async (transactionData, { rejectWithValue }) => {
     try {
-      const data = await getExpenseAPI(credentials);
+      const data = await getExpenseAPI(transactionData);
       return data;
     } catch (error) {
       Notify.failure('Something went wrong, please try again later');
@@ -37,7 +40,6 @@ export const getExpenseCategoriesThunk = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const data = await getExpenseCategoriesAPI();
-      //console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -49,8 +51,44 @@ export const delateTransactionThunk = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       await deleteTransactionAPI(id);
-      //console.log(data);
       return id;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+/*income */
+export const addIncomeTransactionThunk = createAsyncThunk(
+  'income/addTransaction',
+  async (transactionData, { rejectWithValue }) => {
+    try {
+      const data = await addIncomeAPI(transactionData);
+      return data;
+    } catch (error) {
+      Notify.failure('Something went wrong, please try again later');
+      return rejectWithValue(error.message);
+    }
+  }
+);
+export const getIncomeTransactionsByThunk = createAsyncThunk(
+  'income/getTransaction',
+  async (transactionData, { rejectWithValue }) => {
+    try {
+      const data = await getIncomeAPI(transactionData);
+      return data;
+    } catch (error) {
+      Notify.failure('Something went wrong, please try again later');
+      return rejectWithValue(error.message);
+    }
+  }
+);
+export const getIncomeCategoriesThunk = createAsyncThunk(
+  'income/getExpenseCategories',
+  async (_, { rejectWithValue }) => {
+    try {
+      const data = await getIncomeCategoriesAPI();
+      return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
