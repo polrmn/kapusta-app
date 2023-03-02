@@ -1,10 +1,10 @@
 import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getIsLogin } from '../../redux/auth/authSelectors';
+import { getAccessToken } from '../../redux/auth/authSelectors';
 
 const PrivateRoute = ({ component }) => {
-  const isLogin = useSelector(getIsLogin);
-  return isLogin ? component : <Navigate to={'/login'} />;
+  const token = useSelector(getAccessToken);
+  return token ? component : <Navigate to={'/login'} />;
 };
 
 export default PrivateRoute;
