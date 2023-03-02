@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import {getTransactionsThunk} from './transactionOperations'
 import { getExpense, getIncome } from './transactionOperations';
 import { getUserThunk, loginThunk } from '../auth/authOperations';
 
@@ -17,8 +18,21 @@ export const transactionSlice = createSlice({
   name: 'transaction',
   initialState,
   reducers: {},
-  extraReducers: builder =>
+  extraReducers: builder => {
     builder
+      .addCase(getTransactionsThunk.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(getTransactionsThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.items = payload
+      })
+      .addCase(getTransactionsThunk.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload
+      })
+
+ 
       .addCase(getIncome.pending, state => {
         state.isLoading = true;
       })
@@ -43,12 +57,15 @@ export const transactionSlice = createSlice({
         state.error = action.payload;
       })
       // ============================ 2 санки после логина/рефреша которые нужны для передачи транзакций
-      .addCase(loginThunk.fulfilled, (state, {payload}) => {
+      .addCase(loginThunk.fulfilled, (state, { payload }) => {
         state.userTransactions = payload.userData.transactions;
       })
-      .addCase(getUserThunk.fulfilled, (state, {payload}) => {
+      .addCase(getUserThunk.fulfilled, (state, { payload }) => {
         state.userTransactions = payload.transactions;
       })
-});
+  }
+  });
+
 
 export const transactionReducer = transactionSlice.reducer;
+ console.log(createSlice);
