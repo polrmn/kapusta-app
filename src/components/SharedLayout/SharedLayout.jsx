@@ -58,7 +58,7 @@ export const SharedLayout = () => {
           </div>
         </div>
       </header>
-      <main>
+      <main className='main'>
         <div className='containerMain'>
           <Outlet />
         </div>
