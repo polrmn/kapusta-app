@@ -45,9 +45,11 @@ export const ExpensesReport = () => {
     }
   }, [reportDate, dispatch]);
 
-  const filteredCategories = categories?.filter(
-    category => expenses?.expensesData[category]
-  );
+  const filteredCategories = () => {
+    return  categories?.filter(
+      category => expenses?.expensesData[category]
+      );
+  }
 
   const getSvg = category => {
     switch (category) {
@@ -100,7 +102,7 @@ export const ExpensesReport = () => {
       <button type='button' onClick={() => {dispatch(setReportType('income'))}}>{'>'}</button>
       {expenses.expenseTotal > 0 && (
         <ul className={css.container}>
-          {filteredCategories.map(category => (
+          {filteredCategories().map(category => (
             <li
               className={css.category}
               key={category}
