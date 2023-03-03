@@ -4,13 +4,12 @@ import {
   getIncome,
   getIncomeCategoriesThunk,
   getTransactionsThunkHome,
-} from './transactionOperations';
-import {
   addExpenseTransactionThunk,
   delateTransactionThunk,
   getExpenseTransactionsByThunk,
   getExpenseCategoriesThunk,
   addIncomeTransactionThunk,
+  getIncomeTransactionsByThunk,
   getTransactionsThunk,
 } from './transactionOperations';
 
@@ -69,8 +68,9 @@ export const transactionSlice = createSlice({
       })
       .addCase(delateTransactionThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
+        console.log(payload);
         const indexElem = state.transactions.findIndex(
-          item => item.id === payload.id
+          item => item.id === payload
         );
         state.transactions.splice(indexElem, 1);
       })
@@ -90,19 +90,8 @@ export const transactionSlice = createSlice({
         state.isLoading = false;
         state.error = payload;
       })
-      .addCase(getIncomeCategoriesThunk.pending, state => {
-        state.isLoading = true;
-      })
-      .addCase(getIncomeCategoriesThunk.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.incomeCategory = payload;
-      })
-      .addCase(getIncomeCategoriesThunk.rejected, (state, { payload }) => {
-        state.isLoading = false;
-        state.error = payload;
-      })
 
-      /*income */
+      /*addIncomeTransactionThunk */
       .addCase(addIncomeTransactionThunk.pending, state => {
         state.isLoading = true;
       })
@@ -114,6 +103,44 @@ export const transactionSlice = createSlice({
         state.isLoading = false;
         state.error = payload;
       })
+      /*getIncomeTransactionsByThunk */
+      .addCase(getIncomeTransactionsByThunk.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(getIncomeTransactionsByThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.category = payload;
+      })
+      .addCase(getIncomeTransactionsByThunk.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
+      /* del getIncomeCategoriesThunk */
+      .addCase(getIncomeCategoriesThunk.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(getIncomeCategoriesThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.category = payload;
+      })
+      .addCase(getIncomeCategoriesThunk.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
+      /* del - getIncomeCategoriesThunk*/
+      // .addCase(getIncomeCategoriesThunk.pending, state => {
+      //   state.isLoading = true;
+      // })
+      // .addCase(getIncomeCategoriesThunk.fulfilled, (state, { payload }) => {
+      //   state.isLoading = false;
+      //   state.incomeCategory = payload;
+      //   //state.category = payload;
+      // })
+      // .addCase(getIncomeCategoriesThunk.rejected, (state, { payload }) => {
+      //   state.isLoading = false;
+      //   state.error = payload;
+      // })
+      /*delate getTransactionsThunkHome */
       .addCase(getTransactionsThunkHome.pending, state => {
         state.isLoading = true;
       })
@@ -125,7 +152,7 @@ export const transactionSlice = createSlice({
         state.isLoading = false;
         state.error = payload;
       })
-
+      /* */
       .addCase(getIncome.pending, state => {
         state.isLoading = true;
       })
