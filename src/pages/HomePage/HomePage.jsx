@@ -1,3 +1,4 @@
+import BalancePanel from 'components/BalancePanel/BalancePanel';
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import scss from './HomePage.module.scss';
@@ -15,6 +16,7 @@ const Home = () => {
           Reports
         </NavLink>
       </div>
+      <BalancePanel/>
       <Outlet />
     </>
   );

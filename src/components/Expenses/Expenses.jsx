@@ -17,6 +17,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import scss from './Expenses.module.scss';
 import { ReactComponent as ReactCalc } from '../../images/iconsForm/calc.svg';
 import SharedButton from './../../commons/sharedButton/SharedButton';
+import { Summury } from 'components/Summary/Summary';
 export const Expenses = () => {
   const isScreenMoreTablet = useMediaQuery('(min-width: 768px)');
   const [description, setDescription] = useState('');
@@ -198,7 +199,9 @@ export const Expenses = () => {
               </table>
             </div>
           </div>
-          <div className={scss.summery}></div>
+          <div className={scss.summery}>
+            <Summury />
+          </div>
         </div>
       </div>
     </>

@@ -2,22 +2,21 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   getExpense,
   getIncome,
+  getIncomeCategoriesThunk,
   getTransactionsThunkHome,
-} from './transactionOperations';
-import {
   addExpenseTransactionThunk,
   delateTransactionThunk,
   getExpenseTransactionsByThunk,
   getExpenseCategoriesThunk,
   addIncomeTransactionThunk,
   getIncomeTransactionsByThunk,
-  getIncomeCategoriesThunk,
   getTransactionsThunk,
 } from './transactionOperations';
 
 const initialState = {
   transactions: [],
   category: [],
+  incomeCategory: [],
   isLoading: false,
   error: null,
   incomes: {
@@ -88,6 +87,17 @@ export const transactionSlice = createSlice({
         state.category = payload;
       })
       .addCase(getExpenseCategoriesThunk.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
+      .addCase(getIncomeCategoriesThunk.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(getIncomeCategoriesThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.incomeCategory = payload;
+      })
+      .addCase(getIncomeCategoriesThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
       })

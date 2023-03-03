@@ -1,12 +1,12 @@
 import React from 'react';
 import style from './Authorization.module.scss';
-import AuthorizationForm from './AuthorizationForm';
+import AuthorizationForm from '../../components/auth/AuthorizationForm';
 
-const Authorization = ({type}) => {
+const Authorization = ({ type }) => {
   return (
     <div className={style.authContainer}>
       <div className={style.authSectionLogo} />
-      <AuthorizationForm type={type}/>
+      <AuthorizationForm type={type} />
     </div>
   );
 };
