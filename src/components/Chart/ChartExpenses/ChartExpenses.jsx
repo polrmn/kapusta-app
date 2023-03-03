@@ -6,7 +6,6 @@ import {
   ResponsiveContainer,
   ComposedChart,
 } from 'recharts';
-import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import css from '../ChartExpenses/chart.module.scss';
 import { omit } from 'lodash';
@@ -15,22 +14,31 @@ import {
   selectProductExpenses,
 } from '../../../redux/transaction/transactionSelectors';
 import { useMemo } from 'react';
+import { selectCategoryFilter } from 'redux/categoryFilter/categoryFilterSelectors';
 
-export const ChartExpenses = () => {
+export const ChartExpenses = ({ filter, dataArr }) => {
   // const { width, height } = useWindowSize();
   const DataIncomes = useSelector(selectProductIncomes);
   const DataExpenses = useSelector(selectProductExpenses);
 
-  // const dispatch = useDispatch();
+  const categoryFilter = useSelector(selectCategoryFilter);
 
   const data = useMemo(() => {
     if (DataExpenses) {
       const entriesExpenses = Object.entries(DataExpenses);
+
       const omitedExpenses = entriesExpenses.map(item => {
         item[1] = omit(item[1], ['total']);
         return item;
       });
-      const expensesChart = omitedExpenses[0][1]; // підставити замість 0 індекс обраного продукту, додати масив залежностей індекс
+      console.log(omitedExpenses);
+
+      if (!categoryFilter) {
+        return [];
+      }
+      const expensesChart = omitedExpenses.find(
+        elem => elem[0] === categoryFilter
+      )[1]; // підставити замість 0 індекс обраного продукту, додати масив залежностей індекс
 
       const res = [];
       for (const key in expensesChart) {
@@ -38,7 +46,7 @@ export const ChartExpenses = () => {
       }
       return res.sort((a, b) => b.UAH - a.UAH);
     }
-  }, [DataExpenses]);
+  }, [DataExpenses, categoryFilter]);
 
   const getPath = (x, y, width, height, borderRadius = 10) => {
     const r = borderRadius || 0;
