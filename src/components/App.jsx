@@ -5,18 +5,17 @@ import { Expenses } from './Expenses/Expenses';
 import Home from './../pages/HomePage/HomePage';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import PublicRoute from './PublicRoute/PublicRoute';
-import {ExpensesReport} from './ExpensesReport/ExpensesReport'
+import { ExpensesReport } from './ExpensesReport/ExpensesReport';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getUserThunk } from 'redux/auth/authOperations';
-
+import { Income } from './Income/Income';
 const App = () => {
   const dispatch = useDispatch();
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getUserThunk());
-  },[])
-  
+  }, []);
 
   return (
     <Routes>
@@ -26,6 +25,7 @@ const App = () => {
         {/*===================*/}
         <Route path="/" element={<PrivateRoute component={<Home />} />}>
           <Route path="expenses" element={<Expenses />} />
+          <Route path="income" element={<Income />} />
           <Route path="reports" element={<ExpensesReport />} />
         </Route>
         <Route

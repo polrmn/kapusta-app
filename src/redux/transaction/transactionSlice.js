@@ -1,13 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getExpense, getIncome, getTransactionsThunkHome } from './transactionOperations';
-import { 
-  addExpenseTransactionThunk, 
-  delateTransactionThunk, 
-  getExpenseTransactionsByThunk, 
-  getExpenseCategoriesThunk, 
+import {
+  getExpense,
+  getIncome,
+  getTransactionsThunkHome,
+} from './transactionOperations';
+import {
+  addExpenseTransactionThunk,
+  delateTransactionThunk,
+  getExpenseTransactionsByThunk,
+  getExpenseCategoriesThunk,
   addIncomeTransactionThunk,
-  getTransactionsThunk, 
-} from './transactionOperations'; 
+  getIncomeTransactionsByThunk,
+  getIncomeCategoriesThunk,
+  getTransactionsThunk,
+} from './transactionOperations';
 
 const initialState = {
   transactions: [],
@@ -85,7 +91,7 @@ export const transactionSlice = createSlice({
         state.error = payload;
       })
 
-      /*income */
+      /*addIncomeTransactionThunk */
       .addCase(addIncomeTransactionThunk.pending, state => {
         state.isLoading = true;
       })
@@ -97,6 +103,31 @@ export const transactionSlice = createSlice({
         state.isLoading = false;
         state.error = payload;
       })
+      /*getIncomeTransactionsByThunk */
+      .addCase(getIncomeTransactionsByThunk.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(getIncomeTransactionsByThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.category = payload;
+      })
+      .addCase(getIncomeTransactionsByThunk.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
+      /*getIncomeCategoriesThunk */
+      .addCase(getIncomeCategoriesThunk.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(getIncomeCategoriesThunk.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.category = payload;
+      })
+      .addCase(getIncomeCategoriesThunk.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
+      /*delate getTransactionsThunkHome */
       .addCase(getTransactionsThunkHome.pending, state => {
         state.isLoading = true;
       })
@@ -108,7 +139,7 @@ export const transactionSlice = createSlice({
         state.isLoading = false;
         state.error = payload;
       })
-
+      /* */
       .addCase(getIncome.pending, state => {
         state.isLoading = true;
       })

@@ -25,7 +25,7 @@ function formReducer(state, action) {
     case 'description':
       return { ...state, description: action.payload };
     case 'amount':
-      return { ...state, amount: action.payload };
+      return { ...state, amount: Math.abs(Number(action.payload)) };
     case 'category':
       return { ...state, category: action.payload };
     case 'date':
@@ -59,6 +59,8 @@ export const Expenses = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    if (amount < 1) return alert('ffff');
     const balanse = 1000;
     if (balanse > state.amount) {
       dispatch(addExpenseTransactionThunk(state));
