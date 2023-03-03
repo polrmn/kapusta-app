@@ -46,7 +46,7 @@ export const ExpensesReport = () => {
   }, [reportDate, dispatch]);
 
   const filteredCategories = categories?.filter(
-    category => expenses.expensesData[category]
+    category => expenses?.expensesData[category]
   );
 
   const getSvg = category => {

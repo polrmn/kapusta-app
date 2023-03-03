@@ -31,10 +31,10 @@ body {
 }
 
 .main {
-  background-image: url(../src/images/backgrounds/mobile/mobileHome@2x.png);
+  background-image: url(../src/images/backgrounds/mobile/mobileHome.png);
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center
+  background-position: center;
 }
 
 .containerMain {
@@ -52,7 +52,7 @@ body {
   }
 
   .main {
-    background-image: url(../src/images/backgrounds/tablet/tabletHome@2x.png);
+    background-image: url(../src/images/backgrounds/tablet/tabletHome.png);
   }
 
   .containerMain {
@@ -68,7 +68,7 @@ body {
   }
 
   .main {
-    background-image: url(../src/images/backgrounds/desktop/desktopHome@2x.png);
+    background-image: url(../src/images/backgrounds/desktop/desktopHome.png);
   }
 
   .containerMain {
