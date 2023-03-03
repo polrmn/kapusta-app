@@ -24,7 +24,7 @@ import { ReactComponent as ReportTechnique } from '../../images/svg-reports/tech
 import { ReactComponent as ReportTransport } from '../../images/svg-reports/transport.svg';
 import { ReactComponent as ReportOther } from '../../images/svg-reports/other.svg';
 import { setCategoryFilter } from 'redux/categoryFilter/categoryFilterSlice';
-import { Chart } from 'components/Chart/Chart';
+import { setReportType } from 'redux/reportType/reportTypeSlice';
 
 export const ExpensesReport = () => {
   const reportDate = useSelector(selectDate);
@@ -95,7 +95,9 @@ export const ExpensesReport = () => {
     <p>Loading...</p>
   ) : (
     <>
+    <button type='button' onClick={() => {dispatch(setReportType('income'))}}>{'<'}</button>
       <h3 className={css.title}>Expenses</h3>
+      <button type='button' onClick={() => {dispatch(setReportType('income'))}}>{'>'}</button>
       {expenses.expenseTotal > 0 && (
         <ul className={css.container}>
           {filteredCategories.map(category => (
@@ -112,7 +114,6 @@ export const ExpensesReport = () => {
           ))}
         </ul>
       )}
-      <Chart />
     </>
   );
 };

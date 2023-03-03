@@ -46,6 +46,7 @@ export const getExpenseCategoriesThunk = createAsyncThunk(
     }
   }
 );
+
 export const delateTransactionThunk = createAsyncThunk(
   'expenses/delateTransaction',
   async (id, { rejectWithValue }) => {

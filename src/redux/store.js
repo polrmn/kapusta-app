@@ -16,6 +16,7 @@ import { userReducer } from './user/userSlice';
 import { authReducer } from './auth/authSlice';
 import { dateReducer } from './dateSlice';
 import { categoryFilterReducer } from './categoryFilter/categoryFilterSlice';
+import { reportTypeReducer } from './reportType/reportTypeSlice';
 
 const persistConfig = {
   key: 'persisted-token',
@@ -32,6 +33,7 @@ export const store = configureStore({
     user: userReducer,
     date: dateReducer,
     categoryFilter: categoryFilterReducer,
+    reportType: reportTypeReducer
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
