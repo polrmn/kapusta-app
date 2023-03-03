@@ -13,23 +13,3 @@ const Modal = ({ children, active, setActive }) => {
 };
 
 export default Modal;
-
-   // React.useEffect(() => {
-    //     const handleKeyDown = (e) => {
-    //         if (e.code === `Escape`) {
-    //             onClose();
-    //         };
-    //     };
-    //     window.addEventListener(`keydown`, handleKeyDown);
-    //     return (() => {
-    //         window.removeEventListener(`keydown`, handleKeyDown);
-    //     });
-    // }, [onClose]);
-
-    // const handleBackdropClick = (e) => {
-    //     const { target, currentTarget } = e;
-    //     e.stopPropagation();
-    //     if (target === currentTarget) {
-    //         onClose();
-    //     }
-    // };

@@ -21,11 +21,11 @@ const initialState = {
   error: null,
   incomes: {
     monthStats: {},
-    incomes: { incomeTotal: 0, incomesData: {} },
+    incomes: { incomeTotal: 0, incomesData: null },
   },
   expenses: {
     monthStats: {},
-    expenses: { expenseTotal: 0, expensesData: {} },
+    expenses: { expenseTotal: 0, expensesData: null },
   },
 };
 

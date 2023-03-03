@@ -7,7 +7,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
-import css from '../ChartIncome/chartIncome.module.scss';
+import css from '../ChartIncomeMobile/ChartIncomeMobile.module.scss';
 
 export const ChartIncomeMobile = () => {
   const data = [
