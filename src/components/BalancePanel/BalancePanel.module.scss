@@ -446,7 +446,7 @@ p {
     margin: 0 auto;
     padding: 0 20px;
     display: flex;
-    background-color: #F5F6FB;
+    // background-color: #F5F6FB;
 
     @media screen and (max-width: 767px) {
         flex-direction: column;
@@ -485,7 +485,6 @@ p {
         }
 
         @media screen and (min-width: 768px) and (max-width: 1279px) {
-            display: flex;
             flex-direction: row-reverse;
             align-items: center;
             justify-content: space-between;
