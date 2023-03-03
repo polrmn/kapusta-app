@@ -29,7 +29,6 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: auto;
   }
   @media screen and (min-width: 1280px) {
     height: 44px;
@@ -40,8 +39,9 @@
 .inputDescription {
   display: block;
   font-family: inherit;
+
   // width: 100%;
-  width: 30%;
+  // width: 30%;
   height: 44px;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
@@ -54,6 +54,7 @@
   border: 2px solid #ffffff;
   border-bottom: none;
   color: #52555f;
+  margin-left: 44px;
   &::placeholder {
     font-weight: 400;
     color: #c7ccdc;
@@ -70,9 +71,10 @@
 }
 .inputSelect {
   display: block;
+
   font-family: inherit;
-  // width: 100%;
-  width: 30%;
+  //width: 100%;
+
   height: 44px;
   border: 2px solid #ffffff;
 
@@ -85,6 +87,11 @@
     border-right: none;
     border-bottom-right-radius: 0px;
     height: 49px;
+    //width: 186px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 169px;
+    padding: 0 20px;
   }
 }
 .inputWrapper {
@@ -95,7 +102,7 @@
     display: flex;
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
-    width: 110px;
+    //width: 110px;
     border: 2px solid #f6f7fc;
   }
   @media screen and (min-width: 1280px) {
@@ -106,38 +113,32 @@
     }
   }
 }
-.inputCount {
-  // font-family: inherit;
-  // outline: none;
-  // width: 183px;
-  // height: 44px;
-  // padding-right: 55px;
-  // padding-left: 55px;
-  // border-radius: 22px;
-  // font-weight: 900;
-  // font-size: 12px;
-  // line-height: 1.14;
-  // text-align: center;
-  // margin-top: 32px;
-  // color: #52555f;
-  // border: 2px solid #f6f7fc;
-  // background-color: transparent;
-  width: 40px;
-  border: none;
+
+.inputWrapper {
+  font-weight: 900;
   outline: none;
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 1.14;
+  color: #52555f;
+  background-color: transparent;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  width: 183px;
+  height: 44px;
+  border: 2px solid #f6f7fc;
+  border-radius: 16px;
+  margin-top: 35px;
   @media screen and (min-width: 768px) {
-    height: 40px;
-    border: 2px solid #f6f7fc;
-    width: 71px;
-    margin-top: 0;
-    padding-right: 45px;
-    padding-left: 10px;
-    border: transparent;
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
+    margin: 0;
+    height: 45px;
+    border-radius: 0px 16px 16px 0px;
+    width: 110px;
   }
   @media screen and (min-width: 1280px) {
-    width: 60px;
+    width: 121px;
   }
 }
 .calc {
@@ -147,72 +148,12 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
-.testWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 121px;
-  height: 45px;
-  border: 2px solid #f6f7fc;
-  border-radius: 0px 16px 16px 0px;
+.inputCount {
+  width: 40px;
+  border: none;
+  outline: none;
+}
 
-  div {
-    width: 20px;
-    height: 20px;
-    background-image: url('../../images/iconsForm/calc.svg');
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-  input {
-    width: 40px;
-    border: none;
-    outline: none;
-  }
-}
-.calcWrapper {
-  // position: relative;
-  // width: 183px;
-  // @media screen and (min-width: 768px) {
-  //   display: flex;
-  //   border-top-right-radius: 16px;
-  //   border-bottom-right-radius: 16px;
-  //   width: 110px;
-  //   border: 2px solid #f6f7fc;
-  // }
-  // @media screen and (min-width: 1280px) {
-  // width: 121px;
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // width: 120px;
-  // height: 44px;
-  // border: 2px solid red;
-  // border-radius: 0px 16px 16px 0px;
-  // }
-}
-// .calcIcon {
-//   position: absolute;
-//   top: 34px;
-//   right: 12px;
-//   padding: 8px;
-//   border-left: 2px solid #f6f7fc;
-//   width: 20px;
-//   height: 20px;
-//   background-image: url('../../images/logo-header.svg');
-//   background-repeat: no-repeat;
-//   background-position: center;
-//   background-size: contain;
-//   @media screen and (min-width: 768px) {
-//     border: none;
-//     right: 16px;
-//     top: 9px;
-//     padding: 0;
-//   }
-//   @media screen and (min-width: 1280px) {
-//     right: 17px;
-//     top: 10px;
-//   }
-// }
 .buttonsWrapper {
   display: flex;
   margin-top: 80px;
@@ -226,39 +167,24 @@
     gap: 15px;
   }
 }
-// .buttonOrange {
-//   padding: 12px 0px;
-//   width: 116px;
-//   border: none;
-//   background-color: #ff751d;
-//   border-radius: 16px;
-//   color: #fff;
-//   font-weight: 700;
-//   font-family: inherit;
-//   text-align: center;
-//   letter-spacing: 0.02em;
-//   font-size: 12px;
-//   line-height: 1.17;
-// }
 
-// .buttonWhite {
-//   padding: 12px 34px;
-//   border: 2px solid #f5f6fb;
-//   background-color: #fff;
-//   border-radius: 16px;
-//   color: #52555f;
-//   font-size: 12px;
-//   font-weight: 700;
-//   font-family: inherit;
-//   text-align: center;
-//   letter-spacing: 0.02em;
-//   line-height: 1.17;
-// }
 .bodyTable {
-  width: 97%;
+  width: 100%;
+  display: flex;
   table-layout: fixed;
   border: none;
   overflow-x: hidden;
+  @media screen and (min-width: 768px) {
+    flex-direction: column;
+    gap: 30px;
+  }
+  @media screen and (min-width: 1280px) {
+    flex-direction: row;
+    gap: 75px;
+  }
+}
+.commonTable {
+  display: block;
 }
 
 // .bodyTableScroll {
@@ -270,7 +196,6 @@
 // }
 
 .main {
-  width: 605px;
   text-align: center;
   border-radius: 30px;
   color: rgb(0, 0, 0);
@@ -282,6 +207,12 @@
   border-right-style: inset;
   border-right-color: transparent;
   border-left-color: transparent;
+  @media screen and (min-width: 768px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 100%;
+  }
 }
 
 .mainTbody {
@@ -357,7 +288,8 @@
   width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: wrap;
+  overflow-wrap: break-word;
 }
 .thIcon {
   width: 40px;
@@ -398,12 +330,13 @@
 
 @media screen and (min-width: 1280px) {
   .bodyTable {
-    width: 75%;
+    width: 100%;
   }
 }
 .section {
   margin: 0 auto;
-  max-width: 1098px;
+  width: 1098px;
+  height: 578px;
   height: 579px;
   padding: 32px;
   background-color: rgb(255, 255, 255);

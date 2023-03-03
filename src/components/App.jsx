@@ -17,7 +17,7 @@ import { getUserThunk } from 'redux/auth/authOperations';
 import { getAccessToken } from '../redux/auth/authSelectors';
 import { googleAuth } from '../helpers/googleAuth';
 import { ReportPage } from 'pages/ReportPage/ReportPage';
-
+import { Income } from './Income/Income';
 const App = () => {
   const dispatch = useDispatch();
   const token = useSelector(getAccessToken);
@@ -35,6 +35,7 @@ const App = () => {
       <Route path="/" element={<SharedLayout />}>
         <Route path="/" element={<PrivateRoute component={<Home />} />}>
           <Route path="expenses" element={<Expenses />} />
+          <Route path="income" element={<Income />} />
           <Route path="reports" element={<ReportPage />} />
         </Route>
         <Route

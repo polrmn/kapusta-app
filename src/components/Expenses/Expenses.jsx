@@ -15,9 +15,8 @@ import {
 import { setAuthHeader } from '../../services/http/http';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import scss from './Expenses.module.scss';
-import { ReactComponent as ReactCalc } from '../../images/iconsForm/calc.svg';
 import SharedButton from './../../commons/sharedButton/SharedButton';
-import { Summury } from 'components/Summary/Summary';
+import Summury from '../Summary/Summary';
 export const Expenses = () => {
   const isScreenMoreTablet = useMediaQuery('(min-width: 768px)');
   const [description, setDescription] = useState('');
@@ -111,8 +110,7 @@ export const Expenses = () => {
                 </option>
               ))}
             </select>
-            {/* <ReactCalc width="20" height="20" display="block" /> */}
-            {/* <div className={scss.inputWrapper}>
+            <div className={scss.inputWrapper}>
               <input
                 name="amount"
                 value={amount}
@@ -121,12 +119,7 @@ export const Expenses = () => {
                 className={scss.inputCount}
                 onChange={handleChange}
               />
-              
-              <div className={scss.calc}></div>
-            </div> */}
-            <div className={scss.testWrapper}>
-              <input type="number" placeholder="0.00" />
-              <div />
+              <div className={scss.calc} />
             </div>
           </div>
           <div className={scss.buttonsWrapper}>
@@ -136,70 +129,60 @@ export const Expenses = () => {
             <SharedButton type="button" onClick={handleClear}>
               Clear
             </SharedButton>
-            {/* <button className={scss.buttonOrange} type="submit">
-              Input
-            </button>
-            <button
-              className={scss.buttonWhite}
-              type="button"
-              onClick={handleClear}
-            >
-              Clear
-            </button> */}
           </div>
         </form>
 
         <div>
           <div className={scss.bodyTable}>
-            <table className={scss.main}>
-              <thead className={scss.theadTable}>
-                <tr>
-                  <th className={`${scss.th} ${scss.thData}`}>Date</th>
-                  <th className={`${scss.th} ${scss.thDesc}`}>Description</th>
-                  <th className={`${scss.th} ${scss.thCateg}`}>Category</th>
-                  <th className={`${scss.th} ${scss.thSum}`}>Sum</th>
-                  <th className={`${scss.th} ${scss.thIcon}`}></th>
-                </tr>
-              </thead>
-            </table>
-            <div className={scss.bodyTableScroll}>
-              <table className={`${scss.main} ${scss.mainTbody}`}>
-                <tbody className={scss.tbodyTable}>
-                  {transactionsArray &&
-                    transactionsArray.map(
-                      ({
-                        transaction: {
-                          _id,
-                          date,
-                          description,
-                          category,
-                          amount,
-                        },
-                      }) => (
-                        <tr key={_id} className={scss.td}>
-                          <td className={scss.thData}>{date}</td>
-                          <td className={scss.tdDesc}>{description}</td>
-                          <td className={scss.thCateg}>{category}</td>
-                          <td className={scss.tdSum}>{amount}</td>
-                          <td className={scss.thIcon}>
-                            <button
-                              className={scss.deleteBtn}
-                              type="button"
-                              onClick={() => {
-                                delateContact(_id);
-                              }}
-                            >
-                              delate
-                            </button>
-                          </td>
-                        </tr>
-                      )
-                    )}
-                </tbody>
+            <div className={scss.commonTable}>
+              <table className={scss.main}>
+                <thead className={scss.theadTable}>
+                  <tr>
+                    <th className={`${scss.th} ${scss.thData}`}>Date</th>
+                    <th className={`${scss.th} ${scss.thDesc}`}>Description</th>
+                    <th className={`${scss.th} ${scss.thCateg}`}>Category</th>
+                    <th className={`${scss.th} ${scss.thSum}`}>Sum</th>
+                    <th className={`${scss.th} ${scss.thIcon}`}></th>
+                  </tr>
+                </thead>
               </table>
+              <div className={scss.bodyTableScroll}>
+                <table className={`${scss.main} ${scss.mainTbody}`}>
+                  <tbody className={scss.tbodyTable}>
+                    {transactionsArray &&
+                      transactionsArray.map(
+                        ({
+                          transaction: {
+                            _id,
+                            date,
+                            description,
+                            category,
+                            amount,
+                          },
+                        }) => (
+                          <tr key={_id} className={scss.td}>
+                            <td className={scss.thData}>{date}</td>
+                            <td className={scss.tdDesc}>{description}</td>
+                            <td className={scss.thCateg}>{category}</td>
+                            <td className={scss.tdSum}>{amount}</td>
+                            <td className={scss.thIcon}>
+                              <button
+                                className={scss.deleteBtn}
+                                type="button"
+                                onClick={() => {
+                                  delateContact(_id);
+                                }}
+                              >
+                                delate
+                              </button>
+                            </td>
+                          </tr>
+                        )
+                      )}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
-          <div className={scss.summery}>
             <Summury />
           </div>
         </div>
