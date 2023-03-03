@@ -1,6 +1,7 @@
 import { Calendar } from 'components/Calendar/Calendar';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { getAccessToken } from '../../redux/auth/authSelectors';
 import {
   selectCategory,
@@ -24,8 +25,6 @@ export const Income = () => {
   const token = useSelector(getAccessToken);
   const categoriesArray = useSelector(selectCategory);
   const transactionsArray = useSelector(selectTransactions);
-  //console.log(categoriesArray);
-  //console.log(transactionsArray);
 
   useEffect(() => {
     if (token) {
@@ -45,7 +44,6 @@ export const Income = () => {
         date,
       })
     );
-    //console.log(state);
   };
 
   const handleClear = () => {
@@ -66,7 +64,7 @@ export const Income = () => {
     amount: value => {
       console.log(value.charAt(0));
       if (value.charAt(0) === '0' || value.charAt(0) === '-') {
-        alert('число має бути більше 0');
+        Notify.failure('Amount must be greater than 0');
         return;
       }
       setAmount(value);

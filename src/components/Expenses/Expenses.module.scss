@@ -1,22 +1,415 @@
-.expensesNav {
-  &__Link {
-    margin: 20px;
-
-    display: inline-block;
-    background: #fefefe;
-    width: 138px;
-    height: 40px;
-    border-radius: 16px 16px 0 0;
-    outline: 1px solid black;
-    text-align: center;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 12px;
-    line-height: 11.166;
-    text-decoration: none;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-
-    color: #ff751d;
+.sectionForm {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
+  @media screen and (min-width: 768px) {
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 40px;
   }
+  @media screen and (min-width: 1280px) {
+    padding-top: 30px;
+    flex-direction: row;
+    justify-self: flex-start;
+    flex-wrap: nowrap;
+    padding: 0;
+    margin-bottom: 60px;
+  }
+}
+.sectionInputs {
+  align-items: center;
+  display: contents;
+  flex-direction: column;
+  border-bottom-left-radius: 30%;
+  background-color: transparent;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+  }
+  @media screen and (min-width: 1280px) {
+    height: 44px;
+    text-align: center;
+    width: calc(100% - 355px);
+  }
+}
+.inputDescription {
+  display: block;
+  font-family: inherit;
+  // width: 100%;
+  width: 30%;
+  height: 44px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  font-size: 12px;
+  line-height: 1.14;
+  text-align: start;
+  background-color: transparent;
+  padding-left: 30px;
+  outline-color: #ff751d;
+  border: 2px solid #ffffff;
+  border-bottom: none;
+  color: #52555f;
+  &::placeholder {
+    font-weight: 400;
+    color: #c7ccdc;
+  }
+  @media screen and (min-width: 768px) {
+    border-top-right-radius: 0px;
+    border: 2px solid #f6f7fc;
+    display: flex;
+    padding-left: 12px;
+  }
+  @media screen and (min-width: 1280px) {
+    padding-left: 12px;
+  }
+}
+.inputSelect {
+  display: block;
+  font-family: inherit;
+  // width: 100%;
+  width: 30%;
+  height: 44px;
+  border: 2px solid #ffffff;
+
+  border-bottom-right-radius: 16px;
+  outline-color: #ff751d;
+  color: #c7ccdc;
+  @media screen and (min-width: 768px) {
+    border: 2px solid #f6f7fc;
+    border-left: none;
+    border-right: none;
+    border-bottom-right-radius: 0px;
+    height: 49px;
+  }
+}
+.inputWrapper {
+  position: relative;
+  //width: 183px;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    width: 110px;
+    border: 2px solid #f6f7fc;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 121px;
+
+    &:hover {
+      border-color: #ff751d;
+    }
+  }
+}
+.inputCount {
+  // font-family: inherit;
+  // outline: none;
+  // width: 183px;
+  // height: 44px;
+  // padding-right: 55px;
+  // padding-left: 55px;
+  // border-radius: 22px;
+  // font-weight: 900;
+  // font-size: 12px;
+  // line-height: 1.14;
+  // text-align: center;
+  // margin-top: 32px;
+  // color: #52555f;
+  // border: 2px solid #f6f7fc;
+  // background-color: transparent;
+  width: 40px;
+  border: none;
+  outline: none;
+  @media screen and (min-width: 768px) {
+    height: 40px;
+    border: 2px solid #f6f7fc;
+    width: 71px;
+    margin-top: 0;
+    padding-right: 45px;
+    padding-left: 10px;
+    border: transparent;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 60px;
+  }
+}
+.calc {
+  width: 20px;
+  height: 20px;
+  background-image: url('../../images/iconsForm/calc.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.testWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 121px;
+  height: 45px;
+  border: 2px solid #f6f7fc;
+  border-radius: 0px 16px 16px 0px;
+
+  div {
+    width: 20px;
+    height: 20px;
+    background-image: url('../../images/iconsForm/calc.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  input {
+    width: 40px;
+    border: none;
+    outline: none;
+  }
+}
+.calcWrapper {
+  // position: relative;
+  // width: 183px;
+  // @media screen and (min-width: 768px) {
+  //   display: flex;
+  //   border-top-right-radius: 16px;
+  //   border-bottom-right-radius: 16px;
+  //   width: 110px;
+  //   border: 2px solid #f6f7fc;
+  // }
+  // @media screen and (min-width: 1280px) {
+  // width: 121px;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // width: 120px;
+  // height: 44px;
+  // border: 2px solid red;
+  // border-radius: 0px 16px 16px 0px;
+  // }
+}
+// .calcIcon {
+//   position: absolute;
+//   top: 34px;
+//   right: 12px;
+//   padding: 8px;
+//   border-left: 2px solid #f6f7fc;
+//   width: 20px;
+//   height: 20px;
+//   background-image: url('../../images/logo-header.svg');
+//   background-repeat: no-repeat;
+//   background-position: center;
+//   background-size: contain;
+//   @media screen and (min-width: 768px) {
+//     border: none;
+//     right: 16px;
+//     top: 9px;
+//     padding: 0;
+//   }
+//   @media screen and (min-width: 1280px) {
+//     right: 17px;
+//     top: 10px;
+//   }
+// }
+.buttonsWrapper {
+  display: flex;
+  margin-top: 80px;
+  gap: 20px;
+  @media screen and (min-width: 768px) {
+    margin-top: 32px;
+  }
+  @media screen and (min-width: 1280px) {
+    margin-left: 32px;
+    margin-top: 0;
+    gap: 15px;
+  }
+}
+// .buttonOrange {
+//   padding: 12px 0px;
+//   width: 116px;
+//   border: none;
+//   background-color: #ff751d;
+//   border-radius: 16px;
+//   color: #fff;
+//   font-weight: 700;
+//   font-family: inherit;
+//   text-align: center;
+//   letter-spacing: 0.02em;
+//   font-size: 12px;
+//   line-height: 1.17;
+// }
+
+// .buttonWhite {
+//   padding: 12px 34px;
+//   border: 2px solid #f5f6fb;
+//   background-color: #fff;
+//   border-radius: 16px;
+//   color: #52555f;
+//   font-size: 12px;
+//   font-weight: 700;
+//   font-family: inherit;
+//   text-align: center;
+//   letter-spacing: 0.02em;
+//   line-height: 1.17;
+// }
+.bodyTable {
+  width: 97%;
+  table-layout: fixed;
+  border: none;
+  overflow-x: hidden;
+}
+
+// .bodyTableScroll {
+//   height: 342px;
+//   overflow-x: hidden;
+//   margin-top: 0px;
+//   margin-bottom: 20px;
+//   border-bottom: 1px solid #fff;
+// }
+
+.main {
+  width: 605px;
+  text-align: center;
+  border-radius: 30px;
+  color: rgb(0, 0, 0);
+  border-radius: 20px 20px 0 0;
+  background-color: #f5f6fb;
+  border-spacing: 0px 2px;
+  border-left: 2px;
+  border-left-style: outset;
+  border-right-style: inset;
+  border-right-color: transparent;
+  border-left-color: transparent;
+}
+
+.mainTbody {
+  border-radius: 0;
+  /* overflow: auto; */
+}
+
+.theadTable {
+  display: none;
+  align-items: center;
+  height: 38px;
+  font-size: 13px;
+  font-weight: normal;
+  color: #52555f;
+}
+
+.th {
+  padding: 10px;
+  text-transform: uppercase;
+  color: rgb(0, 0, 0);
+  align-items: center;
+  letter-spacing: 0.02em;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 14px;
+  font-family: Roboto;
+  font-style: normal;
+}
+
+.td {
+  display: revert;
+  align-items: center;
+  height: 38px;
+  padding: 0 8px;
+  background: #ffffff;
+  color: #52555f;
+  border-bottom: 2px solid #f4f6fb;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.04em;
+}
+
+.thData {
+  width: 100px;
+}
+
+.thDesc {
+  width: 200px;
+}
+
+.thCateg {
+  width: 140px;
+}
+
+.thSum {
+  width: 130px;
+  margin: 0 auto;
+}
+.tdSum {
+  font-weight: bold;
+  width: 130px;
+  color: #407946;
+  margin: 0 auto;
+}
+.tdSumExpense {
+  font-weight: bold;
+  color: #e7192e;
+}
+.tdDesc {
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.thIcon {
+  width: 40px;
+}
+
+@media screen and (min-width: 1280px) {
+  .main {
+    width: 760px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .theadTable {
+    display: revert;
+  }
+}
+
+.deleteBtn {
+  margin-right: auto;
+  margin-left: auto;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: transparent;
+  background-color: transparent;
+}
+
+.deleteBtnIcon {
+  width: 16px;
+  height: 18px;
+}
+
+.deleteBtn:hover svg path {
+  color: #ff751d;
+  fill: currentColor;
+}
+
+@media screen and (min-width: 1280px) {
+  .bodyTable {
+    width: 75%;
+  }
+}
+.section {
+  margin: 0 auto;
+  max-width: 1098px;
+  height: 579px;
+  padding: 32px;
+  background-color: rgb(255, 255, 255);
+  margin-bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgb(170 178 197 / 20%) 0px 10px 60px;
+  border-radius: 0px 30px 30px;
 }

@@ -69,8 +69,9 @@ export const transactionSlice = createSlice({
       })
       .addCase(delateTransactionThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
+        console.log(payload);
         const indexElem = state.transactions.findIndex(
-          item => item.id === payload.id
+          item => item.id === payload
         );
         state.transactions.splice(indexElem, 1);
       })
