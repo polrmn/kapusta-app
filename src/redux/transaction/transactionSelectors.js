@@ -12,3 +12,7 @@ export const selectIncomes = state =>
 
 export const selectExpenses = state => 
   state.transaction.expenses.expenses;
+  export const selectProductExpenses = state => 
+  state.transaction.expenses.expenses.expensesData;
+  export const selectProductIncomes = state => 
+  state.transaction.incomes.incomes.incomesData;

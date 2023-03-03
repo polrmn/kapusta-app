@@ -11,22 +11,51 @@ import { useSelector } from 'react-redux';
 import { getTransactionsThunk } from '../../../redux/transaction/transactionOperations';
 // import { nanoid } from '@reduxjs/toolkit';
 import css from '../ChartExpenses/chart.module.scss';
-import { selectItems } from '../../../redux/transaction/transactionSelectors';
+import {
+  selectProductIncomes,
+  selectProductExpenses,
+} from '../../../redux/transaction/transactionSelectors';
+
 import { useEffect } from 'react';
 
 // import { useWindowSize } from 'react-use';
 
 export const ChartExpenses = () => {
   // const { width, height } = useWindowSize();
-  const items = useSelector(selectItems);
+  const DataIncomes = useSelector(selectProductIncomes);
+  const DataExpenses = useSelector(selectProductExpenses);
+  // const itemsExpenses = useSelector(selectExpenses);
   const dispatch = useDispatch();
-  const handleButtonClick = () => {
-    dispatch(getTransactionsThunk());
-  };
 
+  // const expensesData = useSelector(selectExpenses).expensesData;
+  // const category = 'Развлечения';
+
+  const handleButtonClick = () => {
+    // console.log(DataExpenses);
+    // dispatch(getTransactionsThunk(DataExpenses));
+  };
+  // console.log(DataExpenses);
   // useEffect(() => {
   //   dispatch(getTransactionsThunk());
   // },[dispatch]);
+
+  // const expensesData = useSelector(selectExpenses).expensesData;
+  const category = 'Развлечения';
+  const filtredArr = Object.entries(DataExpenses).filter(
+    arr => arr[0] === category
+  )[0];
+  console.log(filtredArr);
+  const values = filtredArr[1];
+  const result = Object.entries(values)
+    .filter(elem => !elem.includes('total'))
+    .sort((firstElem, secondElem) => secondElem[1] - firstElem[1]);
+  console.log(result);
+  const resultData = result.map(elem => ({
+    name: elem[0],
+    uv: elem[1],
+  }));
+  console.log(resultData);
+  console.log(resultData);
 
   const data = [
     {
@@ -66,6 +95,13 @@ export const ChartExpenses = () => {
       amt: 1700,
     },
   ];
+  // const keys = [];
+  // const values = [];
+
+  // for (let obj of DataExpenses) {
+  //   keys.push(Object.keys(obj));
+  //   values.push(Object.values(obj));
+  // }
 
   const getPath = (x, y, width, height, borderRadius = 10) => {
     const r = borderRadius || 0;
@@ -113,9 +149,11 @@ export const ChartExpenses = () => {
       return '#FFDAC0';
     }
   };
+
   const dataForRender = data => {
     return data.map((elem, index) => ({ ...elem, fill: fillRender(index) }));
   };
+
   return (
     <>
       <button className={css.btn} type="button" onClick={handleButtonClick}>
