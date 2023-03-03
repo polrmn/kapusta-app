@@ -82,7 +82,8 @@ p {
     }
 
     &Main {
-        display: none;
+        display: block;
+        padding-top: 16px;
 
         @media screen and (min-width: 768px) and (max-width: 1279px) {
             display: block;
@@ -123,6 +124,17 @@ p {
     &LinkMain {
         text-decoration: none;
         color: rgba(82, 85, 95, 0.7);
+    }
+
+    &OuterBlock {
+        display: flex;
+
+        @media screen and (max-width: 767px) {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 16px;
+        }
     }
 
     &Reports {
@@ -244,10 +256,14 @@ p {
     }
 
     &InnerBlock {
-        padding-top: 32px;
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        
+
+        @media screen and (max-width: 767px) {
+            padding-top: 32px;
+            flex-direction: column;
+            align-items: center;
+        }
 
         @media screen and (min-width: 768px) and (max-width: 1279px) {
             display: flex;
