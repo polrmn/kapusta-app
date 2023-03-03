@@ -95,25 +95,45 @@ export const ExpensesReport = () => {
     <p>Loading...</p>
   ) : (
     <>
-    <button type='button' onClick={() => {dispatch(setReportType('income'))}}>{'<'}</button>
-      <h3 className={css.title}>Expenses</h3>
-      <button type='button' onClick={() => {dispatch(setReportType('income'))}}>{'>'}</button>
-      {expenses.expenseTotal > 0 && (
-        <ul className={css.container}>
-          {filteredCategories.map(category => (
-            <li
-              className={css.category}
-              key={category}
-              data-category={category}
-              onClick={handleCategoryClick}
-            >
-              <p>{expenses.expensesData[category].total}</p>
-              <svg className={css.category__svg} height={'56px'} width={'56px'}>{getSvg(category)}</svg>
-              <p>{category}</p>
-            </li>
-          ))}
-        </ul>
-      )}
+      <div className={css.box}>
+        <div className={css.category__navigate}>
+          <button
+            className={css.btn}
+            type="button"
+            onClick={() => {
+              dispatch(setReportType('income'));
+            }}
+          >
+            {'<'}
+          </button>
+          <h3 className={css.title}>Expenses</h3>
+          <button
+            className={css.btn}
+            type="button"
+            onClick={() => {
+              dispatch(setReportType('income'));
+            }}
+          >
+            {'>'}
+          </button>
+        </div>
+        {expenses.expenseTotal > 0 && (
+          <ul className={css.container}>
+            {filteredCategories.map(category => (
+              <li
+                className={css.category}
+                key={category}
+                data-category={category}
+                onClick={handleCategoryClick}
+              >
+                <p className={css.text}>{expenses.expensesData[category].total}</p>
+                {getSvg(category)}
+                <p className={css.text}>{category}</p>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </>
   );
 };
