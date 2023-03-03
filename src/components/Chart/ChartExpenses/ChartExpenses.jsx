@@ -8,100 +8,37 @@ import {
 } from 'recharts';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { getTransactionsThunk } from '../../../redux/transaction/transactionOperations';
-// import { nanoid } from '@reduxjs/toolkit';
 import css from '../ChartExpenses/chart.module.scss';
+import { omit } from 'lodash';
 import {
   selectProductIncomes,
   selectProductExpenses,
 } from '../../../redux/transaction/transactionSelectors';
-
-import { useEffect } from 'react';
-
-// import { useWindowSize } from 'react-use';
+import { useMemo } from 'react';
 
 export const ChartExpenses = () => {
   // const { width, height } = useWindowSize();
   const DataIncomes = useSelector(selectProductIncomes);
   const DataExpenses = useSelector(selectProductExpenses);
-  // const itemsExpenses = useSelector(selectExpenses);
-  const dispatch = useDispatch();
 
-  // const expensesData = useSelector(selectExpenses).expensesData;
-  // const category = 'Развлечения';
+  // const dispatch = useDispatch();
 
-  const handleButtonClick = () => {
-    // console.log(DataExpenses);
-    // dispatch(getTransactionsThunk(DataExpenses));
-  };
-  // console.log(DataExpenses);
-  // useEffect(() => {
-  //   dispatch(getTransactionsThunk());
-  // },[dispatch]);
+  const data = useMemo(() => {
+    if (DataExpenses) {
+      const entriesExpenses = Object.entries(DataExpenses);
+      const omitedExpenses = entriesExpenses.map(item => {
+        item[1] = omit(item[1], ['total']);
+        return item;
+      });
+      const expensesChart = omitedExpenses[0][1]; // підставити замість 0 індекс обраного продукту, додати масив залежностей індекс
 
-  // const expensesData = useSelector(selectExpenses).expensesData;
-  const category = 'Развлечения';
-  const filtredArr = Object.entries(DataExpenses).filter(
-    arr => arr[0] === category
-  )[0];
-  console.log(filtredArr);
-  const values = filtredArr[1];
-  const result = Object.entries(values)
-    .filter(elem => !elem.includes('total'))
-    .sort((firstElem, secondElem) => secondElem[1] - firstElem[1]);
-  console.log(result);
-  const resultData = result.map(elem => ({
-    name: elem[0],
-    uv: elem[1],
-  }));
-  console.log(resultData);
-  console.log(resultData);
-
-  const data = [
-    {
-      name: 'Page A',
-      uv: 590,
-      pv: 800,
-      amt: 1400,
-    },
-    {
-      name: 'Page B',
-      uv: 868,
-      pv: 967,
-      amt: 1506,
-    },
-    {
-      name: 'Page C',
-      uv: 1397,
-      pv: 1098,
-      amt: 989,
-    },
-    {
-      name: 'Page D',
-      uv: 1480,
-      pv: 1200,
-      amt: 1228,
-    },
-    {
-      name: 'Page E',
-      uv: 1520,
-      pv: 1108,
-      amt: 1100,
-    },
-    {
-      name: 'Page F',
-      uv: 1400,
-      pv: 680,
-      amt: 1700,
-    },
-  ];
-  // const keys = [];
-  // const values = [];
-
-  // for (let obj of DataExpenses) {
-  //   keys.push(Object.keys(obj));
-  //   values.push(Object.values(obj));
-  // }
+      const res = [];
+      for (const key in expensesChart) {
+        res.push({ name: key, UAH: expensesChart[key] });
+      }
+      return res.sort((a, b) => b.UAH - a.UAH);
+    }
+  }, [DataExpenses]);
 
   const getPath = (x, y, width, height, borderRadius = 10) => {
     const r = borderRadius || 0;
@@ -126,22 +63,7 @@ export const ChartExpenses = () => {
 
     return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
   };
-  // const calculateBarWidths = (data, containerWidth) => {
-  //   // Find the maximum value in the data array
-  //   const maxVal = Math.max(...data);
 
-  //   // Calculate the width of each bar based on the container width and data
-  //   const barWidths = data.map(val => (val / maxVal) * containerWidth);
-
-  //   return barWidths;
-  // };
-
-  // let maxDataLength = Math.max(...data.map(arr => arr.length));
-  // let barWidth = 800;
-
-  // if (maxDataLength >= 10) {
-  //   barWidth += 2 * (maxDataLength - 10);
-  // }
   const fillRender = index => {
     if (index % 2 === 0) {
       return '#FF751D';
@@ -151,17 +73,17 @@ export const ChartExpenses = () => {
   };
 
   const dataForRender = data => {
-    return data.map((elem, index) => ({ ...elem, fill: fillRender(index) }));
+    if (data) {
+      return data.map((elem, index) => ({
+        ...elem,
+        fill: fillRender(index),
+      }));
+    }
+    return data;
   };
 
   return (
     <>
-      <button className={css.btn} type="button" onClick={handleButtonClick}>
-        Products
-      </button>
-      <button className={css.btn} type="button" onClick={handleButtonClick}>
-        Salary
-      </button>
       <div className={css.chartContainer}>
         <ResponsiveContainer width="100%" height={500}>
           <ComposedChart
@@ -174,8 +96,13 @@ export const ChartExpenses = () => {
 
             <Tooltip />
 
-            <Bar dataKey="uv" fill="fill" barSize={38} shape={<TriangleBar />}>
-              <LabelList dataKey="UAH" position="top"></LabelList>
+            <Bar dataKey="UAH" fill="fill" barSize={38} shape={<TriangleBar />}>
+              <LabelList
+                dataKey="UAH"
+                position="top"
+                fill="#52555F"
+                content="UAH"
+              ></LabelList>
             </Bar>
           </ComposedChart>
         </ResponsiveContainer>

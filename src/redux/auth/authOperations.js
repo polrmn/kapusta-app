@@ -9,7 +9,6 @@ const notlifixOptions = {
     distance: '80px',
     backOverlay: true,
     clickToClose: true,
-    closeButton: true,
     useIcon: true,
   },
   success: {
@@ -17,7 +16,6 @@ const notlifixOptions = {
     distance: '80px',
     backOverlay: false,
     clickToClose: true,
-    closeButton: true,
     useIcon: true,
   },
 };
@@ -75,7 +73,7 @@ export const getUserThunk = createAsyncThunk(
       if (!token) {
         return rejectWithValue('no token');
       }
-      setAuthHeader(token)
+      setAuthHeader(token);
       return await getUserInfoApi();
     } catch (error) {
       Notiflix.Notify.failure(`${error.message}`, notlifixOptions.failure);
@@ -91,6 +89,18 @@ export const refreshThunk = createAsyncThunk(
     try {
       return null;
       // eslint-disable-next-line
+    } catch (error) {
+      Notiflix.Notify.failure(`${error.message}`, notlifixOptions.failure);
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
+export const googleAuthThunk = createAsyncThunk(
+  'auth/googleAuth',
+  async (data, { rejectWithValue }) => {
+    try {
+      return data;
     } catch (error) {
       Notiflix.Notify.failure(`${error.message}`, notlifixOptions.failure);
       return rejectWithValue(error.message);

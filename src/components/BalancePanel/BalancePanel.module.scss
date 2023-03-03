@@ -1,4 +1,416 @@
+p {
+    padding: 0;
+    margin: 0;
+}
+
 .balance {
-    background-color: goldenrod;
     max-width: 320px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    // background-color: #F5F6FB;
+
+    @media screen and (min-width: 768px) and (max-width: 1279px) {
+        max-width: 768px;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: nowrap;
+        padding-top: 10px;
+        padding-bottom: 60px;
+    }
+
+    @media screen and (min-width: 1280px) {
+        max-width: 1280px;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: center;
+        position: relative;
+        padding-top: 10px;
+        padding-bottom: 60px;
+    }
+
+    &Back {
+        padding-top: 16px;
+        padding-bottom: 14px;
+
+        @media screen and (min-width: 1280px) {
+            padding-top: 50px;
+        }
+    }
+
+    &BtnBack {
+        width: 118px;
+        height: 18px;
+        position: relative;
+        font-weight: 700;
+        font-size: 10px;
+        line-height: 12px;
+        // display: flex;
+        // align-items: center;
+        text-align: right;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        color: #000;
+        background-color: transparent;
+        cursor: pointer;
+        border: none;
+
+        @media screen and (min-width: 768px) {
+            display: none;
+        }
+
+        &::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: inline-block;
+            content: "";
+            width: 18px;
+            height: 18px;
+            background-image: url(../../images/icons/balance_backspace.svg);
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    }
+
+    &LinkBack {
+        text-decoration: none;
+        color: #000;
+    }
+
+    &Main {
+        display: none;
+
+        @media screen and (min-width: 768px) and (max-width: 1279px) {
+            display: block;
+        }
+
+        @media screen and (min-width: 1280px) {
+            display: block;
+        }
+    }
+
+    &BtnMain {
+        width: 125px;
+        height: 24px;
+        position: relative;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 0.04em;
+        color: rgba(82, 85, 95, 0.7);
+        background-color: transparent;
+        cursor: pointer;
+        border: none;
+
+        &::before {
+            position: absolute;
+            top: 3px;
+            left: 0;
+            display: inline-block;
+            content: "";
+            width: 18px;
+            height: 18px;
+            background-image: url(../../images/icons/balance_backspace.svg);
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    }
+
+    &LinkMain {
+        text-decoration: none;
+        color: rgba(82, 85, 95, 0.7);
+    }
+
+    &Reports {
+        display: flex;
+        justify-content: center;
+
+        @media screen and (min-width: 768px) and (max-width: 1279px) {
+            padding-top: 45px;
+            padding-left: 251px;
+            padding-right: 12px;
+        }
+
+        @media screen and (min-width: 1280px) {
+            padding-top: 45px;
+            padding-left: 298px;
+            padding-right: 91px;
+        }
+    }
+
+    &BtnReport {
+        width: 84px;
+        height: 24px;
+        justify-content: flex-start;
+        position: relative;
+        font-size: 12px;
+        line-height: 14px;
+        text-align: left;
+        letter-spacing: 0.04em;
+        color: rgba(82, 85, 95, 0.7);
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+
+        @media screen and (min-width: 768px) and (max-width: 1279px) {}
+
+        &::before {
+            position: absolute;
+            top: -2px;
+            left: 62px;
+            display: inline-block;
+            content: "";
+            width: 24px;
+            height: 24px;
+            background-image: url(../../images/icons/balance_bar_chart.svg);
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    }
+
+    &LinkReport {
+        text-decoration: none;
+        color: rgba(82, 85, 95, 0.7);
+    }
+
+    &Cal {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &Para {
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 14px;
+            text-align: center;
+            letter-spacing: 0.04em;
+            color: rgba(82, 85, 95, 0.7);
+            padding-bottom: 5px;
+        }
+
+        &Inner {
+            display: flex;
+            flex-direction: row;
+            position: relative;
+        }
+
+        &Dec {
+            width: 10px;
+            height: 15px;
+            position: absolute;
+            top: 0;
+            left: -14px;
+            display: inline-block;
+            content: "";
+            background-image: url(../../images/icons/balance_vector_l.svg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        &Prop {
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 16px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            color: #000;
+        }
+
+        &Inc {
+            width: 10px;
+            height: 15px;
+            position: absolute;
+            top: 0;
+            left: 123px;
+            display: inline-block;
+            content: "";
+            background-image: url(../../images/icons/balance_vector_r.svg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+    }
+
+    &InnerBlock {
+        padding-top: 32px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        @media screen and (min-width: 768px) and (max-width: 1279px) {
+            display: flex;
+            flex-direction: row;
+            align-items: baseline;
+            justify-content: center;
+            padding-left: 32px;
+            // margin-top: 32px;
+        }
+
+        @media screen and (min-width: 1280px) {
+            display: flex;
+            flex-direction: row;
+            align-items: baseline;
+            justify-content: center;
+            padding-left: 473px;
+        }
+    }
+
+    &Para {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 14px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        letter-spacing: 0.02em;
+        color: rgba(82, 85, 95, 0.7);
+        padding-bottom: 8px;
+
+        @media screen and (min-width: 768px) and (max-width: 1279px) {}
+    }
+
+    &Add {
+        display: flex;
+        flex-direction: row;
+    }
+
+    &Prop {
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: right;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        color: #000;
+        width: 140px;
+        height: 40px;
+        border: 2px solid #fff;
+        border-radius: 22px 0px 0px 22px;
+
+        @media screen and (min-width: 768px) {
+            width: 125px;
+            height: 40px;
+            border: 2px solid #FFF;
+            border-radius: 16px;
+            margin-left: 21px;
+        }
+    }
+
+    &BtnAdd {
+        width: 142px;
+        height: 44px;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding-left: 16px;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        color: rgba(82, 85, 95, 0.7);
+        background-color: transparent;
+        cursor: pointer;
+        border: 2px solid #FFF;
+        border-radius: 0px 22px 22px 0px;
+
+        @media screen and (min-width: 768px) {
+            width: 125px;
+            height: 44px;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 14px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            background-color: transparent;
+            color: rgba(82, 85, 95, 0.7);
+            border: 2px solid #FFFFFF;
+            border-radius: 16px;
+            margin-left: 15px;
+        }
+
+        // &:active {
+        //     color: #fff;
+        //     background-color: #FF751D;
+        //     transition: background 0.4s;
+        // }
+
+        &:hover,&:focus {
+            // border: 1px solid #FF751D;
+            color: #fff;
+            background-color: #FF751D;
+            transition: background 0.5s;
+        }
+    }
+
+    &Form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &ModalPara {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        letter-spacing: 0.02em;
+        color: rgba(82, 85, 95, 0.7);
+        padding-bottom: 8px;
+    }
+
+    &ModalInput {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        border: 1px solid rgba(82, 85, 95, 0.7);
+
+        &:hover,&:focus {
+            border: 1px solid #FF751D;
+            transition: border 0.5s;
+        }
+    }
+
+    &ModalBtn {
+        width: 142px;
+        height: 44px;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        color: rgba(82, 85, 95, 0.7);
+        background-color: #F5F6FB;
+        cursor: pointer;
+        border: 2px solid #FFF;
+        border-radius: 5px;
+        margin-top: 10px;
+
+        &:hover,&:focus {
+            color: #fff;
+            background-color: #FF751D;
+            transition: background 0.5s;
+        }
+    }
 }
