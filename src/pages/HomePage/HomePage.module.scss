@@ -1,6 +1,5 @@
 .homeNavLink {
   display: inline-flex;
-  outline: 1px solid red;
   text-decoration: none;
   text-align: center;
   justify-content: center;
@@ -16,8 +15,4 @@
   background-color: #fefefe;
   letter-spacing: 0.02em;
   cursor: pointer;
-}
-
-.homeNavLink:active {
-  color: #ff751d;
 }
