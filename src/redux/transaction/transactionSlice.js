@@ -14,7 +14,8 @@ import {
 } from './transactionOperations';
 
 const initialState = {
-  transactions: [],
+  transactionsExpense: [],
+  transactionsIncome: [],
   category: [],
   incomeCategory: [],
   isLoading: false,
@@ -41,7 +42,10 @@ export const transactionSlice = createSlice({
       })
       .addCase(addExpenseTransactionThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.transactions = [...state.transactions, payload];
+        state.transactionsExpense = [
+          ...state.transactionsExpense,
+          payload.transaction,
+        ];
       })
       .addCase(addExpenseTransactionThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -55,13 +59,14 @@ export const transactionSlice = createSlice({
         getExpenseTransactionsByThunk.fulfilled,
         (state, { payload }) => {
           state.isLoading = false;
-          state.transactions = payload;
+          state.transactionsExpense = payload.expenses;
         }
       )
       .addCase(getExpenseTransactionsByThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
       })
+
       /*delateTransactionThunk */
       .addCase(delateTransactionThunk.pending, state => {
         state.isLoading = true;
@@ -69,10 +74,14 @@ export const transactionSlice = createSlice({
       .addCase(delateTransactionThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         console.log(payload);
-        const indexElem = state.transactions.findIndex(
-          item => item.id === payload
+        const indexElemExp = state.transactionsExpense.findIndex(
+          item => item._id === payload
         );
-        state.transactions.splice(indexElem, 1);
+        state.transactionsExpense.splice(indexElemExp, 1);
+        const indexElemInc = state.transactionsIncome.findIndex(
+          item => item._id === payload
+        );
+        state.transactionsIncome.splice(indexElemInc, 1);
       })
       .addCase(delateTransactionThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -97,7 +106,10 @@ export const transactionSlice = createSlice({
       })
       .addCase(addIncomeTransactionThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.transactions = [...state.transactions, payload];
+        state.transactionsIncome = [
+          ...state.transactionsIncome,
+          payload.transaction,
+        ];
       })
       .addCase(addIncomeTransactionThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -109,7 +121,7 @@ export const transactionSlice = createSlice({
       })
       .addCase(getIncomeTransactionsByThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.category = payload;
+        state.transactionsIncome = payload.incomes;
       })
       .addCase(getIncomeTransactionsByThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
