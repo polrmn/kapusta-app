@@ -12,7 +12,7 @@ import style from './BalancePanel.module.scss';
 import { CurrentPeriod } from '../CurrentPeriod/CurrentPeriod';
 
 function BalancePanel() {
-  const [balance, setBalance] = React.useState(0);
+  const [balance, setBalance] = React.useState("");
   const [showModal, setShowModal] = React.useState(false);
   const dispatch = useDispatch();
   const balAnce = useSelector(getBalance);
@@ -30,7 +30,7 @@ function BalancePanel() {
   };
 
   const resetInput = () => {
-    setBalance(0);
+    setBalance("");
   };
 
   const balanceChange = e => {
@@ -97,13 +97,62 @@ function BalancePanel() {
           </Modal>
         </section>
       )}
+      {location.pathname === '/income' && (
+        <section className={style.balanceExpenses}>
+          {/* <div className={style.balanceIncomeBack}>
+            <Link className={style.balanceIncomeLinkBack} to="/">
+              to transaction
+            </Link>
+          </div> */}
+          <div className={style.balanceExpensesOuterBlock}>
+            <div className={style.balanceIncomeReports}>
+              <Link className={style.balanceIncomeLinkReport} to="/reports">
+                Reports
+              </Link>
+            </div>
+            <div className={style.balanceExpensesInnerBlock}>
+              <p className={style.balanceExpensesPara}>Balance:</p>
+              <div className={style.balanceExpensesAdd}>
+                <p className={style.balanceExpensesProp}>{balAnce} UAH</p>
+                <button
+                  onClick={() => setShowModal(true)}
+                  className={style.balanceExpensesBtnAdd}
+                >
+                  Add balance
+                </button>
+              </div>
+            </div>
+          </div>
+          <Modal active={showModal} setActive={setShowModal}>
+            <form
+              action=""
+              onSubmit={onClickConfirm}
+              className={style.balanceForm}
+            >
+              <label>
+                <p className={style.balanceModalPara}>Balance:</p>
+                <input
+                  className={style.balanceModalInput}
+                  type="text"
+                  name="balance"
+                  value={balance}
+                  onChange={balanceChange}
+                />
+              </label>
+              <button className={style.balanceModalBtn} type="submit">
+                Confirm
+              </button>
+            </form>
+          </Modal>
+        </section>
+      )}
       {location.pathname === '/expenses' && (
         <section className={style.balanceExpenses}>
-          <div className={style.balanceBack}>
+          {/* <div className={style.balanceBack}>
             <Link className={style.balanceLinkBack} to="/">
               to transaction
             </Link>
-          </div>
+          </div> */}
           <div className={style.balanceExpensesOuterBlock}>
             <div className={style.balanceExpensesReports}>
               <Link className={style.balanceExpensesLinkReport} to="/reports">
