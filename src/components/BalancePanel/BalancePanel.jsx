@@ -97,55 +97,56 @@ function BalancePanel() {
           </Modal>
         </section>
       )}
-      {location.pathname === '/income' && (
-        <section className={style.balanceExpenses}>
-          {/* <div className={style.balanceIncomeBack}>
+      {(location.pathname === '/income' ||
+        location.pathname === '/') && (
+          <section className={style.balanceExpenses}>
+            {/* <div className={style.balanceIncomeBack}>
             <Link className={style.balanceIncomeLinkBack} to="/">
               to transaction
             </Link>
           </div> */}
-          <div className={style.balanceExpensesOuterBlock}>
-            <div className={style.balanceIncomeReports}>
-              <Link className={style.balanceIncomeLinkReport} to="/reports">
-                Reports
-              </Link>
-            </div>
-            <div className={style.balanceExpensesInnerBlock}>
-              <p className={style.balanceExpensesPara}>Balance:</p>
-              <div className={style.balanceExpensesAdd}>
-                <p className={style.balanceExpensesProp}>{balAnce} UAH</p>
-                <button
-                  onClick={() => setShowModal(true)}
-                  className={style.balanceExpensesBtnAdd}
-                >
-                  Add balance
-                </button>
+            <div className={style.balanceExpensesOuterBlock}>
+              <div className={style.balanceIncomeReports}>
+                <Link className={style.balanceIncomeLinkReport} to="/reports">
+                  Reports
+                </Link>
+              </div>
+              <div className={style.balanceExpensesInnerBlock}>
+                <p className={style.balanceExpensesPara}>Balance:</p>
+                <div className={style.balanceExpensesAdd}>
+                  <p className={style.balanceExpensesProp}>{balAnce} UAH</p>
+                  <button
+                    onClick={() => setShowModal(true)}
+                    className={style.balanceExpensesBtnAdd}
+                  >
+                    Add balance
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-          <Modal active={showModal} setActive={setShowModal}>
-            <form
-              action=""
-              onSubmit={onClickConfirm}
-              className={style.balanceForm}
-            >
-              <label>
-                <p className={style.balanceModalPara}>Balance:</p>
-                <input
-                  className={style.balanceModalInput}
-                  type="text"
-                  name="balance"
-                  value={balance}
-                  onChange={balanceChange}
-                />
-              </label>
-              <button className={style.balanceModalBtn} type="submit">
-                Confirm
-              </button>
-            </form>
-          </Modal>
-        </section>
-      )}
+            <Modal active={showModal} setActive={setShowModal}>
+              <form
+                action=""
+                onSubmit={onClickConfirm}
+                className={style.balanceForm}
+              >
+                <label>
+                  <p className={style.balanceModalPara}>Balance:</p>
+                  <input
+                    className={style.balanceModalInput}
+                    type="text"
+                    name="balance"
+                    value={balance}
+                    onChange={balanceChange}
+                  />
+                </label>
+                <button className={style.balanceModalBtn} type="submit">
+                  Confirm
+                </button>
+              </form>
+            </Modal>
+          </section>
+        )}
       {location.pathname === '/expenses' && (
         <section className={style.balanceExpenses}>
           {/* <div className={style.balanceBack}>

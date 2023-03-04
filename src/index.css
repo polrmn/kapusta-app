@@ -33,6 +33,7 @@ body {
 }
 
 .main {
+  padding-bottom: 0;
   background-image: url(../src/images/backgrounds/mobile/mobileHome.png);
   background-repeat: no-repeat;
   background-size: cover;
@@ -54,6 +55,7 @@ body {
   }
 
   .main {
+    padding-bottom: 60px;
     background-image: url(../src/images/backgrounds/tablet/tabletHome.png);
   }
 
@@ -70,6 +72,7 @@ body {
   }
 
   .main {
+    padding-bottom: 80px;
     background-image: url(../src/images/backgrounds/desktop/desktopHome.png);
   }
 
