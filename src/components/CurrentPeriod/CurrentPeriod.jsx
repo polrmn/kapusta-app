@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useDispatch } from 'react-redux';
+import { setDate } from 'redux/dateSlice';
 import css from './current-period.module.scss';
 
 export const CurrentPeriod = () => {
+  const dispatch = useDispatch();
   const [startDate, setStartDate] = useState(new Date());
+
+  const setNewDate = date => {
+    dispatch(setDate(date));
+  }
 
   const handleClick = date => {
     Date.isLeapYear = function (year) {
@@ -43,20 +50,22 @@ export const CurrentPeriod = () => {
       this.setDate(1);
       this.setMonth(this.getMonth() + value);
       this.setDate(Math.min(n, this.getDaysInMonth()));
+      console.log(this);
       return this;
     };
     const myDate = new Date(startDate);
     const result1 = myDate.addMonths(date);
-
     return result1;
   };
 
   const handleMonthMinus = () => {
     setStartDate(handleClick(-1));
+    setNewDate(handleClick(-1).toISOString().slice(0, 7));
   };
 
   const handleMonthPlus = () => {
     setStartDate(handleClick(1));
+    setNewDate(handleClick(1).toISOString().slice(0, 7));
   };
 
   return (
@@ -69,7 +78,11 @@ export const CurrentPeriod = () => {
       <DatePicker
         className={css.currentDate}
         selected={startDate}
-        onChange={date => setStartDate(date)}
+        onChange={date => {
+          setStartDate(date)
+          setNewDate(date.toISOString().slice(0, 7));
+        }
+      }
         dateFormat="MMMM yyyy"
         showMonthYearPicker
       />
