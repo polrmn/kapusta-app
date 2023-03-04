@@ -39,7 +39,7 @@ export const ExpensesReport = () => {
   useEffect(() => {
     if (reportDate) {
       dispatch(getTransactionsThunk(reportDate));
-      dispatch(getExpenseCategoriesThunk());
+      // dispatch(getExpenseCategoriesThunk());
     } else {
       dispatch(setDate('2023-03'));
     }

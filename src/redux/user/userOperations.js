@@ -13,10 +13,11 @@ export const thunkName = createAsyncThunk(
 );
 
 export const addBalance = createAsyncThunk(
-  'user/balance',
+  'user/addBalance',
   async (balance, thunkApi) => {
     try {
       const newBalance = await updateBalanceAPI(balance);
+      
       return newBalance;
     } catch (e) {
       return thunkApi.rejectWithValue(e.message);

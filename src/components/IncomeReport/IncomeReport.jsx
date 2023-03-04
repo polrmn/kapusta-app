@@ -9,6 +9,7 @@ import {
 } from 'redux/transaction/transactionOperations';
 import {
   selectCategory,
+  selectIncomeCategories,
   selectIncomes,
 } from 'redux/transaction/transactionSelectors';
 import { ReactComponent as ReportSalary } from '../../images/svg-reports/salary.svg';
@@ -23,7 +24,7 @@ const refs = {
 export const IncomeReport = () => {
   const reportDate = useSelector(selectDate);
   const incomes = useSelector(selectIncomes);
-  const categories = useSelector(selectCategory);
+  const categories = useSelector(selectIncomeCategories);
   const dispatch = useDispatch();
 
   const isLoading = useSelector(selectIsLoading);
@@ -31,7 +32,7 @@ export const IncomeReport = () => {
   useEffect(() => {
     if (reportDate) {
       dispatch(getTransactionsThunk(reportDate));
-      dispatch(getIncomeCategoriesThunk());
+      // dispatch(getIncomeCategoriesThunk());
     } else {
       dispatch(setDate('2023-03'));
     }

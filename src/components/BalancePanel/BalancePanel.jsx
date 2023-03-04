@@ -21,9 +21,9 @@ function BalancePanel() {
   const location = useLocation();
   const newBalance = useSelector(getBalance);
 
-  useEffect(() => {
-    dispatch(getUserThunk());
-  }, [dispatch, newBalance]);
+  // useEffect(() => {
+  //   dispatch(getUserThunk());
+  // }, [dispatch, newBalance]);
 
   const onClickConfirm = e => {
     e.preventDefault();
@@ -33,7 +33,7 @@ function BalancePanel() {
     // console.log(privateAPI.defaults.headers.common)
     const updateBalance = async () => {
       await dispatch(addBalance(data));
-      await dispatch(getUserThunk());
+      // await dispatch(getUserThunk());
     }
     updateBalance();    
     resetInput();

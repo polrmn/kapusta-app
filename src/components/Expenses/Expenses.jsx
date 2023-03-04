@@ -39,14 +39,14 @@ export const Expenses = () => {
   const transactionsArrayExpenses = useSelector(selectTransactionsExpenses);
   const balanceCurrent = useSelector(getUserBalance);
 
-  useEffect(() => {
-    if (token) {
-      setAuthHeader(token);
-    }
+  // useEffect(() => {
+  //   // if (token) {
+  //   //   setAuthHeader(token);
+  //   // }
 
-    dispatch(getExpenseCategoriesThunk());
-    dispatch(getExpenseTransactionsByThunk());
-  }, [dispatch]);
+  //   // dispatch(getExpenseCategoriesThunk());
+  //   dispatch(getExpenseTransactionsByThunk());
+  // }, [dispatch]);
 
   const handleSubmit = e => {
     e.preventDefault();
