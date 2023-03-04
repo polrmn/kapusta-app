@@ -4,9 +4,9 @@ p {
 }
 
 .balance {
-    max-width: 320px;
-    margin: 0 auto;
-    padding: 0 20px;
+    // max-width: 320px;
+    // margin: 0 auto;
+    // padding: 0 20px;
     display: flex;
     // background-color: #F5F6FB;
 
@@ -15,8 +15,7 @@ p {
     }
 
     @media screen and (min-width: 768px) and (max-width: 1279px) {
-        max-width: 768px;
-        display: flex;
+        // max-width: 768px;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
@@ -26,11 +25,11 @@ p {
     }
 
     @media screen and (min-width: 1280px) {
-        max-width: 1280px;
+        // max-width: 1280px;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        position: relative;
+        // position: relative;
         padding-top: 40px;
         padding-bottom: 32px;
     }
@@ -80,6 +79,7 @@ p {
 
     &Main {
         display: block;
+        position: relative;
 
         @media screen and (max-width: 767px) {
             padding-top: 16px;
@@ -91,7 +91,7 @@ p {
             display: block;
             width: 99px;
             height: 24px;
-            padding-left: 12px;
+            // padding-left: 12px;
         }
 
         @media screen and (min-width: 1280px) {
@@ -100,7 +100,6 @@ p {
     }
 
     &LinkMain {
-        position: relative;
         font-weight: 400;
         font-size: 12px;
         line-height: 14px;
@@ -115,7 +114,7 @@ p {
 
             &::before {
                 position: absolute;
-                top: -5px;
+                top: 15px;
                 left: 0;
                 display: inline-block;
                 content: "";
@@ -132,7 +131,7 @@ p {
 
             &::before {
                 position: absolute;
-                top: -5px;
+                top: -2px;
                 left: 0;
                 display: inline-block;
                 content: "";
@@ -145,12 +144,12 @@ p {
         }
 
         @media screen and (min-width: 1280px) {
-            padding-left: 146px;
+            padding-left: 64px;
 
             &::before {
                 position: absolute;
-                top: -5px;
-                left: 108px;
+                top: -2px;
+                left: 24px;
                 display: inline-block;
                 content: "";
                 width: 24px;
@@ -176,13 +175,13 @@ p {
         @media screen and (min-width: 768px) and (max-width: 1279px) {
             flex-direction: row-reverse;
             align-items: center;
-            padding-right: 28px;
+            padding-right: 18px;
         }
 
         @media screen and (min-width: 1280px) {
             flex-direction: row-reverse;
             align-items: center;
-            padding-right: 123px;
+            padding-right: 53px;
         }
     }
 
