@@ -144,7 +144,7 @@ export const ExpensesReport = () => {
                 onClick={handleCategoryClick}
               >
                 <p className={css.text}>
-                  {expenses.expensesData[category].total}
+                  {expenses.expensesData[category].total.toFixed(2)}
                 </p>
                 {getSvg(category)}
                 <p className={css.text}>{category}</p>

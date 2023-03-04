@@ -3,9 +3,17 @@ li {
 }
 
 .text {
-  width: 100px;
-  text-align: center;
+  width: 80px;
   margin: 10px auto;
+  font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 14px;
+align-items: center;
+text-align: center;
+letter-spacing: 0.02em;
+text-transform: uppercase;
 }
 
 .title {
@@ -28,13 +36,18 @@ li {
     margin: 0 auto;
     padding: 0;
     flex-wrap: wrap;
+    gap: 10px;
     justify-content: center;
+    padding-bottom: 20px;
   }
 
   @media screen and (min-width: 767px){
-    width: 704px;
-    gap: 30px;
-    // padding: 20px;
+    width: 624px;
+    gap: 20px;
+  }
+
+  @media screen and (min-width: 1280px){
+    gap: 28px;
   }
 }
 
@@ -55,6 +68,7 @@ svg:focus {
 .category__navigate {
   display: flex;
   justify-content: center;
+  padding-top: 20px;
 }
 
 .btn {
@@ -66,15 +80,15 @@ svg:focus {
 
 .box {
   @media screen and (min-width: 320px){
-    width: 100%;
     margin: 0 auto;
+    padding: 0 20px;
   }
 
   @media screen and (min-width: 767px){
-    width: 704px;
+    width: 624px;
     box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
     border-radius: 30px;
-    margin: 0 auto;
+    padding: 0 40px;
   }
 
   @media screen and (min-width: 1280px){

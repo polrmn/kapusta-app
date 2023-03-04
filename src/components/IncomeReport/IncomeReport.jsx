@@ -108,7 +108,7 @@ export const IncomeReport = () => {
                 onClick={handleCategoryClick}
               >
                 <p className={css.text}>
-                  {incomes.incomesData[category].total}
+                  {incomes.incomesData[category].total.toFixed(2)}
                 </p>
                 {getSvg(category)}
                 <p className={css.text}>{category}</p>
