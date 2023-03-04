@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import css from './expensesReport.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-// import { getAccessToken } from 'redux/auth/authSelectors';
 import { setDate } from 'redux/dateSlice';
 import { selectDate, selectIsLoading } from 'redux/selectors';
 import {
@@ -35,12 +34,9 @@ export const ExpensesReport = () => {
   const expenses = useSelector(selectExpenses);
   const categories = useSelector(selectCategory);
   const dispatch = useDispatch();
-  // const persistedToken = useSelector(getAccessToken);
   const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
-    // setAuthHeader(persistedToken);
-
     if (reportDate) {
       dispatch(getTransactionsThunk(reportDate));
       dispatch(getExpenseCategoriesThunk());
@@ -49,9 +45,9 @@ export const ExpensesReport = () => {
     }
   }, [reportDate, dispatch]);
 
-  const filteredCategories = categories.filter(
-    category => expenses.expensesData[category]
-  );
+  const filteredCategories = () => {
+    return categories?.filter(category => expenses?.expensesData[category]);
+  };
 
   const getSvg = category => {
     switch (category) {
@@ -136,7 +132,7 @@ export const ExpensesReport = () => {
         </div>
         {expenses.expenseTotal > 0 && (
           <ul className={css.container}>
-            {filteredCategories.map(category => (
+            {filteredCategories().map(category => (
               <li
                 className={css.category}
                 key={category}

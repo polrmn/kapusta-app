@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import css from './incomeReport.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-// import { getAccessToken } from 'redux/auth/authSelectors';
 import { setDate } from 'redux/dateSlice';
 import { selectDate, selectIsLoading } from 'redux/selectors';
 import {
@@ -9,12 +8,11 @@ import {
   getTransactionsThunk,
 } from 'redux/transaction/transactionOperations';
 import {
-  selectIncomeCategories,
+  selectCategory,
   selectIncomes,
 } from 'redux/transaction/transactionSelectors';
 import { ReactComponent as ReportSalary } from '../../images/svg-reports/salary.svg';
 import { ReactComponent as ReportIncome } from '../../images/svg-reports/income.svg';
-
 import { setCategoryFilter } from 'redux/categoryFilter/categoryFilterSlice';
 import { setReportType } from 'redux/reportType/reportTypeSlice';
 
@@ -25,14 +23,12 @@ const refs = {
 export const IncomeReport = () => {
   const reportDate = useSelector(selectDate);
   const incomes = useSelector(selectIncomes);
-  const categories = useSelector(selectIncomeCategories);
+  const categories = useSelector(selectCategory);
   const dispatch = useDispatch();
-  // const persistedToken = useSelector(getAccessToken);
+
   const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
-    // setAuthHeader(persistedToken);
-
     if (reportDate) {
       dispatch(getTransactionsThunk(reportDate));
       dispatch(getIncomeCategoriesThunk());
@@ -41,9 +37,13 @@ export const IncomeReport = () => {
     }
   }, [reportDate, dispatch]);
 
+  console.log('Categories: ', categories);
+
   const filteredCategories = categories.filter(
     category => incomes.incomesData[category]
   );
+
+  console.log('filteredCategories: ',filteredCategories);
 
   const getSvg = category => {
     switch (category) {
@@ -71,6 +71,8 @@ export const IncomeReport = () => {
     event.currentTarget.classList.add(css.activeCategory);
     refs.selectedCategory = event.currentTarget;
   };
+
+  console.log('Income:', incomes);
 
   return isLoading ? (
     <p>Loading...</p>

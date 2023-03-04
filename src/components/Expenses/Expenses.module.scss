@@ -1,22 +1,361 @@
-.expensesNav {
-  &__Link {
-    margin: 20px;
-
-    display: inline-block;
-    background: #fefefe;
-    width: 138px;
-    height: 40px;
-    border-radius: 16px 16px 0 0;
-    outline: 1px solid black;
+.section {
+  @media screen and (min-width: 768px) {
+    max-width: 704px;
+    width: 100%;
+    max-height: 616px;
+    margin: 0 auto;
+    padding: 32px;
+    background-color: rgb(255, 255, 255);
+    // margin-bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: #aab2c533 0px 10px 60px;
+    border-radius: 0px 30px 30px;
+  }
+  @media screen and (min-width: 768px) {
+    max-width: 1098px;
+    width: 100%;
+    max-height: 579px;
+  }
+}
+.sectionForm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
+  @media screen and (min-width: 768px) {
+    margin: 0 auto;
+    margin-bottom: 40px;
+  }
+  @media screen and (min-width: 1280px) {
+    padding-top: 30px;
+    flex-direction: row;
+    justify-self: flex-start;
+    flex-wrap: nowrap;
+    padding: 0;
+    margin-bottom: 60px;
+    gap: 15px;
+  }
+}
+.sectionInputs {
+  align-items: center;
+  display: contents;
+  flex-direction: column;
+  border-bottom-left-radius: 30%;
+  background-color: transparent;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+  @media screen and (min-width: 1280px) {
+    height: 44px;
     text-align: center;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 12px;
-    line-height: 11.166;
-    text-decoration: none;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
+    width: calc(100% - 355px);
+  }
+}
+.inputDescription {
+  display: block;
+  font-family: inherit;
 
-    color: #ff751d;
+  //width: 100%;
+  height: 44px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  font-size: 12px;
+  line-height: 1.14;
+  text-align: start;
+  background-color: transparent;
+  padding-left: 30px;
+  outline-color: #ff751d;
+  border: 2px solid #ffffff;
+  border-bottom: none;
+  color: #52555f;
+  margin-left: 44px;
+  &::placeholder {
+    font-weight: 400;
+    color: #c7ccdc;
+  }
+  @media screen and (min-width: 768px) {
+    border-top-right-radius: 0px;
+    border: 2px solid #f6f7fc;
+    display: flex;
+    padding-left: 12px;
+    width: 184px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 259px;
+  }
+}
+.inputSelect {
+  display: block;
+
+  font-family: inherit;
+  //width: 100%;
+
+  height: 44px;
+  border: 2px solid #ffffff;
+
+  border-bottom-right-radius: 16px;
+  outline-color: #ff751d;
+  color: #c7ccdc;
+  @media screen and (min-width: 768px) {
+    border: 2px solid #f6f7fc;
+    border-left: none;
+    border-right: none;
+    border-bottom-right-radius: 0px;
+    height: 48px;
+    width: 186px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 169px;
+    padding: 0 20px;
+  }
+}
+// .inputWrapper {
+//   position: relative;
+//   //width: 183px;
+
+//   @media screen and (min-width: 768px) {
+//     display: flex;
+//     border-top-right-radius: 16px;
+//     border-bottom-right-radius: 16px;
+//     width: 125px;
+//     border: 2px solid #f6f7fc;
+//   }
+//   @media screen and (min-width: 1280px) {
+//     width: 121px;
+
+//     &:hover {
+//       border-color: #ff751d;
+//     }
+//   }
+// }
+
+.inputWrapper {
+  @media screen and (min-width: 768px) {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #f6f7fc;
+
+    font-weight: 900;
+    font-size: 12px;
+    line-height: 1.14;
+    color: #52555f;
+    background-color: transparent;
+    margin: 0;
+    height: 44px;
+    border-radius: 0px 16px 16px 0px;
+    width: 110px;
+    &:hover {
+      border-color: #ff751d;
+    }
+  }
+  @media screen and (min-width: 1280px) {
+    width: 121px;
+  }
+}
+.calc {
+  width: 20px;
+  height: 20px;
+  background-image: url('../../images/iconsForm/calc.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.inputCount {
+  width: 40px;
+  border: none;
+  outline: none;
+}
+
+.buttonsWrapper {
+  display: flex;
+  margin-top: 80px;
+  gap: 20px;
+  @media screen and (min-width: 768px) {
+    margin-top: 32px;
+  }
+  @media screen and (min-width: 1280px) {
+    margin-left: 32px;
+    margin-top: 0;
+    gap: 15px;
+  }
+}
+
+.bodyTable {
+  width: 100%;
+  display: flex;
+  table-layout: fixed;
+  border: none;
+  overflow-x: hidden;
+  @media screen and (min-width: 768px) {
+    flex-direction: column;
+    gap: 30px;
+  }
+  @media screen and (min-width: 1280px) {
+    flex-direction: row;
+    gap: 75px;
+  }
+}
+.summery {
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+  @media screen and (min-width: 1280px) {
+    display: inline-block;
+  }
+}
+.commonTable {
+  display: block;
+}
+
+.bodyTableScroll {
+  height: 342px;
+  overflow-x: hidden;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #fff;
+}
+
+.main {
+  text-align: center;
+  border-radius: 30px;
+  color: rgb(0, 0, 0);
+  border-radius: 20px 20px 0 0;
+  background-color: #f5f6fb;
+  border-spacing: 0px 2px;
+  border-left: 2px;
+  border-left-style: outset;
+  border-right-style: inset;
+  border-right-color: transparent;
+  border-left-color: transparent;
+  @media screen and (min-width: 768px) {
+    width: 100%;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 100%;
+  }
+}
+
+.mainTbody {
+  border-radius: 0;
+  /* overflow: auto; */
+}
+
+.theadTable {
+  display: none;
+  align-items: center;
+  height: 38px;
+  font-size: 13px;
+  font-weight: normal;
+  color: #52555f;
+}
+
+.th {
+  padding: 10px;
+  text-transform: uppercase;
+  color: rgb(0, 0, 0);
+  align-items: center;
+  letter-spacing: 0.02em;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 14px;
+  font-family: Roboto;
+  font-style: normal;
+}
+
+.td {
+  display: revert;
+  align-items: center;
+  height: 38px;
+  padding: 0 8px;
+  background: #ffffff;
+  color: #52555f;
+  border-bottom: 2px solid #f4f6fb;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.04em;
+}
+
+.thData {
+  width: 100px;
+}
+
+.thDesc {
+  width: 200px;
+}
+
+.thCateg {
+  width: 140px;
+}
+
+.thSum {
+  width: 130px;
+  margin: 0 auto;
+}
+.tdSum {
+  font-weight: bold;
+  width: 130px;
+  color: #407946;
+  margin: 0 auto;
+}
+.tdSumExpense {
+  font-weight: bold;
+  color: #e7192e;
+}
+.tdDesc {
+  width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: wrap;
+  overflow-wrap: break-word;
+}
+.thIcon {
+  width: 40px;
+}
+
+@media screen and (min-width: 1280px) {
+  .main {
+    width: 760px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .theadTable {
+    display: revert;
+  }
+}
+
+.deleteBtn {
+  margin-right: auto;
+  margin-left: auto;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: transparent;
+  background-color: transparent;
+}
+
+.deleteBtnIcon {
+  width: 16px;
+  height: 18px;
+}
+
+.deleteBtn:hover svg path {
+  color: #ff751d;
+  fill: currentColor;
+}
+
+@media screen and (min-width: 1280px) {
+  .bodyTable {
+    width: 100%;
   }
 }
