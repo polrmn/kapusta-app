@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { addBalance } from 'redux/user/userOperations';
@@ -10,13 +10,20 @@ import Modal from './BalanceModal';
 // import { privateAPI } from '../../services/http/http'
 import style from './BalancePanel.module.scss';
 import { CurrentPeriod } from '../CurrentPeriod/CurrentPeriod';
+import { getUserThunk } from 'redux/auth/authOperations';
+import { getUserBalance } from 'redux/auth/authSelectors';
 
 function BalancePanel() {
   const [balance, setBalance] = React.useState("");
   const [showModal, setShowModal] = React.useState(false);
   const dispatch = useDispatch();
-  const balAnce = useSelector(getBalance);
+  const balAnce = useSelector(getUserBalance);
   const location = useLocation();
+  const newBalance = useSelector(getBalance);
+
+  useEffect(() => {
+    dispatch(getUserThunk());
+  }, [dispatch, newBalance]);
 
   const onClickConfirm = e => {
     e.preventDefault();
@@ -24,7 +31,11 @@ function BalancePanel() {
       newBalance: balance,
     };
     // console.log(privateAPI.defaults.headers.common)
-    dispatch(addBalance(data));
+    const updateBalance = async () => {
+      await dispatch(addBalance(data));
+      await dispatch(getUserThunk());
+    }
+    updateBalance();    
     resetInput();
     setShowModal(false);
   };

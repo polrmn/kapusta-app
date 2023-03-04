@@ -46,3 +46,4 @@ export const updateBalanceAPI = async newBalance => {
   const { data } = await privateAPI.patch('user/balance', newBalance);
   return data;
 };
+

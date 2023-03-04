@@ -11,6 +11,7 @@ const initialState = {
   accessToken: null,
   refreshToken: null,
   transactions: null,
+  balance: null,
 };
 
 export const authSlice = createSlice({
@@ -85,18 +86,19 @@ export const authSlice = createSlice({
     addCase(refreshThunk.rejected, (state, { payload }) => {
       state.error = payload;
       state.isLoading = false;
-      console.log('refreshThunk.rejected', payload);
+      // console.log('refreshThunk.rejected', payload);
     });
     // get User
     addCase(getUserThunk.pending, (state, { payload }) => {
       state.isLoading = true;
-      console.log('getUserThunk.pending');
+      // console.log('getUserThunk.pending');
     });
     addCase(getUserThunk.fulfilled, (state, { payload }) => {
       state.userEmail = payload.email
       state.isLogin = true
       state.isLoading = false;
-      state.transactions = payload.transactions
+      state.transactions = payload.transactions;
+      state.balance = payload.balance;
       state.error = null;
       console.log('getUserThunk.fulfilled');
 
