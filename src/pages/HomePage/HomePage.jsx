@@ -1,8 +1,17 @@
 import BalancePanel from 'components/BalancePanel/BalancePanel';
-import React from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import scss from './HomePage.module.scss';
 const Home = () => {
+  const navigate = useNavigate();
+  const location = useLocation()
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      navigate('/expenses');
+    }
+  }, [location]);
+
   return (
     <div className="main">
       <div className="containerMain">
@@ -14,9 +23,9 @@ const Home = () => {
           <NavLink to="/income" className={scss.homeNavLink}>
             Income
           </NavLink>
-          <NavLink to="/reports" className={scss.homeNavLink}>
+          {/* <NavLink to="/reports" className={scss.homeNavLink}>
             Reports
-          </NavLink>
+          </NavLink> */}
         </div>
         <Outlet />
       </div>
