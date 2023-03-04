@@ -5,6 +5,7 @@ import { IncomeReport } from 'components/IncomeReport/IncomeReport';
 import { useSelector } from 'react-redux';
 import { selectReportType } from 'redux/reportType/reportTypeSelector';
 import { selectIsLoading } from 'redux/selectors';
+// import { CurrentPeriod } from 'components/CurrentPeriod/CurrentPeriod';
 
 export const ReportPage = () => {
   const isLoading = useSelector(selectIsLoading);
@@ -21,6 +22,7 @@ export const ReportPage = () => {
           console.log(result);
         }}
       />
+      {/* <CurrentPeriod /> */}
       {reportType === 'expense' ? <ExpensesReport /> : <IncomeReport />}
       <Chart />
     </>

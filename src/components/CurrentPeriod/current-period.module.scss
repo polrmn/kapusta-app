@@ -1,0 +1,51 @@
+.calendarWrapper {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.currentDateButtonLeft {
+  width: 10px;
+  height: 15px;
+
+  content: '';
+  background-image: url('../../images/icons/balance_vector_l.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.currentDate {
+  width: 130px;
+  height: 40px;
+
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #000;
+
+  background-color: transparent;
+  border: none;
+
+  cursor: pointer;
+}
+
+.currentDateButtonRight {
+  width: 10px;
+  height: 15px;
+
+  content: '';
+  background-image: url('../../images/icons/balance_vector_r.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

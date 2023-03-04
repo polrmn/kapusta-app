@@ -9,6 +9,7 @@ import { getBalance } from 'redux/user/userSelectors';
 import Modal from './BalanceModal';
 // import { privateAPI } from '../../services/http/http'
 import style from './BalancePanel.module.scss';
+import { CurrentPeriod } from '../CurrentPeriod/CurrentPeriod';
 
 function BalancePanel() {
   const [balance, setBalance] = React.useState(0);
@@ -17,7 +18,7 @@ function BalancePanel() {
   const balAnce = useSelector(getBalance);
   const location = useLocation();
 
-  const onClickConfirm = (e) => {
+  const onClickConfirm = e => {
     e.preventDefault();
     const data = {
       newBalance: balance,
@@ -32,10 +33,10 @@ function BalancePanel() {
     setBalance(0);
   };
 
-  const balanceChange = (e) => {
+  const balanceChange = e => {
     const { value } = e.target;
     // if (balance === "balance") {
-      setBalance(value);
+    setBalance(value);
     // } else {
     //   alert(`Something happen (-_-)`);
     // }
@@ -43,19 +44,22 @@ function BalancePanel() {
 
   return (
     <>
-      {location.pathname === "/reports" && (
+      {location.pathname === '/reports' && (
         <section className={style.balance}>
           <div className={style.balanceMain}>
-            <Link className={style.balanceLinkMain} to="/">Main page</Link>
+            <Link className={style.balanceLinkMain} to="/">
+              Main page
+            </Link>
           </div>
           <div className={style.balanceOuterBlock}>
             <div className={style.balanceCal}>
-              <p className={style.balanceCalPara}>Current period:</p>
+              <CurrentPeriod />
+              {/* <p className={style.balanceCalPara}>Current period:</p>
               <div className={style.balanceCalInner}>
                 <button type='button' className={style.balanceCalDec}></button>
                 <p className={style.balanceCalProp}>March 2023</p>
                 <button type='button' className={style.balanceCalInc}></button>
-              </div>
+              </div> */}
             </div>
             <div className={style.balanceInnerBlock}>
               <p className={style.balancePara}>Balance:</p>
@@ -93,14 +97,18 @@ function BalancePanel() {
           </Modal>
         </section>
       )}
-      {location.pathname === "/expenses" && (
+      {location.pathname === '/expenses' && (
         <section className={style.balanceExpenses}>
           <div className={style.balanceBack}>
-            <Link className={style.balanceLinkBack} to="/">to transaction</Link>
+            <Link className={style.balanceLinkBack} to="/">
+              to transaction
+            </Link>
           </div>
           <div className={style.balanceExpensesOuterBlock}>
             <div className={style.balanceExpensesReports}>
-              <Link className={style.balanceExpensesLinkReport} to="/reports">Reports</Link>
+              <Link className={style.balanceExpensesLinkReport} to="/reports">
+                Reports
+              </Link>
             </div>
             <div className={style.balanceExpensesInnerBlock}>
               <p className={style.balanceExpensesPara}>Balance:</p>
@@ -140,6 +148,6 @@ function BalancePanel() {
       )}
     </>
   );
-};
+}
 
 export default BalancePanel;
