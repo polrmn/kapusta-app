@@ -1,3 +1,15 @@
+
+
+.title {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+  letter-spacing: 0.04em;
+  color: rgba(82, 85, 95, 0.7);
+  padding-bottom: 5px;
+}
+
 .calendarWrapper {
   display: inline-flex;
   justify-content: center;
@@ -19,7 +31,7 @@
 
 .currentDate {
   width: 130px;
-  height: 40px;
+  height: 20px;
 
   font-weight: 700;
   font-size: 14px;

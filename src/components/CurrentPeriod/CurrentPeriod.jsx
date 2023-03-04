@@ -69,28 +69,30 @@ export const CurrentPeriod = () => {
   };
 
   return (
-    <div className={css['calendarWrapper']}>
-      <button
-        className={css.currentDateButtonLeft}
-        onClick={handleMonthMinus}
-      ></button>
+    <div className="wrapper">
+      <p className={css.title}>Current period:</p>
+      <div className={css['calendarWrapper']}>
+        <button
+          className={css.currentDateButtonLeft}
+          onClick={handleMonthMinus}
+        ></button>
 
-      <DatePicker
-        className={css.currentDate}
-        selected={startDate}
-        onChange={date => {
-          setStartDate(date)
-          setNewDate(date.toISOString().slice(0, 7));
-        }
-      }
-        dateFormat="MMMM yyyy"
-        showMonthYearPicker
-      />
+        <DatePicker
+          className={css.currentDate}
+          selected={startDate}
+          onChange={date => {
+            setStartDate(date);
+            setNewDate(date.toISOString().slice(0, 7));
+          }}
+          dateFormat="MMMM yyyy"
+          showMonthYearPicker
+        />
 
-      <button
-        className={css.currentDateButtonRight}
-        onClick={handleMonthPlus}
-      ></button>
+        <button
+          className={css.currentDateButtonRight}
+          onClick={handleMonthPlus}
+        ></button>
+      </div>
     </div>
   );
 };
