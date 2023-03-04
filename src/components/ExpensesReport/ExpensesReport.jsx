@@ -26,6 +26,10 @@ import { ReactComponent as ReportOther } from '../../images/svg-reports/other.sv
 import { setCategoryFilter } from 'redux/categoryFilter/categoryFilterSlice';
 import { setReportType } from 'redux/reportType/reportTypeSlice';
 
+const refs = {
+  selectedCategory: null,
+};
+
 export const ExpensesReport = () => {
   const reportDate = useSelector(selectDate);
   const expenses = useSelector(selectExpenses);
@@ -88,7 +92,20 @@ export const ExpensesReport = () => {
   };
 
   const handleCategoryClick = event => {
+    if (refs.selectedCategory) {
+      refs.selectedCategory.classList.remove(css.activeCategory);
+
+      if (refs.selectedCategory === event.currentTarget) {
+        dispatch(setCategoryFilter(''));
+        refs.selectedCategory = null;
+        return;
+      }
+    }
+
     dispatch(setCategoryFilter(event.currentTarget.dataset['category']));
+
+    event.currentTarget.classList.add(css.activeCategory);
+    refs.selectedCategory = event.currentTarget;
   };
 
   return isLoading ? (
@@ -126,7 +143,9 @@ export const ExpensesReport = () => {
                 data-category={category}
                 onClick={handleCategoryClick}
               >
-                <p className={css.text}>{expenses.expensesData[category].total}</p>
+                <p className={css.text}>
+                  {expenses.expensesData[category].total}
+                </p>
                 {getSvg(category)}
                 <p className={css.text}>{category}</p>
               </li>

@@ -18,6 +18,10 @@ import { ReactComponent as ReportIncome } from '../../images/svg-reports/income.
 import { setCategoryFilter } from 'redux/categoryFilter/categoryFilterSlice';
 import { setReportType } from 'redux/reportType/reportTypeSlice';
 
+const refs = {
+  selectedCategory: null,
+};
+
 export const IncomeReport = () => {
   const reportDate = useSelector(selectDate);
   const incomes = useSelector(selectIncomes);
@@ -52,7 +56,20 @@ export const IncomeReport = () => {
   };
 
   const handleCategoryClick = event => {
+    if (refs.selectedCategory) {
+      refs.selectedCategory.classList.remove(css.activeCategory);
+
+      if (refs.selectedCategory === event.currentTarget) {
+        dispatch(setCategoryFilter(''));
+        refs.selectedCategory = null;
+        return;
+      }
+    }
+
     dispatch(setCategoryFilter(event.currentTarget.dataset['category']));
+
+    event.currentTarget.classList.add(css.activeCategory);
+    refs.selectedCategory = event.currentTarget;
   };
 
   return isLoading ? (
@@ -90,8 +107,10 @@ export const IncomeReport = () => {
                 data-category={category}
                 onClick={handleCategoryClick}
               >
-                <p className={css.text}>{incomes.incomesData[category].total}</p>
-                  {getSvg(category)}
+                <p className={css.text}>
+                  {incomes.incomesData[category].total}
+                </p>
+                {getSvg(category)}
                 <p className={css.text}>{category}</p>
               </li>
             ))}
