@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import css from './expensesReport.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-// import { getAccessToken } from 'redux/auth/authSelectors';
 import { setDate } from 'redux/dateSlice';
 import { selectDate, selectIsLoading } from 'redux/selectors';
 import {
@@ -26,17 +25,18 @@ import { ReactComponent as ReportOther } from '../../images/svg-reports/other.sv
 import { setCategoryFilter } from 'redux/categoryFilter/categoryFilterSlice';
 import { setReportType } from 'redux/reportType/reportTypeSlice';
 
+const refs = {
+  selectedCategory: null,
+};
+
 export const ExpensesReport = () => {
   const reportDate = useSelector(selectDate);
   const expenses = useSelector(selectExpenses);
   const categories = useSelector(selectCategory);
   const dispatch = useDispatch();
-  // const persistedToken = useSelector(getAccessToken);
   const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
-    // setAuthHeader(persistedToken);
-
     if (reportDate) {
       dispatch(getTransactionsThunk(reportDate));
       dispatch(getExpenseCategoriesThunk());
@@ -46,10 +46,8 @@ export const ExpensesReport = () => {
   }, [reportDate, dispatch]);
 
   const filteredCategories = () => {
-    return  categories?.filter(
-      category => expenses?.expensesData[category]
-      );
-  }
+    return categories?.filter(category => expenses?.expensesData[category]);
+  };
 
   const getSvg = category => {
     switch (category) {
@@ -90,32 +88,67 @@ export const ExpensesReport = () => {
   };
 
   const handleCategoryClick = event => {
+    if (refs.selectedCategory) {
+      refs.selectedCategory.classList.remove(css.activeCategory);
+
+      if (refs.selectedCategory === event.currentTarget) {
+        dispatch(setCategoryFilter(''));
+        refs.selectedCategory = null;
+        return;
+      }
+    }
+
     dispatch(setCategoryFilter(event.currentTarget.dataset['category']));
+
+    event.currentTarget.classList.add(css.activeCategory);
+    refs.selectedCategory = event.currentTarget;
   };
 
   return isLoading ? (
     <p>Loading...</p>
   ) : (
     <>
-    <button type='button' onClick={() => {dispatch(setReportType('income'))}}>{'<'}</button>
-      <h3 className={css.title}>Expenses</h3>
-      <button type='button' onClick={() => {dispatch(setReportType('income'))}}>{'>'}</button>
-      {expenses.expenseTotal > 0 && (
-        <ul className={css.container}>
-          {filteredCategories().map(category => (
-            <li
-              className={css.category}
-              key={category}
-              data-category={category}
-              onClick={handleCategoryClick}
-            >
-              <p>{expenses.expensesData[category].total}</p>
-              <svg className={css.category__svg} height={'56px'} width={'56px'}>{getSvg(category)}</svg>
-              <p>{category}</p>
-            </li>
-          ))}
-        </ul>
-      )}
+      <div className={css.box}>
+        <div className={css.category__navigate}>
+          <button
+            className={css.btn}
+            type="button"
+            onClick={() => {
+              dispatch(setReportType('income'));
+            }}
+          >
+            {'<'}
+          </button>
+          <h3 className={css.title}>Expenses</h3>
+          <button
+            className={css.btn}
+            type="button"
+            onClick={() => {
+              dispatch(setReportType('income'));
+            }}
+          >
+            {'>'}
+          </button>
+        </div>
+        {expenses.expenseTotal > 0 && (
+          <ul className={css.container}>
+            {filteredCategories().map(category => (
+              <li
+                className={css.category}
+                key={category}
+                data-category={category}
+                onClick={handleCategoryClick}
+              >
+                <p className={css.text}>
+                  {expenses.expensesData[category].total.toFixed(2)}
+                </p>
+                {getSvg(category)}
+                <p className={css.text}>{category}</p>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </>
   );
 };
