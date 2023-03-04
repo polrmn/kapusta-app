@@ -50,7 +50,7 @@ export const CurrentPeriod = () => {
       this.setDate(1);
       this.setMonth(this.getMonth() + value);
       this.setDate(Math.min(n, this.getDaysInMonth()));
-      console.log(this);
+      // console.log(this);
       return this;
     };
     const myDate = new Date(startDate);

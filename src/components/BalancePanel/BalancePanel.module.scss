@@ -34,50 +34,50 @@ p {
         padding-bottom: 32px;
     }
 
-    &Back {
-        padding-top: 16px;
-        width: 118px;
-        height: 18px;
-        display: flex;
-        align-items: center;
-        position: relative;
+    // &Back {
+    //     padding-top: 16px;
+    //     width: 118px;
+    //     height: 18px;
+    //     display: flex;
+    //     align-items: center;
+    //     position: relative;
 
-        @media screen and (min-width: 768px) {
-            display: none;
-        }
-    }
+    //     @media screen and (min-width: 768px) {
+    //         display: none;
+    //     }
+    // }
 
-    &LinkBack {
-        font-weight: 700;
-        font-size: 10px;
-        line-height: 12px;
-        display: flex;
-        align-items: center;
-        text-align: center;
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
-        text-decoration: none;
-        color: #000;
-        cursor: pointer;
-        padding-left: 22px;
+    // &LinkBack {
+    //     font-weight: 700;
+    //     font-size: 10px;
+    //     line-height: 12px;
+    //     display: flex;
+    //     align-items: center;
+    //     text-align: center;
+    //     letter-spacing: 0.02em;
+    //     text-transform: uppercase;
+    //     text-decoration: none;
+    //     color: #000;
+    //     cursor: pointer;
+    //     padding-left: 22px;
 
-        @media screen and (min-width: 768px) {
-            display: none;
-        }
+    //     @media screen and (min-width: 768px) {
+    //         display: none;
+    //     }
 
-        &::before {
-            position: absolute;
-            top: 16px;
-            left: 0;
-            display: inline-block;
-            content: "";
-            width: 18px;
-            height: 18px;
-            background-image: url(../../images/icons/balance_backspace.svg);
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-    }
+    //     &::before {
+    //         position: absolute;
+    //         top: 16px;
+    //         left: 0;
+    //         display: inline-block;
+    //         content: "";
+    //         width: 18px;
+    //         height: 18px;
+    //         background-image: url(../../images/icons/balance_backspace.svg);
+    //         background-position: center;
+    //         background-repeat: no-repeat;
+    //     }
+    // }
 
     &Main {
         display: block;
@@ -452,6 +452,7 @@ p {
     @media screen and (max-width: 767px) {
         flex-direction: column;
         padding-bottom: 40px;
+        padding-top: 16px;
     }
 
     @media screen and (min-width: 768px) and (max-width: 1279px) {
@@ -495,7 +496,7 @@ p {
         @media screen and (min-width: 1280px) {
             flex-direction: row-reverse;
             align-items: center;
-            justify-content: flex-end;
+            justify-content: center;
             // padding-right: 123px;
         }
     }
@@ -508,14 +509,12 @@ p {
         height: 24px;
 
         @media screen and (min-width: 768px) and (max-width: 1279px) {
-            // padding-top: 45px;
             padding-left: 251px;
             // padding-right: 12px;
         }
 
         @media screen and (min-width: 1280px) {
-            // padding-top: 45px;
-            // padding-left: 298px;
+            padding-left: 298px;
             // padding-right: 91px;
         }
     }
@@ -571,7 +570,7 @@ p {
             flex-direction: row;
             align-items: baseline;
             justify-content: center;
-            padding-right: 240px;
+            padding-left: 383px;
         }
     }
 
@@ -655,4 +654,48 @@ p {
             transition: background 0.5s;
         }
     }
+}
+
+.balanceIncomeReports {
+    display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 84px;
+        height: 24px;
+
+        @media screen and (min-width: 768px) and (max-width: 1279px) {
+            padding-left: 251px;
+            // padding-right: 12px;
+        }
+
+        @media screen and (min-width: 1280px) {
+            padding-left: 298px;
+            // padding-right: 91px;
+        }
+}
+
+.balanceIncomeLinkReport{
+     justify-content: flex-start;
+        position: relative;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        text-align: right;
+        letter-spacing: 0.04em;
+        color: rgba(82, 85, 95, 0.7);
+        text-decoration: none;
+        cursor: pointer;
+
+         &::before {
+            position: absolute;
+            top: -7px;
+            left: 58px;
+            display: inline-block;
+            content: "";
+            width: 24px;
+            height: 24px;
+            background-image: url(../../images/icons/balance_bar_chart.svg);
+            background-position: center;
+            background-repeat: no-repeat;
+        }
 }
