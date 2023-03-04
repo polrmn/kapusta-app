@@ -11,14 +11,22 @@ import {
   getExpenseCategoriesThunk,
   addExpenseTransactionThunk,
   delateTransactionThunk,
+  getExpenseTransactionsByThunk,
 } from '../../redux/transaction/transactionOperations';
 import { setAuthHeader } from '../../services/http/http';
 import useMediaQuery from '@mui/material/useMediaQuery';
+
 import scss from './Expenses.module.scss';
 import SharedButton from './../../commons/sharedButton/SharedButton';
 import Summury from '../Summary/Summary';
+import { selectTransactionsExpenses } from '../../redux/transaction/transactionSelectors';
+import { getBalance } from '../../redux/user/userSelectors';
 export const Expenses = () => {
-  const isScreenMoreTablet = useMediaQuery('(min-width: 768px)');
+  const isScreenTablet = useMediaQuery(
+    '(min-width: 768px) and (max-width: 1280px)'
+  );
+  const isScreenDesktop = useMediaQuery('(min-width: 1281px)');
+
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('');
@@ -27,18 +35,25 @@ export const Expenses = () => {
   const dispatch = useDispatch();
   const token = useSelector(getAccessToken);
   const categoriesArray = useSelector(selectCategory);
-  const transactionsArray = useSelector(selectTransactions);
+  const transactionsArrayExpenses = useSelector(selectTransactionsExpenses);
+  const balanceCurrent = useSelector(getBalance);
 
   useEffect(() => {
     if (token) {
       setAuthHeader(token);
     }
+
     dispatch(getExpenseCategoriesThunk());
+    dispatch(getExpenseTransactionsByThunk());
   }, [dispatch]);
 
   const handleSubmit = e => {
     e.preventDefault();
     if (!amount) return alert('ffff');
+    if (balanceCurrent < amount) {
+      alert('недостатньо коштів');
+      return;
+    }
     dispatch(
       addExpenseTransactionThunk({
         description,
@@ -149,21 +164,13 @@ export const Expenses = () => {
               <div className={scss.bodyTableScroll}>
                 <table className={`${scss.main} ${scss.mainTbody}`}>
                   <tbody className={scss.tbodyTable}>
-                    {transactionsArray &&
-                      transactionsArray.map(
-                        ({
-                          transaction: {
-                            _id,
-                            date,
-                            description,
-                            category,
-                            amount,
-                          },
-                        }) => (
+                    {transactionsArrayExpenses &&
+                      transactionsArrayExpenses.map(
+                        ({ _id, date, description, category, amount }) => (
                           <tr key={_id} className={scss.td}>
                             <td className={scss.thData}>{date}</td>
                             <td className={scss.tdDesc}>{description}</td>
-                            <td className={scss.thCateg}>{category}</td>
+                            <td className={scss.tdCateg}>{category}</td>
                             <td className={scss.tdSum}>{amount}</td>
                             <td className={scss.thIcon}>
                               <button
@@ -183,10 +190,11 @@ export const Expenses = () => {
                 </table>
               </div>
             </div>
-            <Summury />
+            {isScreenDesktop && <Summury />}
           </div>
         </div>
       </div>
+      {isScreenTablet && <Summury />}
     </>
   );
 };

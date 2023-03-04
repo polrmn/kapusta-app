@@ -5,12 +5,13 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { getAccessToken } from '../../redux/auth/authSelectors';
 import {
   selectCategory,
-  selectTransactions,
+  selectTransactionsIncome,
 } from 'redux/transaction/transactionSelectors';
 import {
   getIncomeCategoriesThunk,
   addIncomeTransactionThunk,
   delateTransactionThunk,
+  getIncomeTransactionsByThunk,
 } from '../../redux/transaction/transactionOperations';
 import { setAuthHeader } from '../../services/http/http';
 import scss from './Income.module.scss';
@@ -24,13 +25,14 @@ export const Income = () => {
   const dispatch = useDispatch();
   const token = useSelector(getAccessToken);
   const categoriesArray = useSelector(selectCategory);
-  const transactionsArray = useSelector(selectTransactions);
+  const transactionsArrayIncome = useSelector(selectTransactionsIncome);
 
   useEffect(() => {
     if (token) {
       setAuthHeader(token);
     }
     dispatch(getIncomeCategoriesThunk());
+    dispatch(getIncomeTransactionsByThunk());
   }, [dispatch]);
 
   const handleSubmit = e => {
@@ -138,11 +140,9 @@ export const Income = () => {
               </thead>
 
               <tbody className={scss.container}>
-                {transactionsArray &&
-                  transactionsArray.map(
-                    ({
-                      transaction: { _id, date, description, category, amount },
-                    }) => (
+                {transactionsArrayIncome &&
+                  transactionsArrayIncome.map(
+                    ({ _id, date, description, category, amount }) => (
                       <tr key={_id} className={scss.listRow}>
                         <td className={scss.listColumn}>{date}</td>
                         <td className={scss.listColumn}>{description}</td>
