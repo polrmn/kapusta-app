@@ -44,9 +44,9 @@
 }
 .sectionInputs {
   align-items: center;
-  display: contents;
+  //display: contents;
   flex-direction: column;
-  border-bottom-left-radius: 30%;
+  //border-bottom-left-radius: 30%;
   background-color: transparent;
   @media screen and (min-width: 768px) {
     display: flex;
@@ -63,27 +63,21 @@
   display: block;
   font-family: inherit;
   height: 44px;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
+  padding: 0 20px;
   font-size: 12px;
   line-height: 1.14;
   text-align: start;
-  background-color: transparent;
-  padding-left: 30px;
   outline-color: #ff751d;
-  border: 2px solid #ffffff;
-  border-bottom: none;
   color: #52555f;
-  margin-left: 44px;
   &::placeholder {
     font-weight: 400;
     color: #c7ccdc;
   }
   @media screen and (min-width: 768px) {
-    border-top-right-radius: 0px;
+    border-top-left-radius: 16px;
+    background-color: transparent;
     border: 2px solid #f6f7fc;
     display: flex;
-    padding-left: 12px;
     width: 184px;
   }
   @media screen and (min-width: 1280px) {
@@ -94,10 +88,9 @@
   display: block;
   font-family: inherit;
   height: 44px;
-  border: 2px solid #ffffff;
-  border-bottom-right-radius: 16px;
   outline-color: #ff751d;
   color: #c7ccdc;
+  padding: 0 20px;
   @media screen and (min-width: 768px) {
     border: 2px solid #f6f7fc;
     border-left: none;
@@ -108,11 +101,11 @@
   }
   @media screen and (min-width: 1280px) {
     width: 169px;
-    padding: 0 20px;
   }
 }
 /*&&&&&&&*/
 .selectOption {
+  height: 32px;
   font-family: 'Roboto';
   font-size: 12px;
   line-height: 14px;
@@ -120,14 +113,18 @@
   align-items: center;
   letter-spacing: 0.02em;
   color: #c7ccdc;
+  // color: red;
   padding: 5px 19px;
 
-  &:hover {
+  &:hover, &:focus, &:active {
     font-family: inherit;
-    color: #52555f;
-    background-color: #f5f6fb;
+    color: #52555F;
+    background-color: #F5F6FB;
   }
 }
+// option:hover {
+//   background-color: yellow;
+// }
 .inputWrapper {
   @media screen and (min-width: 768px) {
     display: flex;
@@ -325,7 +322,7 @@
 }
 .category {
   @media screen and (min-width: 768px) {
-    width: 160px;
+    width: 130px;
   }
   @media screen and (min-width: 1280px) {
     width: 200px;
@@ -333,11 +330,17 @@
 }
 .amount {
   @media screen and (min-width: 768px) {
-    width: 80px;
+    width: 110px;
   }
   @media screen and (min-width: 1280px) {
     width: 110px;
   }
+}
+.amountExpenses {
+  color: #e7192e;
+}
+.amountIncome {
+  color: #407946;
 }
 .btnWrapper {
   @media screen and (min-width: 768px) {
@@ -345,5 +348,209 @@
   }
   @media screen and (min-width: 1280px) {
     width: 54px;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 53px;
+}
+
+.transactionList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+}
+
+.transactionItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.descriptionWrapper {
+  max-width: 167px;
+  width: 100%;
+}
+
+.infoWrapper {
+  display: flex;
+  gap: 20px;
+}
+
+.mobileNav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 53px;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  z-index: 99;
+}
+
+.mobileNavLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: calc(50% - 4px);
+  color: #000;
+  background: #f5f6fb;
+  text-decoration: none;
+  cursor: pointer;
+
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.bntOpenModal {
+  display: flex;
+  position: absolute;
+  top: 70px;
+  left: 20px;
+  cursor: pointer;
+}
+
+.btnCloseModal {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  width: 24px;
+  height: 24px;
+  background-image: url('../../images/icons/balance_backspace.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+.btnArrowLeft {
+  width: 18px;
+  height: 18px;
+  background-image: url('../../images/icons/balance_backspace.svg');
+  margin-right: 4px;
+}
+
+.btnText {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 12px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+.modal {
+  position: absolute;
+  top: 56px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  overflow: hidden;
+  z-index: 9999;
+  background-image: url('../../images/backgrounds/mobile/mobileHome@2x.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+@media screen and (max-width: 767.9px) {
+  .description {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.04em;
+
+    color: #52555f;
+  }
+
+  .date {
+    font-weight: 400;
+    font-size: 8px;
+    line-height: 9px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #52555f;
+  }
+
+  .category {
+    font-weight: 400;
+    font-size: 8px;
+    line-height: 9px;
+    letter-spacing: 0.04em;
+    color: #52555f;
+  }
+
+  .amount {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    letter-spacing: 0.04em;
+    //color: #407946;
+    width: 120px;
+    margin-right: 20px;
+  }
+
+  .sectionInputs {
+    display: flex;
+    margin-top: 56px;
+  }
+  .inputDescription {
+    width: 236px;
+    background: #f5f6fb;
+    border: 2px solid #ffffff;
+    border-radius: 22px 22px 0px 0px;
+  }
+  .inputSelect {
+    width: 280px;
+    background: #f5f6fb;
+    border-top: none;
+    border: 2px solid #ffffff;
+    border-top: none;
+    border-radius: 0px 0px 22px 22px;
+  }
+  .inputWrapper {
+    display: inline-flex;
+    align-items: center;
+    width: 181px;
+    height: 44px;
+    margin-top: 35px;
+    border: 2px solid #ffffff;
+    border-radius: 22px 22px 22px 22px;
+  }
+  .inputCount {
+    width: 105px;
+    outline: none;
+    text-align: right;
+    padding-right: 16px;
+    height: 44px;
+    border-right: 1px solid #ffffff;
+    border-radius: 22px 0px 0px 22px;
+    background-color: #f5f6fb;
+  }
+  .calc {
+    width: 20px;
+    height: 20px;
+    margin: 0 20px;
+    background-color: #f5f6fb;
   }
 }
