@@ -1,12 +1,6 @@
-import { useEffect } from 'react';
 import css from './expensesReport.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDate } from 'redux/dateSlice';
-import { selectDate, selectIsLoading } from 'redux/selectors';
-import {
-  getExpenseCategoriesThunk,
-  getTransactionsThunk,
-} from 'redux/transaction/transactionOperations';
+import { selectIsLoading } from 'redux/selectors';
 import {
   selectCategory,
   selectExpenses,
@@ -30,20 +24,11 @@ const refs = {
 };
 
 export const ExpensesReport = () => {
-  const reportDate = useSelector(selectDate);
+  const isLoading = useSelector(selectIsLoading);
   const expenses = useSelector(selectExpenses);
   const categories = useSelector(selectCategory);
-  const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsLoading);
 
-  useEffect(() => {
-    if (reportDate) {
-      dispatch(getTransactionsThunk(reportDate));
-      // dispatch(getExpenseCategoriesThunk());
-    } else {
-      dispatch(setDate('2023-03'));
-    }
-  }, [reportDate, dispatch]);
+  const dispatch = useDispatch();
 
   const filteredCategories = () => {
     return categories?.filter(category => expenses?.expensesData[category]);
