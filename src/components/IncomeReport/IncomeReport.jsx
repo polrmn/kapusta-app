@@ -61,23 +61,21 @@ export const IncomeReport = () => {
       <div className={css.box}>
         <div className={css.category__navigate}>
           <button
-            className={css.btn}
+            className={css.bntLeft}
             type="button"
             onClick={() => {
               dispatch(setReportType('expense'));
             }}
           >
-            {'<'}
           </button>
           <h3 className={css.title}>Incomes</h3>
           <button
-            className={css.btn}
+            className={css.btnRight}
             type="button"
             onClick={() => {
               dispatch(setReportType('expense'));
             }}
           >
-            {'>'}
           </button>
         </div>
         {incomes.incomeTotal > 0 && (

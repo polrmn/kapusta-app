@@ -96,23 +96,23 @@ export const ExpensesReport = () => {
       <div className={css.box}>
         <div className={css.category__navigate}>
           <button
-            className={css.btn}
+            className={css.bntLeft}
             type="button"
             onClick={() => {
               dispatch(setReportType('income'));
             }}
           >
-            {'<'}
+            {/* {'<'} */}
           </button>
           <h3 className={css.title}>Expenses</h3>
           <button
-            className={css.btn}
+            className={css.btnRight}
             type="button"
             onClick={() => {
               dispatch(setReportType('income'));
             }}
           >
-            {'>'}
+            {/* {'>'} */}
           </button>
         </div>
         {expenses.expenseTotal > 0 && (

@@ -69,11 +69,33 @@ svg:focus {
   display: flex;
   justify-content: center;
   padding-top: 20px;
+  align-items: center;
 }
 
 .btn {
   border: none;
   color: #ff751d;
+  background-color: #fff;
+  font-size: 22px;
+}
+
+.bntLeft {
+  width: 4px;
+  height: 10px;
+  border: none;
+  color: #ff751d;
+  background: url('../../images/icons/balance_vector_l.svg');
+  background-position: center;
+  background-color: #fff;
+  font-size: 22px;
+}
+
+.btnRight {
+  width: 4px;
+  height: 10px;
+  border: none;
+  background: url('../../images/icons/balance_vector_r.svg');
+  background-position: center;
   background-color: #fff;
   font-size: 22px;
 }

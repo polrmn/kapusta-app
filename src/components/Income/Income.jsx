@@ -14,7 +14,7 @@ import {
   getIncomeTransactionsByThunk,
 } from '../../redux/transaction/transactionOperations';
 
-import scss from './Income.module.scss';
+import scss from '../Expenses/Expenses.module.scss';
 import { addBalance } from 'redux/user/userOperations';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Summury from './../Summary/Summary';

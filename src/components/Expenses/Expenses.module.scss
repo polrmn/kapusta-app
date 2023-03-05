@@ -1,5 +1,6 @@
 .section {
   @media screen and (min-width: 768px) {
+    box-sizing: border-box;
     max-width: 704px;
     width: 100%;
     max-height: 616px;
@@ -16,6 +17,7 @@
     max-width: 1098px;
     width: 100%;
     max-height: 579px;
+    margin-bottom: 0;
   }
 }
 .sectionForm {
@@ -36,7 +38,8 @@
     flex-wrap: nowrap;
     padding: 0;
     margin-bottom: 60px;
-    gap: 15px;
+    // gap: 15px;
+    justify-content: space-between;
   }
 }
 .sectionInputs {
@@ -84,7 +87,7 @@
     width: 184px;
   }
   @media screen and (min-width: 1280px) {
-    width: 259px;
+    width: 290px;
   }
 }
 .inputSelect {
@@ -177,7 +180,7 @@
 /*TABLE*/
 .containerAll {
   @media screen and (max-width: 1280px) {
-    margin: 0 auto;
+    // margin: 0 auto;
   }
 }
 .tableContainer {
@@ -186,15 +189,16 @@
   table-layout: fixed;
   border: none;
   overflow-x: hidden;
-  margin-top: 40px;
+  // margin-top: 40px;
   @media screen and (min-width: 768px) {
-    flex-direction: column;
-    gap: 30px;
+    // flex-direction: column;
+    // gap: 30px;
+    justify-content: center;
   }
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1279px) {
     flex-direction: row;
-    gap: 75px;
-    margin-top: 60px;
+    justify-content: space-between;
+    // margin-top: 60px;
   }
 }
 .table {
@@ -277,7 +281,10 @@
 }
 
 .btnDelate {
-  padding: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // padding: none;
   background-color: transparent;
   cursor: pointer;
   border: none;
