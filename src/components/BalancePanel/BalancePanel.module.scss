@@ -10,11 +10,11 @@ p {
     display: flex;
     // background-color: #F5F6FB;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 767.98px) {
         flex-direction: column;
     }
 
-    @media screen and (min-width: 768px) and (max-width: 1279px) {
+    @media screen and (min-width: 768px) and (max-width: 1279.98px) {
         // max-width: 768px;
         flex-direction: row;
         justify-content: space-between;
@@ -311,7 +311,7 @@ p {
         justify-content: center;
         text-align: right;
         letter-spacing: 0.02em;
-        text-transform: uppercase;
+        // text-transform: uppercase;
         color: #000;
         width: 140px;
         height: 40px;
@@ -440,6 +440,164 @@ p {
             transition: background 0.5s;
         }
     }
+
+    &Clue {
+        position: relative;
+        color: transparent;
+
+        &::before,&::after {
+            display: block;
+            position: absolute;
+            opacity: 1;
+            visibility: visible;
+            // margin-top: 20px;
+        }
+
+        &::before {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            color: #FFF;
+            text-align: left;
+            width: 280px;
+            height: 152px;
+            top: 40px;
+            left: -56px;
+            padding: 29px 25px;
+            background: linear-gradient(117.84deg, #1D346A 2.84%, #031634 67.28%);
+            border-radius: 30px;
+            content: attr(data-title);
+            box-sizing: border-box;
+            z-index: 9;
+            transition: opacity 1.0s, margin-top 1.0s;
+        }
+
+        &::after {
+            content: "";
+            border-bottom: 10px solid #1D346A;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            top: 30px;
+            left: 16px;
+            transition: opacity 1.0s, margin-top 1.0s;
+        }
+
+        // &:hover::before,&:focus::before,&:hover::after,&:focus::after {
+        //     opacity: 1;
+        //     visibility: visible;
+        //     margin-top: 0;
+        // }
+    }
+
+    &Clue2 {
+        position: relative;
+
+        &::before {
+            display: block;
+            position: absolute;
+            opacity: 1;
+            visibility: visible;
+            // margin-top: 40px;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 16px;
+            color: #fff;
+            text-align: center;
+            width: 280px;
+            top: 128px;
+            left: -57px;
+            content: attr(data);
+            box-sizing: border-box;
+            z-index: 19;
+            transition: opacity 2.0s, margin-top 1.0s;
+        }
+
+        // &:hover::before,&:focus::before {
+        //     opacity: 1;
+        //     visibility: visible;
+        //     margin-top: 0;
+        //     z-index: 99;
+        // }
+    }
+
+    &ClueReports {
+        position: relative;
+        color: transparent;
+
+        &::before,&::after {
+            display: block;
+            position: absolute;
+            opacity: 1;
+            visibility: visible;
+            // margin-top: 20px;
+        }
+
+        &::before {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            color: #FFF;
+            text-align: left;
+            width: 280px;
+            height: 152px;
+            top: 40px;
+            left: -128px;
+            padding: 29px 25px;
+            background: linear-gradient(117.84deg, #1D346A 2.84%, #031634 67.28%);
+            border-radius: 30px;
+            content: attr(data-title);
+            box-sizing: border-box;
+            z-index: 9;
+            transition: opacity 1.0s, margin-top 1.0s;
+        }
+
+        &::after {
+            content: "";
+            border-bottom: 10px solid #1D346A;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            top: 30px;
+            left: 0;
+            transition: opacity 1.0s, margin-top 1.0s;
+        }
+
+        // &:hover::before,&:focus::before,&:hover::after,&:focus::after {
+        //     opacity: 1;
+        //     visibility: visible;
+        //     margin-top: 0;
+        // }
+    }
+
+    &Clue2Reports {
+        position: relative;
+
+        &::before {
+            display: block;
+            position: absolute;
+            opacity: 1;
+            visibility: visible;
+            // margin-top: 40px;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 16px;
+            color: #fff;
+            text-align: center;
+            width: 280px;
+            top: 128px;
+            left: -128px;
+            content: attr(data);
+            box-sizing: border-box;
+            z-index: 19;
+            transition: opacity 2.0s, margin-top 1.0s;
+        }
+
+        // &:hover::before,&:focus::before {
+        //     opacity: 1;
+        //     visibility: visible;
+        //     margin-top: 0;
+        //     z-index: 99;
+        // }
+    }
 }
 
 .balanceExpenses {
@@ -449,13 +607,13 @@ p {
     display: flex;
     // background-color: #F5F6FB;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 767.98px) {
         flex-direction: column;
         padding-bottom: 40px;
         padding-top: 16px;
     }
 
-    @media screen and (min-width: 768px) and (max-width: 1279px) {
+    @media screen and (min-width: 768px) and (max-width: 1279.98px) {
         max-width: 768px;
         display: flex;
         flex-direction: row-reverse;
@@ -602,52 +760,8 @@ p {
         justify-content: center;
         text-align: right;
         letter-spacing: 0.02em;
-        text-transform: uppercase;
+        // text-transform: uppercase;
         color: #000;
-        position: relative;
-
-        &::before,&::after {
-            display: block;
-            position: absolute;
-            opacity: 0;
-            visibility: hidden;
-            margin-top: 12px;
-        }
-
-        &::before {
-            font-weight: 400;
-            // font-size: 14px;
-            font-size: .9em;
-            line-height: 20px;
-            color: #FFF;
-            text-align: center;
-            width: 280px;
-            top: 50px;
-            left: 0;
-            padding: 40px 25px;
-            background: linear-gradient(117.84deg, #1D346A 2.84%, #031634 67.28%);
-            border-radius: 30px;
-            content: attr(data-title);
-            box-sizing: border-box;
-            z-index: 9;
-            transition: opacity 1.0s, margin-top 1.0s;
-        }
-
-        &::after {
-            content: "";
-            border-bottom: 10px solid #1D346A;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            top: 40px;
-            left: 70px;
-            transition: opacity 1.0s, margin-top 1.0s;
-        }
-
-        &:hover::before,&:focus::before,&:hover::after,&:focus::after {
-            opacity: 1;
-            visibility: visible;
-            margin-top: 0;
-        }
 
         @media screen and (max-width: 767px) {
             width: 140px;
