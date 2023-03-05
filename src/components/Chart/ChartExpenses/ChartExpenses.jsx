@@ -1,10 +1,12 @@
 import {
   Bar,
   XAxis,
+  YAxis,
   Tooltip,
-  LabelList,
+  CartesianGrid,
   ResponsiveContainer,
   ComposedChart,
+  BarChart,
 } from 'recharts';
 import { useSelector } from 'react-redux';
 import css from '../ChartExpenses/chart.module.scss';
@@ -13,40 +15,53 @@ import {
   selectProductIncomes,
   selectProductExpenses,
 } from '../../../redux/transaction/transactionSelectors';
+
 import { useMemo } from 'react';
 import { selectCategoryFilter } from 'redux/categoryFilter/categoryFilterSelectors';
+import { selectReportType } from 'redux/reportType/reportTypeSelector';
 
-export const ChartExpenses = ({ filter, dataArr }) => {
+export const ChartExpenses = () => {
   // const { width, height } = useWindowSize();
+  const ReportType = useSelector(selectReportType);
   const DataIncomes = useSelector(selectProductIncomes);
   const DataExpenses = useSelector(selectProductExpenses);
 
   const categoryFilter = useSelector(selectCategoryFilter);
 
   const data = useMemo(() => {
-    if (DataExpenses) {
-      const entriesExpenses = Object.entries(DataExpenses);
+    let category = null;
+    if (ReportType === 'income') {
+      category = DataIncomes;
+    } else if (ReportType === 'expense') {
+      category = DataExpenses;
+    }
 
-      const omitedExpenses = entriesExpenses.map(item => {
+    if (category != null) {
+      const entries = Object.entries(category);
+      const omitedEntries = entries.map(item => {
         item[1] = omit(item[1], ['total']);
         return item;
       });
-      console.log(omitedExpenses);
 
       if (!categoryFilter) {
         return [];
       }
-      const expensesChart = omitedExpenses.find(
-        elem => elem[0] === categoryFilter
-      )[1]; // підставити замість 0 індекс обраного продукту, додати масив залежностей індекс
+
+      const chartData = omitedEntries.find(elem => elem[0] === categoryFilter);
+
+      if (chartData == null) {
+        return [];
+      }
 
       const res = [];
-      for (const key in expensesChart) {
-        res.push({ name: key, UAH: expensesChart[key] });
+      for (const key in chartData[1]) {
+        res.push({ name: key, UAH: chartData[1][key] });
       }
       return res.sort((a, b) => b.UAH - a.UAH);
+    } else {
+      return [];
     }
-  }, [DataExpenses, categoryFilter]);
+  }, [DataExpenses, categoryFilter, ReportType]);
 
   const getPath = (x, y, width, height, borderRadius = 10) => {
     const r = borderRadius || 0;
@@ -73,7 +88,7 @@ export const ChartExpenses = ({ filter, dataArr }) => {
   };
 
   const fillRender = index => {
-    if (index % 2 === 0) {
+    if (index % 3 === 0) {
       return '#FF751D';
     } else {
       return '#FFDAC0';
@@ -89,30 +104,42 @@ export const ChartExpenses = ({ filter, dataArr }) => {
     }
     return data;
   };
+  const tooltipStyle = {
+    color: '#071F41',
+    letterSpacing: '0.04em',
+    fontSize: '14px',
+    fontWeight: '700',
+    lineHeight: '16px',
+  };
+  const CustomLabelList = props => {
+    const { x, y, value } = props;
+    return (
+      <text x={x} y={y} dy={-10} fill="#666" textAnchor="start">
+        {value} UAH
+      </text>
+    );
+  };
 
   return (
     <>
       <div className={css.chartContainer}>
         <ResponsiveContainer width="100%" height={500}>
-          <ComposedChart
-            width={150}
-            height={400}
-            data={dataForRender(data)}
-            margin={{ top: 20 }}
-          >
-            <XAxis dataKey="name" stroke="false" />
+          <BarChart data={dataForRender(data)} margin={{ top: 30 }}>
+            <XAxis dataKey="name" stroke="false" tickMargin="4" />
 
-            <Tooltip />
+            <Tooltip
+              wrapperStyle={tooltipStyle}
+              viewBox={{ width: 100, height: 100 }}
+            />
 
-            <Bar dataKey="UAH" fill="fill" barSize={38} shape={<TriangleBar />}>
-              <LabelList
-                dataKey="UAH"
-                position="top"
-                fill="#52555F"
-                content="UAH"
-              ></LabelList>
-            </Bar>
-          </ComposedChart>
+            <Bar
+              dataKey="UAH"
+              barSize={38}
+              fill="#FF751D"
+              shape={<TriangleBar />}
+              label={<CustomLabelList />}
+            ></Bar>
+          </BarChart>
         </ResponsiveContainer>
       </div>
     </>
