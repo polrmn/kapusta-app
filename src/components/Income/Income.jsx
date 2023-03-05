@@ -74,7 +74,6 @@ export const Income = () => {
   const delateContact = (id, amount) => {
     dispatch(delateTransactionThunk(id));
     const newBalance = +balanceCurrent - +amount;
-    console.log(balanceCurrent, newBalance);
     dispatch(addBalance({ newBalance }));
   };
 
