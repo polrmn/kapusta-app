@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { setDate } from '../../redux/dateSlice';
-// import { getTransactionsThunk } from '../../redux/transaction/transactionOperations';
+import React, { useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import css from './calendar.module.scss';
 
 export const Calendar = ({ onClick }) => {
   const [startDate, setStartDate] = useState(new Date());
-  // const dispatch = useDispatch();
+
+  useEffect(() => {
+    onClick(startDate.toISOString().slice(0, 10));
+  }, [onClick, startDate]);
 
   const handleCalendarClose = () => {
     const parseData = Date.parse(startDate);
@@ -18,15 +18,8 @@ export const Calendar = ({ onClick }) => {
     const result = getDate.format('YYYY-MM-DD');
 
     onClick(result);
-    // dispatch(getTransactionsThunk(result));
     return;
   };
-
-//   const resultAuth = getDate.format('YYYY-MM');
-
-// і тоді замість dispatch(getTransactionsThunk(result));
-
-// потрібно це: dispatch(getTransactionsThunk(resultAuth));
 
   return (
     <div className={css['calendarWrapper']}>

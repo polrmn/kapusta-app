@@ -2,7 +2,7 @@ import { Calendar } from 'components/Calendar/Calendar';
 import React, { useEffect, useState } from 'react';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAccessToken } from '../../redux/auth/authSelectors';
+import { getAccessToken, getUserBalance } from '../../redux/auth/authSelectors';
 import {
   selectCategory,
   selectTransactions,
@@ -21,6 +21,7 @@ import SharedButton from './../../commons/sharedButton/SharedButton';
 import Summury from '../Summary/Summary';
 import { selectTransactionsExpenses } from '../../redux/transaction/transactionSelectors';
 import { getBalance } from '../../redux/user/userSelectors';
+import { addBalance } from 'redux/user/userOperations';
 export const Expenses = () => {
   const isScreenTablet = useMediaQuery(
     '(min-width: 768px) and (max-width: 1280px)'
@@ -36,21 +37,22 @@ export const Expenses = () => {
   const token = useSelector(getAccessToken);
   const categoriesArray = useSelector(selectCategory);
   const transactionsArrayExpenses = useSelector(selectTransactionsExpenses);
-  const balanceCurrent = useSelector(getBalance);
+  const balanceCurrent = useSelector(getUserBalance);
 
-  useEffect(() => {
-    if (token) {
-      setAuthHeader(token);
-    }
+  // useEffect(() => {
+  //   // if (token) {
+  //   //   setAuthHeader(token);
+  //   // }
 
-    dispatch(getExpenseCategoriesThunk());
-    dispatch(getExpenseTransactionsByThunk());
-  }, [dispatch]);
+  //   // dispatch(getExpenseCategoriesThunk());
+  //   dispatch(getExpenseTransactionsByThunk());
+  // }, [dispatch]);
 
   const handleSubmit = e => {
     e.preventDefault();
     if (!amount) return alert('ffff');
-    if (balanceCurrent < amount) {
+    // if (balanceCurrent < amount) {
+    if ((balanceCurrent - amount) <= 1) {
       alert('недостатньо коштів');
       return;
     }
@@ -62,6 +64,8 @@ export const Expenses = () => {
         date,
       })
     );
+    const newBalance = balanceCurrent - amount;
+    dispatch(addBalance({ newBalance }));
   };
 
   const handleClear = () => {

@@ -18,10 +18,10 @@ const Summury = () => {
   const incomeData = useSelector(selectIncomeSummary);
   const expenseData = useSelector(selectExpenseSummary);
 
-  useEffect(() => {
-    if (user) dispatch(getIncome());
-    if (user) dispatch(getExpense());
-  }, [dispatch, user]);
+  // useEffect(() => {
+  //   if (user) dispatch(getIncome());
+  //   if (user) dispatch(getExpense());
+  // }, [dispatch, user]);
 
   const location = useLocation();
 

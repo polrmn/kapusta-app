@@ -14,21 +14,29 @@ import PublicRoute from './PublicRoute/PublicRoute';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserThunk } from 'redux/auth/authOperations';
-import { getAccessToken } from '../redux/auth/authSelectors';
+import { getAccessToken, getIsLogin } from '../redux/auth/authSelectors';
 import { googleAuth } from '../helpers/googleAuth';
 import { ReportPage } from 'pages/ReportPage/ReportPage';
 import { Income } from './Income/Income';
+import { getExpense, getExpenseCategoriesThunk, getIncome, getIncomeCategoriesThunk } from 'redux/transaction/transactionOperations';
 const App = () => {
   const dispatch = useDispatch();
   const token = useSelector(getAccessToken);
+  const isLogin = useSelector(getIsLogin)
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    token && dispatch(getUserThunk());
+    token && dispatch(getUserThunk()).unwrap().then(()=>{
+      dispatch(getExpenseCategoriesThunk());
+      dispatch(getIncomeCategoriesThunk());
+      dispatch(getIncome());
+      dispatch(getExpense());
+      }
+    );
     googleAuth(token, searchParams, dispatch, navigate);
     // eslint-disable-next-line
-  }, []);
+  }, [token]);
 
   return (
     <Routes>
