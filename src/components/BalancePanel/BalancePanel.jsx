@@ -125,7 +125,9 @@ function BalancePanel() {
               <div className={style.balanceExpensesInnerBlock}>
                 <p className={style.balanceExpensesPara}>Balance:</p>
                 <div className={style.balanceExpensesAdd}>
-                  <p className={style.balanceExpensesProp}>{balAnce} UAH</p>
+                <p className={style.balanceExpensesProp} data-title="
+                  Hello! To get started, enter the current balance of your account!
+                  You can't spend money until you have it :)">{balAnce} UAH</p>
                   <button
                     onClick={() => setShowModal(true)}
                     className={style.balanceExpensesBtnAdd}

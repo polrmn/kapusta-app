@@ -604,6 +604,50 @@ p {
         letter-spacing: 0.02em;
         text-transform: uppercase;
         color: #000;
+        position: relative;
+
+        &::before,&::after {
+            display: block;
+            position: absolute;
+            opacity: 0;
+            visibility: hidden;
+            margin-top: 12px;
+        }
+
+        &::before {
+            font-weight: 400;
+            // font-size: 14px;
+            font-size: .9em;
+            line-height: 20px;
+            color: #FFF;
+            text-align: center;
+            width: 280px;
+            top: 50px;
+            left: 0;
+            padding: 40px 25px;
+            background: linear-gradient(117.84deg, #1D346A 2.84%, #031634 67.28%);
+            border-radius: 30px;
+            content: attr(data-title);
+            box-sizing: border-box;
+            z-index: 9;
+            transition: opacity 1.0s, margin-top 1.0s;
+        }
+
+        &::after {
+            content: "";
+            border-bottom: 10px solid #1D346A;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            top: 40px;
+            left: 70px;
+            transition: opacity 1.0s, margin-top 1.0s;
+        }
+
+        &:hover::before,&:focus::before,&:hover::after,&:focus::after {
+            opacity: 1;
+            visibility: visible;
+            margin-top: 0;
+        }
 
         @media screen and (max-width: 767px) {
             width: 140px;
