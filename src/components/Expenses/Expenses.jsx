@@ -308,7 +308,7 @@ export const Expenses = () => {
                                 className={scss.btnDelate}
                                 type="button"
                                 onClick={() => {
-                                  delateContact(_id);
+                                  delateContact(_id, amount);
                                 }}
                               >
                                 <div className={scss.iconDelate}></div>
