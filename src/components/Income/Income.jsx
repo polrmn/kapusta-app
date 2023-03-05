@@ -70,7 +70,13 @@ export const Income = () => {
     setCategory('');
     setDate('');
   };
-  const delateContact = id => dispatch(delateTransactionThunk(id));
+
+  const delateContact = (id, amount) => {
+    dispatch(delateTransactionThunk(id));
+    const newBalance = +balanceCurrent - +amount;
+    console.log(balanceCurrent, newBalance);
+    dispatch(addBalance({ newBalance }));
+  };
 
   /*date with calendar */
   const handleDate = date => {
@@ -298,7 +304,7 @@ export const Income = () => {
                                 className={scss.btnDelate}
                                 type="button"
                                 onClick={() => {
-                                  delateContact(_id);
+                                  delateContact(_id, amount);
                                 }}
                               >
                                 <div className={scss.iconDelate}></div>
