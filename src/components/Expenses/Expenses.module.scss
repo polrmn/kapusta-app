@@ -347,3 +347,157 @@
     width: 54px;
   }
 }
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  justify-content: center;
+  align-items: center;
+}
+
+.transactionList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+}
+
+.transactionItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.descriptionWrapper {
+  max-width: 167px;
+  width: 100%;
+}
+
+.infoWrapper {
+  display: flex;
+  gap: 20px;
+}
+
+.mobileNav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 53px;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.mobileNavLink {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  height: 100%;
+  width: calc(50% - 4px);
+  color: #000;
+  background: #F5F6FB;
+  text-decoration: none;
+  cursor: pointer;
+
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.bntOpenModal {
+  display: flex;
+  position: absolute;
+  top: 70px;
+  left: 20px;
+}
+
+.btnCloseModal {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  width: 24px;
+  height: 24px;
+  background-image: url('../../images/icons/balance_backspace.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.btnArrowLeft {
+  width: 18px;
+  height: 18px;
+  background-image: url('../../images/icons/balance_backspace.svg');
+  margin-right: 4px;
+}
+
+.btnText {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 12px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+.modal {
+  position: absolute;
+  top: 56px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  overflow: hidden;
+  z-index: 9999;
+  background-image: url('../../images/backgrounds/mobile/mobileHome@2x.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+@media screen and (max-width: 767.9px) {
+  .description {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.04em;
+
+    color: #52555F;
+  }
+
+  .date {
+    font-weight: 400;
+    font-size: 8px;
+    line-height: 9px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #52555F;
+  }
+
+  .category {
+    font-weight: 400;
+    font-size: 8px;
+    line-height: 9px;
+    letter-spacing: 0.04em;
+    color: #52555F
+  }
+
+  .amount {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+    text-align: right;
+    letter-spacing: 0.04em;
+    color: #E7192E;
+  }
+}
