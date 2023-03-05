@@ -52,7 +52,7 @@ export const Expenses = () => {
     e.preventDefault();
     if (!amount) return alert('ffff');
     // if (balanceCurrent < amount) {
-    if ((balanceCurrent - amount) <= 1) {
+    if (balanceCurrent - amount <= 1) {
       alert('недостатньо коштів');
       return;
     }
@@ -151,49 +151,55 @@ export const Expenses = () => {
           </div>
         </form>
 
-        <div>
-          <div className={scss.bodyTable}>
-            <div className={scss.commonTable}>
-              <table className={scss.main}>
-                <thead className={scss.theadTable}>
-                  <tr>
-                    <th className={`${scss.th} ${scss.thData}`}>Date</th>
-                    <th className={`${scss.th} ${scss.thDesc}`}>Description</th>
-                    <th className={`${scss.th} ${scss.thCateg}`}>Category</th>
-                    <th className={`${scss.th} ${scss.thSum}`}>Sum</th>
-                    <th className={`${scss.th} ${scss.thIcon}`}></th>
-                  </tr>
-                </thead>
-              </table>
-              <div className={scss.bodyTableScroll}>
-                <table className={`${scss.main} ${scss.mainTbody}`}>
-                  <tbody className={scss.tbodyTable}>
-                    {transactionsArrayExpenses &&
-                      transactionsArrayExpenses.map(
-                        ({ _id, date, description, category, amount }) => (
-                          <tr key={_id} className={scss.td}>
-                            <td className={scss.thData}>{date}</td>
-                            <td className={scss.tdDesc}>{description}</td>
-                            <td className={scss.tdCateg}>{category}</td>
-                            <td className={scss.tdSum}>{amount}</td>
-                            <td className={scss.thIcon}>
-                              <button
-                                className={scss.deleteBtn}
-                                type="button"
-                                onClick={() => {
-                                  delateContact(_id);
-                                }}
-                              >
-                                delate
-                              </button>
-                            </td>
-                          </tr>
-                        )
-                      )}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+        <div className={scss.containerAll}>
+          <div className={scss.tableContainer}>
+            <table className={scss.table}>
+              <thead className={scss.tableHead}>
+                <tr>
+                  <th className={`${scss.tableHeadTitle} ${scss.date} `}>
+                    Date
+                  </th>
+                  <th className={`${scss.tableHeadTitle} ${scss.description} `}>
+                    Description
+                  </th>
+                  <th className={`${scss.tableHeadTitle} ${scss.category} `}>
+                    Category
+                  </th>
+                  <th className={`${scss.tableHeadTitle} ${scss.amount} `}>
+                    Sum
+                  </th>
+                  <th
+                    className={`${scss.tableHeadTitle} ${scss.btnWrapper} `}
+                  ></th>
+                </tr>
+              </thead>
+
+              <tbody className={scss.tableBody}>
+                {transactionsArrayExpenses &&
+                  transactionsArrayExpenses.map(
+                    ({ _id, date, description, category, amount }) => (
+                      <tr key={_id} className={scss.tableRow}>
+                        <td className={scss.date}>{date}</td>
+                        <td className={scss.description}>{description}</td>
+                        <td className={scss.category}>{category}</td>
+                        <td className={scss.amount}>{amount}</td>
+                        <td className={scss.btnWrapper}>
+                          <button
+                            className={scss.btnDelate}
+                            type="button"
+                            onClick={() => {
+                              delateContact(_id);
+                            }}
+                          >
+                            <div className={scss.iconDelate}></div>
+                          </button>
+                        </td>
+                      </tr>
+                    )
+                  )}
+              </tbody>
+            </table>
+
             {isScreenDesktop && <Summury />}
           </div>
         </div>

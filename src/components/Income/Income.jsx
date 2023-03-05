@@ -2,9 +2,8 @@ import { Calendar } from 'components/Calendar/Calendar';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { getAccessToken, getUserBalance } from '../../redux/auth/authSelectors';
+import { getUserBalance } from '../../redux/auth/authSelectors';
 import {
-  selectCategory,
   selectIncomeCategories,
   selectTransactionsIncome,
 } from 'redux/transaction/transactionSelectors';
@@ -14,20 +13,28 @@ import {
   delateTransactionThunk,
   getIncomeTransactionsByThunk,
 } from '../../redux/transaction/transactionOperations';
-import { setAuthHeader } from '../../services/http/http';
+
 import scss from './Income.module.scss';
 import { addBalance } from 'redux/user/userOperations';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Summury from './../Summary/Summary';
+import SharedButton from './../../commons/sharedButton/SharedButton';
 
 export const Income = () => {
+  const isScreenTablet = useMediaQuery(
+    '(min-width: 768px) and (max-width: 1280px)'
+  );
+  const isScreenDesktop = useMediaQuery('(min-width: 1281px)');
+
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('');
   const [date, setDate] = useState('');
-  
 
   const dispatch = useDispatch();
   const balanceCurrent = useSelector(getUserBalance);
   const categoriesArray = useSelector(selectIncomeCategories);
+  console.log(categoriesArray);
   const transactionsArrayIncome = useSelector(selectTransactionsIncome);
 
   // useEffect(() => {
@@ -87,80 +94,95 @@ export const Income = () => {
   return (
     <>
       <div className={scss.section}>
-        <div>
-          <div className={scss.calendar}>
-            <Calendar onClick={handleDate} />
-          </div>
-
-          <form onSubmit={handleSubmit} className={scss.form}>
+        <form onSubmit={handleSubmit} className={scss.sectionForm}>
+          <div className={scss.sectionInputs}>
+            <div className={scss.calendar}>
+              <Calendar onClick={handleDate} />
+            </div>
             <input
               name="description"
               value={description}
               placeholder="Product description"
               type="text"
-              className={scss.formContainer__description}
+              className={scss.inputDescription}
               onChange={handleChange}
             />
             <select
               name="category"
               value={category}
               onChange={handleChange}
-              className={scss.formContainer__select}
+              className={scss.inputSelect}
             >
               <option value="category">Product category</option>
               {categoriesArray.map(item => (
-                <option key={item} value={item}>
+                <option className={scss.selectOption} key={item} value={item}>
                   {item}
                 </option>
               ))}
             </select>
-
-            <input
-              name="amount"
-              value={amount}
-              placeholder="0.00"
-              type="number"
-              className={scss.formContainer__calculator}
-              onChange={handleChange}
-            />
-            <div className={scss.buttons}>
-              <button type="submit">Input</button>
-              <button type="button" onClick={handleClear}>
-                Clear
-              </button>
+            <div className={scss.inputWrapper}>
+              <input
+                name="amount"
+                value={amount}
+                placeholder="0.00"
+                type="number"
+                className={scss.inputCount}
+                onChange={handleChange}
+              />
+              <div className={scss.calc} />
             </div>
-          </form>
-        </div>
-        <div>
-          <div className={scss.table}>
-            <table className={scss.transaction}>
-              <thead>
-                <tr className={scss.titleList}>
-                  <th>Date</th>
-                  <th>Description</th>
-                  <th>Category</th>
-                  <th>Sum</th>
-                  <th></th>
+          </div>
+          <div className={scss.buttonsWrapper}>
+            <SharedButton active={true} type="submit">
+              Input
+            </SharedButton>
+            <SharedButton type="button" onClick={handleClear}>
+              Clear
+            </SharedButton>
+          </div>
+        </form>
+
+        <div className={scss.containerAll}>
+          <div className={scss.tableContainer}>
+            <table className={scss.table}>
+              <thead className={scss.tableHead}>
+                <tr>
+                  <th className={`${scss.tableHeadTitle} ${scss.date} `}>
+                    Date
+                  </th>
+                  <th className={`${scss.tableHeadTitle} ${scss.description} `}>
+                    Description
+                  </th>
+                  <th className={`${scss.tableHeadTitle} ${scss.category} `}>
+                    Category
+                  </th>
+                  <th className={`${scss.tableHeadTitle} ${scss.amount} `}>
+                    Sum
+                  </th>
+                  <th
+                    className={`${scss.tableHeadTitle} ${scss.btnWrapper} `}
+                  ></th>
                 </tr>
               </thead>
 
-              <tbody className={scss.container}>
+              <tbody className={scss.tableBody}>
                 {transactionsArrayIncome &&
                   transactionsArrayIncome.map(
                     ({ _id, date, description, category, amount }) => (
-                      <tr key={_id} className={scss.listRow}>
-                        <td className={scss.listColumn}>{date}</td>
-                        <td className={scss.listColumn}>{description}</td>
-                        <td className={scss.listColumn}>{category}</td>
-                        <td className={scss.listColumn}>{amount}</td>
-                        <td className={scss.listColumn}>
+                      <tr key={_id} className={scss.tableRow}>
+                        <td className={scss.date}>{date}</td>
+                        <td className={scss.description}>{description}</td>
+                        <td className={scss.category}>{category}</td>
+                        <td className={scss.amount}>{amount}</td>
+                        <td className={scss.btnWrapper}>
                           <button
+                            className={scss.btnDelate}
                             type="button"
                             onClick={() => {
                               delateContact(_id);
                             }}
                           >
-                            delate
+                            <div className={scss.iconDelate}></div>
                           </button>
                         </td>
                       </tr>
@@ -168,10 +190,12 @@ export const Income = () => {
                   )}
               </tbody>
             </table>
+
+            {isScreenDesktop && <Summury />}
           </div>
-          <div className={scss.summery}></div>
         </div>
       </div>
+      {isScreenTablet && <Summury />}
     </>
   );
 };
