@@ -227,10 +227,10 @@ export const transactionSlice = createSlice({
       // });
       // ============================ 2 санки после логина/рефреша которые нужны для передачи транзакций
       .addCase(loginThunk.fulfilled, (state, { payload }) => {
-        state.transactions.expense = payload.userData.transactions.filter(
+        state.transactions.expenses = payload.userData.transactions.filter(
           ({ category }) => category !== 'З/П' && category !== 'Доп. доход'
         );
-        state.transactions.income = payload.userData.transactions.filter(
+        state.transactions.incomes = payload.userData.transactions.filter(
           ({ category }) => category === 'З/П' || category === 'Доп. доход'
         );
       })
