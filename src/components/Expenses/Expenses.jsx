@@ -76,7 +76,11 @@ export const Expenses = () => {
     setCategory('');
     setDate('');
   };
-  const delateContact = id => dispatch(delateTransactionThunk(id));
+  const delateContact = (id, amount) => {
+    dispatch(delateTransactionThunk(id));
+    const newBalance = balanceCurrent + amount;
+    dispatch(addBalance({ newBalance }));
+  };
 
   /*date with calendar */
   const handleDate = date => {
