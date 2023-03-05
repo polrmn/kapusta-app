@@ -10,7 +10,7 @@ import Modal from './BalanceModal';
 // import { privateAPI } from '../../services/http/http'
 import style from './BalancePanel.module.scss';
 import { CurrentPeriod } from '../CurrentPeriod/CurrentPeriod';
-import { getUserThunk } from 'redux/auth/authOperations';
+// import { getUserThunk } from 'redux/auth/authOperations';
 import { getUserBalance } from 'redux/auth/authSelectors';
 
 function BalancePanel() {
@@ -75,7 +75,12 @@ function BalancePanel() {
             <div className={style.balanceInnerBlock}>
               <p className={style.balancePara}>Balance:</p>
               <div className={style.balanceAdd}>
-                <p className={style.balanceProp}>{balAnce} UAH</p>
+                <p className={style.balanceProp}>{balAnce}{balAnce === 0 &&
+                  <span
+                    data="You can't spend money until you have it :)"
+                    className={style.balanceClue2Reports}><span
+                      data-title="Hello! To get started, enter the current balance of your account!"
+                      className={style.balanceClueReports}>_</span></span>} UAH</p>
                 <button
                   onClick={() => setShowModal(true)}
                   className={style.balanceBtnAdd}
@@ -125,7 +130,12 @@ function BalancePanel() {
               <div className={style.balanceExpensesInnerBlock}>
                 <p className={style.balanceExpensesPara}>Balance:</p>
                 <div className={style.balanceExpensesAdd}>
-                  <p className={style.balanceExpensesProp}>{balAnce} UAH</p>
+                  <p className={style.balanceExpensesProp}>{balAnce}{balAnce === 0 &&
+                    <span
+                      data="You can't spend money until you have it :)"
+                      className={style.balanceClue2}><span
+                        data-title="Hello! To get started, enter the current balance of your account!"
+                        className={style.balanceClue}>_</span></span>} UAH</p>
                   <button
                     onClick={() => setShowModal(true)}
                     className={style.balanceExpensesBtnAdd}
@@ -174,7 +184,12 @@ function BalancePanel() {
             <div className={style.balanceExpensesInnerBlock}>
               <p className={style.balanceExpensesPara}>Balance:</p>
               <div className={style.balanceExpensesAdd}>
-                <p className={style.balanceExpensesProp}>{balAnce} UAH</p>
+                <p className={style.balanceExpensesProp}>{balAnce}{balAnce === 0 &&
+                  <span
+                    data="You can't spend money until you have it :)"
+                    className={style.balanceClue2}><span
+                      data-title="Hello! To get started, enter the current balance of your account!"
+                      className={style.balanceClue}>_</span></span>} UAH</p>
                 <button
                   onClick={() => setShowModal(true)}
                   className={style.balanceExpensesBtnAdd}
