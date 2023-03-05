@@ -33,12 +33,12 @@ export const Income = () => {
   const [category, setCategory] = useState('');
   const [date, setDate] = useState('');
 
-  const [isOpenModal, setIsOpenModal] = useState(false)
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   const dispatch = useDispatch();
   const balanceCurrent = useSelector(getUserBalance);
   const categoriesArray = useSelector(selectIncomeCategories);
-  console.log(categoriesArray);
+  //console.log(categoriesArray);
   const transactionsArrayIncome = useSelector(selectTransactionsIncome);
 
   // useEffect(() => {
@@ -51,7 +51,7 @@ export const Income = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (!amount) return alert('ffff');
+    if (!amount) return alert('Потрібно заповнити усі поля');
     dispatch(
       addIncomeTransactionThunk({
         description,
@@ -102,11 +102,10 @@ export const Income = () => {
   };
 
   const handleOpenModal = () => {
-    setIsOpenModal(!isOpenModal)
-  }
+    setIsOpenModal(!isOpenModal);
+  };
 
-
-// console.log(isScreenMobile);
+  // console.log(isScreenMobile);
   return (
     <section>
       {isScreenMobile ? (
@@ -127,13 +126,15 @@ export const Income = () => {
                       </div>
                     </div>
                     <div className={scss.amountWrapper}>
-                      <p className={scss.amount}>- {amount}.00 UAH.</p>
+                      <p className={`${scss.amount} ${scss.amountIncome}`}>
+                        {amount}.00 UAH.
+                      </p>
                     </div>
                     <button
                       className={scss.btnDelate}
                       type="button"
                       onClick={() => {
-                        delateContact(_id);
+                        delateContact(_id, amount);
                       }}
                     >
                       <div className={scss.iconDelate}></div>
@@ -298,7 +299,11 @@ export const Income = () => {
                             <td className={scss.date}>{date}</td>
                             <td className={scss.description}>{description}</td>
                             <td className={scss.category}>{category}</td>
-                            <td className={scss.amount}>{amount}</td>
+                            <td
+                              className={`${scss.amount} ${scss.amountIncome}`}
+                            >
+                              {amount}.00 UAH.
+                            </td>
                             <td className={scss.btnWrapper}>
                               <button
                                 className={scss.btnDelate}
