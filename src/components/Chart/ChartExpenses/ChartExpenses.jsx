@@ -6,6 +6,7 @@ import {
   CartesianGrid,
   ResponsiveContainer,
   ComposedChart,
+  BarChart,
 } from 'recharts';
 import { useSelector } from 'react-redux';
 import css from '../ChartExpenses/chart.module.scss';
@@ -14,7 +15,7 @@ import {
   selectProductIncomes,
   selectProductExpenses,
 } from '../../../redux/transaction/transactionSelectors';
-import styled from 'styled-components';
+
 import { useMemo } from 'react';
 import { selectCategoryFilter } from 'redux/categoryFilter/categoryFilterSelectors';
 import { selectReportType } from 'redux/reportType/reportTypeSelector';
@@ -24,7 +25,7 @@ export const ChartExpenses = () => {
   const ReportType = useSelector(selectReportType);
   const DataIncomes = useSelector(selectProductIncomes);
   const DataExpenses = useSelector(selectProductExpenses);
-  console.log(DataIncomes);
+
   const categoryFilter = useSelector(selectCategoryFilter);
 
   const data = useMemo(() => {
@@ -34,7 +35,7 @@ export const ChartExpenses = () => {
     } else if (ReportType === 'expense') {
       category = DataExpenses;
     }
-    console.log(category);
+
     if (category != null) {
       const entries = Object.entries(category);
       const omitedEntries = entries.map(item => {
@@ -123,11 +124,13 @@ export const ChartExpenses = () => {
     <>
       <div className={css.chartContainer}>
         <ResponsiveContainer width="100%" height={500}>
-          <ComposedChart data={dataForRender(data)} margin={{ top: 30 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" stroke="false" />
+          <BarChart data={dataForRender(data)} margin={{ top: 30 }}>
+            <XAxis dataKey="name" stroke="false" tickMargin="4" />
 
-            <Tooltip wrapperStyle={tooltipStyle} />
+            <Tooltip
+              wrapperStyle={tooltipStyle}
+              viewBox={{ width: 100, height: 100 }}
+            />
 
             <Bar
               dataKey="UAH"
@@ -136,7 +139,7 @@ export const ChartExpenses = () => {
               shape={<TriangleBar />}
               label={<CustomLabelList />}
             ></Bar>
-          </ComposedChart>
+          </BarChart>
         </ResponsiveContainer>
       </div>
     </>

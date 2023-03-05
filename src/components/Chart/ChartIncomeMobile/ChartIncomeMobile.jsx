@@ -1,4 +1,11 @@
-import { ComposedChart, Bar, XAxis, YAxis, Tooltip } from 'recharts';
+import {
+  ComposedChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
 import css from '../ChartIncomeMobile/ChartIncomeMobile.module.scss';
 import { omit } from 'lodash';
 import {
@@ -23,7 +30,7 @@ export const ChartIncomeMobile = () => {
     } else if (ReportType === 'expense') {
       category = DataExpenses;
     }
-    console.log(category);
+
     if (category != null) {
       const entries = Object.entries(category);
       const omitedEntries = entries.map(item => {
@@ -134,44 +141,45 @@ export const ChartIncomeMobile = () => {
 
   return (
     <div className={css.chartContainer}>
-      <ComposedChart
-        layout="vertical"
-        data={dataForRender(data)}
-        width={700}
-        height={800}
-        margin={{
-          top: 20,
-          right: 50,
-          bottom: 20,
-          left: 20,
-        }}
-      >
-        <XAxis
-          type="number"
-          stroke="false"
-          hide="false"
-          tickFormatter={value => `${value} UAH`}
-        />
-        <YAxis
-          dataKey="name"
-          type="category"
-          scale="band"
-          stroke="false"
-          interval="preserveEnd"
-          verticalAnchor="middle"
-        />
+      <ResponsiveContainer width="100%" height={650}>
+        <ComposedChart
+          layout="vertical"
+          data={dataForRender(data)}
+          margin={{
+            top: 20,
+            right: 50,
+            bottom: 25,
+            left: 45,
+          }}
+          barCategoryGap="25px"
+        >
+          <XAxis
+            type="number"
+            stroke="false"
+            hide="false"
+            tickFormatter={value => `${value} UAH`}
+          />
+          <YAxis
+            dataKey="name"
+            type="category"
+            // scale="band"
+            stroke="false"
+            tick={{ stroke: '#52555F', strokeWidth: 1 }}
+          />
 
-        <Tooltip wrapperStyle={tooltipStyle} />
+          <Tooltip wrapperStyle={tooltipStyle} />
 
-        <Bar
-          dataKey="UAH"
-          barSize={38}
-          fill="#FF751D"
-          shape={<TriangleBar />}
-          label={<CustomLabelList />}
-          style={{ marginRight: 25 }}
-        ></Bar>
-      </ComposedChart>
+          <Bar
+            dataKey="UAH"
+            barSize={38}
+            fill="#FF751D"
+            shape={<TriangleBar />}
+            label={<CustomLabelList />}
+            barGap={10}
+            barCategoryGap={20}
+          ></Bar>
+        </ComposedChart>
+      </ResponsiveContainer>
     </div>
   );
 };
