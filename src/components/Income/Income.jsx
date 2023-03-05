@@ -2,9 +2,10 @@ import { Calendar } from 'components/Calendar/Calendar';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { getAccessToken } from '../../redux/auth/authSelectors';
+import { getAccessToken, getUserBalance } from '../../redux/auth/authSelectors';
 import {
   selectCategory,
+  selectIncomeCategories,
   selectTransactionsIncome,
 } from 'redux/transaction/transactionSelectors';
 import {
@@ -15,25 +16,27 @@ import {
 } from '../../redux/transaction/transactionOperations';
 import { setAuthHeader } from '../../services/http/http';
 import scss from './Income.module.scss';
+import { addBalance } from 'redux/user/userOperations';
 
 export const Income = () => {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('');
   const [date, setDate] = useState('');
+  
 
   const dispatch = useDispatch();
-  const token = useSelector(getAccessToken);
-  const categoriesArray = useSelector(selectCategory);
+  const balanceCurrent = useSelector(getUserBalance);
+  const categoriesArray = useSelector(selectIncomeCategories);
   const transactionsArrayIncome = useSelector(selectTransactionsIncome);
 
-  useEffect(() => {
-    if (token) {
-      setAuthHeader(token);
-    }
-    dispatch(getIncomeCategoriesThunk());
-    dispatch(getIncomeTransactionsByThunk());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   if (token) {
+  //     setAuthHeader(token);
+  //   }
+  //   dispatch(getIncomeCategoriesThunk());
+  //   dispatch(getIncomeTransactionsByThunk());
+  // }, [dispatch]);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -46,6 +49,8 @@ export const Income = () => {
         date,
       })
     );
+    const newBalance = +balanceCurrent + +amount;
+    dispatch(addBalance({ newBalance }));
   };
 
   const handleClear = () => {

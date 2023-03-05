@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getUserThunk, loginThunk } from 'redux/auth/authOperations';
 import {
   getExpense,
   getIncome,
@@ -16,6 +17,10 @@ import {
 const initialState = {
   transactionsExpense: [],
   transactionsIncome: [],
+  transactions: {
+    expenses: null,
+    incomes: null,
+  },
   category: [],
   incomeCategory: [],
   isLoading: false,
@@ -42,8 +47,12 @@ export const transactionSlice = createSlice({
       })
       .addCase(addExpenseTransactionThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.transactionsExpense = [
-          ...state.transactionsExpense,
+        // state.transactionsExpense = [
+        //   ...state.transactionsExpense,
+        //   payload.transaction,
+        // ];
+        state.transactions.expenses = [
+          ...state.transactions.expenses,
           payload.transaction,
         ];
       })
@@ -106,8 +115,8 @@ export const transactionSlice = createSlice({
       })
       .addCase(addIncomeTransactionThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.transactionsIncome = [
-          ...state.transactionsIncome,
+        state.transactions.incomes = [
+          ...state.transactions.incomes,
           payload.transaction,
         ];
       })
@@ -133,7 +142,7 @@ export const transactionSlice = createSlice({
       })
       .addCase(getIncomeCategoriesThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.category = payload;
+        state.incomeCategory = payload;
       })
       .addCase(getIncomeCategoriesThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -200,14 +209,33 @@ export const transactionSlice = createSlice({
       .addCase(getTransactionsThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
-      });
-    // ============================ 2 санки после логина/рефреша которые нужны для передачи транзакций
-    // .addCase(loginThunk.fulfilled, (state, { payload }) => {
-    //   state.transactions = payload.userData.transactions;
-    // })
-    // .addCase(getUserThunk.fulfilled, (state, { payload }) => {
-    //   state.transactions = payload.transactions;
-    // });
+      })
+      // ============================ 2 санки после логина/рефреша которые нужны для передачи транзакций
+      // .addCase(loginThunk.fulfilled, (state, { payload }) => {
+      //   state.transactions = payload.userData.transactions;
+      // })
+      // .addCase(getUserThunk.fulfilled, (state, { payload }) => {
+      //   state.transactions = payload.transactions;
+      // });
+      // ============================ 2 санки после логина/рефреша которые нужны для передачи транзакций
+      .addCase(loginThunk.fulfilled, (state, { payload }) => {
+        state.transactions.expense = payload.userData.transactions.filter(
+          ({ category }) => category !== 'З/П' && category !== 'Доп. доход'
+        );
+        state.transactions.income = payload.userData.transactions.filter(
+          ({ category }) => category === 'З/П' || category === 'Доп. доход'
+        );
+      })
+      .addCase(getUserThunk.fulfilled, (state, { payload }) => {
+        console.log(payload)
+        // state.transactions = payload.transactions;
+        state.transactions.expenses = payload.transactions.filter(
+          ({ category }) => category !== 'З/П' && category !== 'Доп. доход'
+        );
+        state.transactions.incomes = payload.transactions.filter(
+          ({ category }) => category === 'З/П' || category === 'Доп. доход'
+        );
+      })
   },
 });
 export const transactionReducer = transactionSlice.reducer;

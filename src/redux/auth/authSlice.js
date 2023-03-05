@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { addBalance } from 'redux/user/userOperations';
 import { getUserThunk, googleAuthThunk, loginThunk, logoutThunk, refreshThunk, signUpThunk } from './authOperations';
 
 
@@ -118,6 +119,10 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.isLogin = false;
       state.error = null;
+    })
+    // balance
+    addCase(addBalance.fulfilled, (state, action) => {
+      state.balance = action.payload.newBalance;
     });
   },
 });
