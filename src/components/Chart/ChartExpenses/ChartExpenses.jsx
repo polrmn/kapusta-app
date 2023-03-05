@@ -5,6 +5,8 @@ import {
   LabelList,
   ResponsiveContainer,
   ComposedChart,
+  Legend,
+  Label,
 } from 'recharts';
 import { useSelector } from 'react-redux';
 import css from '../ChartExpenses/chart.module.scss';
@@ -16,12 +18,16 @@ import {
 import { useMemo } from 'react';
 import { selectCategoryFilter } from 'redux/categoryFilter/categoryFilterSelectors';
 
-export const ChartExpenses = ({ filter, dataArr }) => {
+export const ChartExpenses = ({ type }) => {
   // const { width, height } = useWindowSize();
+
   const DataIncomes = useSelector(selectProductIncomes);
   const DataExpenses = useSelector(selectProductExpenses);
 
   const categoryFilter = useSelector(selectCategoryFilter);
+
+  if (type === 'expenses') {
+  }
 
   const data = useMemo(() => {
     if (DataExpenses) {
@@ -31,7 +37,6 @@ export const ChartExpenses = ({ filter, dataArr }) => {
         item[1] = omit(item[1], ['total']);
         return item;
       });
-      console.log(omitedExpenses);
 
       if (!categoryFilter) {
         return [];
@@ -89,22 +94,42 @@ export const ChartExpenses = ({ filter, dataArr }) => {
     }
     return data;
   };
+  const wrapperStyle = {
+    color: '#FF751D',
+    height: '10%',
+    letterSpacing: '0.04em',
+    fontSize: '14px',
+    fontWeight: '700',
+    lineHeight: '16px',
+  };
+  const tooltipStyle = {
+    color: '#071F41',
+    letterSpacing: '0.04em',
+    fontSize: '14px',
+    fontWeight: '700',
+    lineHeight: '16px',
+  };
 
   return (
     <>
       <div className={css.chartContainer}>
         <ResponsiveContainer width="100%" height={500}>
-          <ComposedChart
-            width={150}
-            height={400}
-            data={dataForRender(data)}
-            margin={{ top: 20 }}
-          >
+          <ComposedChart data={dataForRender(data)} margin={{ top: 20 }}>
             <XAxis dataKey="name" stroke="false" />
 
-            <Tooltip />
-
-            <Bar dataKey="UAH" fill="fill" barSize={38} shape={<TriangleBar />}>
+            <Tooltip wrapperStyle={tooltipStyle} />
+            <Legend
+              verticalAlign="top"
+              iconType="square"
+              wrapperStyle={wrapperStyle}
+            />
+            <Bar
+              dataKey="UAH"
+              fill="#FF751D"
+              background={{ fill: '#eee' }}
+              barSize={38}
+              shape={<TriangleBar />}
+            >
               <LabelList
                 dataKey="UAH"
                 position="top"

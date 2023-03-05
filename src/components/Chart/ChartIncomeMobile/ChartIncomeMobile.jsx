@@ -3,51 +3,50 @@ import {
   Bar,
   XAxis,
   YAxis,
-  CartesianGrid,
+  LabelList,
+  Legend,
   Tooltip,
-  ResponsiveContainer,
+  CartesianAxis,
 } from 'recharts';
 import css from '../ChartIncomeMobile/ChartIncomeMobile.module.scss';
+import { omit } from 'lodash';
+import {
+  selectProductIncomes,
+  selectProductExpenses,
+} from '../../../redux/transaction/transactionSelectors';
+import { useMemo } from 'react';
+import { selectCategoryFilter } from 'redux/categoryFilter/categoryFilterSelectors';
+import { useSelector } from 'react-redux';
 
 export const ChartIncomeMobile = () => {
-  const data = [
-    {
-      name: 'Page A',
-      uv: 590,
-      pv: 800,
-      amt: 1400,
-    },
-    {
-      name: 'Page B',
-      uv: 868,
-      pv: 967,
-      amt: 1506,
-    },
-    {
-      name: 'Page C',
-      uv: 1397,
-      pv: 1098,
-      amt: 989,
-    },
-    {
-      name: 'Page D',
-      uv: 1480,
-      pv: 1200,
-      amt: 1228,
-    },
-    {
-      name: 'Page E',
-      uv: 1520,
-      pv: 1108,
-      amt: 1100,
-    },
-    {
-      name: 'Page F',
-      uv: 1400,
-      pv: 680,
-      amt: 1700,
-    },
-  ];
+  const DataIncomes = useSelector(selectProductIncomes);
+  const DataExpenses = useSelector(selectProductExpenses);
+
+  const categoryFilter = useSelector(selectCategoryFilter);
+
+  const data = useMemo(() => {
+    if (DataExpenses) {
+      const entriesExpenses = Object.entries(DataExpenses);
+
+      const omitedExpenses = entriesExpenses.map(item => {
+        item[1] = omit(item[1], ['total']);
+        return item;
+      });
+
+      if (!categoryFilter) {
+        return [];
+      }
+      const expensesChart = omitedExpenses.find(
+        elem => elem[0] === categoryFilter
+      )[1]; // підставити замість 0 індекс обраного продукту, додати масив залежностей індекс
+
+      const res = [];
+      for (const key in expensesChart) {
+        res.push({ name: key, UAH: expensesChart[key] });
+      }
+      return res.sort((a, b) => b.UAH - a.UAH);
+    }
+  }, [DataExpenses, categoryFilter]);
 
   const getPath = (x, y, width, height, borderRadius = 10) => {
     const r = borderRadius || 0;
@@ -96,7 +95,13 @@ export const ChartIncomeMobile = () => {
     }
   };
   const dataForRender = data => {
-    return data.map((elem, index) => ({ ...elem, fill: fillRender(index) }));
+    if (data) {
+      return data.map((elem, index) => ({
+        ...elem,
+        fill: fillRender(index),
+      }));
+    }
+    return data;
   };
 
   // const calculateBarWidths = (data, containerWidth) => {
@@ -108,34 +113,67 @@ export const ChartIncomeMobile = () => {
 
   //   return barWidths;
   // };
+  const wrapperStyle = {
+    color: '#071F41',
+    height: '10%',
+    letterSpacing: '0.04em',
+    fontSize: '14px',
+    fontWeight: '700',
+    lineHeight: '16px',
+  };
+  const tooltipStyle = {
+    color: '#071F41',
+    letterSpacing: '0.04em',
+    fontSize: '14px',
+    fontWeight: '700',
+    lineHeight: '16px',
+  };
 
   return (
     <div className={css.chartContainer}>
-      <ResponsiveContainer width={400} height={800}>
-        <ComposedChart
-          layout="vertical"
-          width={500}
-          height={400}
-          data={dataForRender(data)}
-          margin={{
-            top: 20,
-            right: 20,
-            bottom: 20,
-            left: 20,
-          }}
+      <ComposedChart
+        layout="vertical"
+        data={dataForRender(data)}
+        width={700}
+        height={800}
+        margin={{
+          top: 20,
+          right: 50,
+          bottom: 20,
+          left: 20,
+        }}
+      >
+        <XAxis type="number" stroke="false" hide="false" />
+        <YAxis
+          dataKey="name"
+          type="category"
+          scale="band"
+          stroke="false"
+          interval="preserveEnd"
+          verticalAnchor="middle"
+        />
+        <CartesianAxis x="100" />
+        <Tooltip wrapperStyle={tooltipStyle} />
+        <Legend
+          verticalAlign="top"
+          iconType="square"
+          wrapperStyle={wrapperStyle}
+        />
+        <Bar
+          dataKey="UAH"
+          barSize={38}
+          fill="#FF751D"
+          shape={<TriangleBar />}
+          background={{ fill: '#eee' }}
         >
-          <XAxis type="number" />
-          <YAxis dataKey="name" type="category" scale="band" />
-          <Tooltip />
-
-          <Bar
-            dataKey="pv"
-            barSize={38}
-            fill="#FF751D"
-            shape={<TriangleBar />}
-          />
-        </ComposedChart>
-      </ResponsiveContainer>
+          <LabelList
+            dataKey="UAH"
+            position="right"
+            fill="#52555F"
+            content="UAH"
+          ></LabelList>
+        </Bar>
+      </ComposedChart>
     </div>
   );
 };
