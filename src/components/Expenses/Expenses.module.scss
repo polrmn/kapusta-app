@@ -113,6 +113,7 @@
 }
 /*&&&&&&&*/
 .selectOption {
+  height: 32px;
   font-family: 'Roboto';
   font-size: 12px;
   line-height: 14px;
@@ -120,14 +121,18 @@
   align-items: center;
   letter-spacing: 0.02em;
   color: #c7ccdc;
+  // color: red;
   padding: 5px 19px;
 
-  &:hover {
+  &:hover, &:focus, &:active {
     font-family: inherit;
-    color: #52555f;
-    background-color: #f5f6fb;
+    color: #52555F;
+    background-color: #F5F6FB;
   }
 }
+// option:hover {
+//   background-color: yellow;
+// }
 .inputWrapper {
   @media screen and (min-width: 768px) {
     display: flex;

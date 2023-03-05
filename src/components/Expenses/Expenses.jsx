@@ -126,9 +126,11 @@ export const Expenses = () => {
               onChange={handleChange}
               className={scss.inputSelect}
             >
-              <option value="category">Product category</option>
+              <option className={scss.selectOption} value="category">
+                Product category
+              </option>
               {categoriesArray.map(item => (
-                <option key={item} value={item}>
+                <option className={scss.selectOption} key={item} value={item}>
                   {item}
                 </option>
               ))}
