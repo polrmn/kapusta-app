@@ -1,0 +1,62 @@
+.box_total {
+  display: flex;
+  justify-content: space-evenly;
+  background: #ffffff;
+
+  box-shadow: 5px 10px 20px rgba(170, 178, 197, 0.4);
+  border-radius: 20px;
+  margin-bottom: 32px;
+
+  @media screen and (min-width: 767px) {
+    border-radius: 30px;
+  }
+}
+
+.totals_bar {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  margin: 15px 0;
+
+  color: #52555f;
+  @media screen and (min-width: 767px) {
+    flex-direction: row;
+  }
+}
+
+.total_expense {
+  
+
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.04em;
+
+  color: #e53935;
+  @media screen and (min-width: 767px) {
+    padding-left: 15px;
+  }
+}
+
+.total_income {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  align-items: center;
+  letter-spacing: 0.04em;
+
+  color: #407946;
+  @media screen and (min-width: 767px) {
+    padding-left: 15px;
+  }
+}

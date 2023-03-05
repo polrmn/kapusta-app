@@ -1,21 +1,23 @@
 .section {
   @media screen and (min-width: 768px) {
+    box-sizing: border-box;
     max-width: 704px;
     width: 100%;
     max-height: 616px;
     margin: 0 auto;
     padding: 32px;
     background-color: rgb(255, 255, 255);
-    // margin-bottom: 0px;
+    margin-bottom: 40px;
     display: flex;
     flex-direction: column;
     box-shadow: #aab2c533 0px 10px 60px;
     border-radius: 0px 30px 30px;
   }
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1280px) {
     max-width: 1098px;
     width: 100%;
     max-height: 579px;
+    margin-bottom: 0;
   }
 }
 .sectionForm {
@@ -36,7 +38,8 @@
     flex-wrap: nowrap;
     padding: 0;
     margin-bottom: 60px;
-    gap: 15px;
+    // gap: 15px;
+    justify-content: space-between;
   }
 }
 .sectionInputs {
@@ -59,8 +62,6 @@
 .inputDescription {
   display: block;
   font-family: inherit;
-
-  //width: 100%;
   height: 44px;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
@@ -86,18 +87,14 @@
     width: 184px;
   }
   @media screen and (min-width: 1280px) {
-    width: 259px;
+    width: 290px;
   }
 }
 .inputSelect {
   display: block;
-
   font-family: inherit;
-  //width: 100%;
-
   height: 44px;
   border: 2px solid #ffffff;
-
   border-bottom-right-radius: 16px;
   outline-color: #ff751d;
   color: #c7ccdc;
@@ -114,34 +111,30 @@
     padding: 0 20px;
   }
 }
-// .inputWrapper {
-//   position: relative;
-//   //width: 183px;
+/*&&&&&&&*/
+.selectOption {
+  font-family: 'Roboto';
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.02em;
+  color: #c7ccdc;
+  padding: 5px 19px;
 
-//   @media screen and (min-width: 768px) {
-//     display: flex;
-//     border-top-right-radius: 16px;
-//     border-bottom-right-radius: 16px;
-//     width: 125px;
-//     border: 2px solid #f6f7fc;
-//   }
-//   @media screen and (min-width: 1280px) {
-//     width: 121px;
-
-//     &:hover {
-//       border-color: #ff751d;
-//     }
-//   }
-// }
-
+  &:hover {
+    font-family: inherit;
+    color: #52555f;
+    background-color: #f5f6fb;
+  }
+}
 .inputWrapper {
   @media screen and (min-width: 768px) {
     display: flex;
     gap: 8px;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     border: 2px solid #f6f7fc;
-
     font-weight: 900;
     font-size: 12px;
     line-height: 1.14;
@@ -159,6 +152,11 @@
     width: 121px;
   }
 }
+.inputCount {
+  width: 55px;
+  border: none;
+  outline: none;
+}
 .calc {
   width: 20px;
   height: 20px;
@@ -166,12 +164,6 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
-.inputCount {
-  width: 40px;
-  border: none;
-  outline: none;
-}
-
 .buttonsWrapper {
   display: flex;
   margin-top: 80px;
@@ -185,177 +177,173 @@
     gap: 15px;
   }
 }
-
-.bodyTable {
+/*TABLE*/
+.containerAll {
+  @media screen and (max-width: 1280px) {
+    // margin: 0 auto;
+  }
+}
+.tableContainer {
   width: 100%;
   display: flex;
   table-layout: fixed;
   border: none;
   overflow-x: hidden;
+  // margin-top: 40px;
   @media screen and (min-width: 768px) {
-    flex-direction: column;
-    gap: 30px;
+    // flex-direction: column;
+    // gap: 30px;
+    justify-content: center;
   }
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1279px) {
     flex-direction: row;
-    gap: 75px;
+    justify-content: space-between;
+    // margin-top: 60px;
   }
 }
-.summery {
+.table {
+  width: 100%;
+  max-height: 500px;
+  overflow-y: scroll;
   @media screen and (min-width: 768px) {
-    display: none;
+    max-width: 624px;
   }
   @media screen and (min-width: 1280px) {
-    display: inline-block;
+    max-width: 746px;
   }
 }
-.commonTable {
-  display: block;
-}
 
-.bodyTableScroll {
-  height: 342px;
-  overflow-x: hidden;
-  margin-top: 0px;
-  margin-bottom: 20px;
-  border-bottom: 1px solid #fff;
-}
-
-.main {
-  text-align: center;
-  border-radius: 30px;
-  color: rgb(0, 0, 0);
-  border-radius: 20px 20px 0 0;
-  background-color: #f5f6fb;
-  border-spacing: 0px 2px;
-  border-left: 2px;
-  border-left-style: outset;
-  border-right-style: inset;
-  border-right-color: transparent;
-  border-left-color: transparent;
+.tableHead {
   @media screen and (min-width: 768px) {
+    display: inline-flex;
     width: 100%;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 14px;
+    align-items: center;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #000000;
+    background-color: #f5f6fb;
+    border-radius: 20px 20px 0 0;
   }
   @media screen and (min-width: 1280px) {
     width: 100%;
   }
 }
-
-.mainTbody {
-  border-radius: 0;
-  /* overflow: auto; */
-}
-
-.theadTable {
+.tableHeadTitle {
   display: none;
-  align-items: center;
-  height: 38px;
-  font-size: 13px;
-  font-weight: normal;
-  color: #52555f;
-}
-
-.th {
-  padding: 10px;
-  text-transform: uppercase;
-  color: rgb(0, 0, 0);
-  align-items: center;
-  letter-spacing: 0.02em;
-  font-weight: bold;
-  font-size: 12px;
-  line-height: 14px;
-  font-family: Roboto;
-  font-style: normal;
-}
-
-.td {
-  display: revert;
-  align-items: center;
-  height: 38px;
-  padding: 0 8px;
-  background: #ffffff;
-  color: #52555f;
-  border-bottom: 2px solid #f4f6fb;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 14px;
-  letter-spacing: 0.04em;
-}
-
-.thData {
-  width: 100px;
-}
-
-.thDesc {
-  width: 200px;
-}
-
-.thCateg {
-  width: 140px;
-}
-
-.thSum {
-  width: 130px;
-  margin: 0 auto;
-}
-.tdSum {
-  font-weight: bold;
-  width: 130px;
-  color: #407946;
-  margin: 0 auto;
-}
-.tdSumExpense {
-  font-weight: bold;
-  color: #e7192e;
-}
-.tdDesc {
-  width: 200px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: wrap;
-  overflow-wrap: break-word;
-}
-.thIcon {
-  width: 40px;
-}
-
-@media screen and (min-width: 1280px) {
-  .main {
-    width: 760px;
+  @media screen and (min-width: 768px) {
+    display: table-cell;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+    height: 44px;
   }
 }
-
-@media screen and (min-width: 768px) {
-  .theadTable {
-    display: revert;
-  }
-}
-
-.deleteBtn {
-  margin-right: auto;
-  margin-left: auto;
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
-  padding: 0;
-  border: transparent;
-  background-color: transparent;
-}
-
-.deleteBtnIcon {
-  width: 16px;
-  height: 18px;
-}
-
-.deleteBtn:hover svg path {
-  color: #ff751d;
-  fill: currentColor;
-}
-
-@media screen and (min-width: 1280px) {
-  .bodyTable {
+.tableBody {
+  @media screen and (min-width: 768px) {
+    display: inline-block;
     width: 100%;
+    overflow-y: scroll;
+    height: 342px;
+    // ::-webkit-scrollbar {
+    //   width: 6px;
+    //   background-color: #f5f6fb;
+    // }
+    // ::-webkit-scrollbar-thumb {
+    //   border-radius: 2px;
+    //   background-color: #ff751d;
+    // }
+  }
+}
+.tableRow {
+  position: relative;
+  height: 40px;
+  font-family: inherit;
+  font-size: 8px;
+  line-height: 1.16;
+  color: #52555f;
+  border-bottom: 2px solid #f5f6fb;
+  display: flex;
+  @media screen and (min-width: 768px) {
+    font-size: 12px;
+    width: calc(100% - 2px);
+    display: table;
+    width: calc(100% - 2px);
+    height: 40px;
+    text-align: center;
+    border-left: 2px solid #f5f6fb;
+  }
+  @media screen and (min-width: 1280px) {
+    height: 38px;
+  }
+}
+
+.btnDelate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // padding: none;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  @media screen and (min-width: 768px) {
+    width: 32px;
+    height: 32px;
+    :hover {
+      background-color: #f5f6fb;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+  }
+}
+.iconDelate {
+  z-index: 2;
+  width: 18px;
+  height: 18px;
+  background-image: url('../../images/iconsForm/delate.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.date {
+  @media screen and (min-width: 768px) {
+    width: 80px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 100px;
+  }
+}
+.description {
+  @media screen and (min-width: 768px) {
+    width: 260px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 300px;
+  }
+}
+.category {
+  @media screen and (min-width: 768px) {
+    width: 160px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 200px;
+  }
+}
+.amount {
+  @media screen and (min-width: 768px) {
+    width: 80px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 110px;
+  }
+}
+.btnWrapper {
+  @media screen and (min-width: 768px) {
+    width: 42px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 54px;
   }
 }
