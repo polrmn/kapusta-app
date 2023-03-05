@@ -1,12 +1,11 @@
 import {
   Bar,
   XAxis,
+  YAxis,
   Tooltip,
-  LabelList,
+  CartesianGrid,
   ResponsiveContainer,
   ComposedChart,
-  Legend,
-  Label,
 } from 'recharts';
 import { useSelector } from 'react-redux';
 import css from '../ChartExpenses/chart.module.scss';
@@ -15,25 +14,30 @@ import {
   selectProductIncomes,
   selectProductExpenses,
 } from '../../../redux/transaction/transactionSelectors';
+import styled from 'styled-components';
 import { useMemo } from 'react';
 import { selectCategoryFilter } from 'redux/categoryFilter/categoryFilterSelectors';
+import { selectReportType } from 'redux/reportType/reportTypeSelector';
 
-export const ChartExpenses = ({ type }) => {
+export const ChartExpenses = () => {
   // const { width, height } = useWindowSize();
-
+  const ReportType = useSelector(selectReportType);
   const DataIncomes = useSelector(selectProductIncomes);
   const DataExpenses = useSelector(selectProductExpenses);
-
+  console.log(DataIncomes);
   const categoryFilter = useSelector(selectCategoryFilter);
 
-  if (type === 'expenses') {
-  }
-
   const data = useMemo(() => {
-    if (DataExpenses) {
-      const entriesExpenses = Object.entries(DataExpenses);
-
-      const omitedExpenses = entriesExpenses.map(item => {
+    let category = null;
+    if (ReportType === 'income') {
+      category = DataIncomes;
+    } else if (ReportType === 'expense') {
+      category = DataExpenses;
+    }
+    console.log(category);
+    if (category != null) {
+      const entries = Object.entries(category);
+      const omitedEntries = entries.map(item => {
         item[1] = omit(item[1], ['total']);
         return item;
       });
@@ -41,17 +45,22 @@ export const ChartExpenses = ({ type }) => {
       if (!categoryFilter) {
         return [];
       }
-      const expensesChart = omitedExpenses.find(
-        elem => elem[0] === categoryFilter
-      )[1]; // підставити замість 0 індекс обраного продукту, додати масив залежностей індекс
+
+      const chartData = omitedEntries.find(elem => elem[0] === categoryFilter);
+
+      if (chartData == null) {
+        return [];
+      }
 
       const res = [];
-      for (const key in expensesChart) {
-        res.push({ name: key, UAH: expensesChart[key] });
+      for (const key in chartData[1]) {
+        res.push({ name: key, UAH: chartData[1][key] });
       }
       return res.sort((a, b) => b.UAH - a.UAH);
+    } else {
+      return [];
     }
-  }, [DataExpenses, categoryFilter]);
+  }, [DataExpenses, categoryFilter, ReportType]);
 
   const getPath = (x, y, width, height, borderRadius = 10) => {
     const r = borderRadius || 0;
@@ -78,7 +87,7 @@ export const ChartExpenses = ({ type }) => {
   };
 
   const fillRender = index => {
-    if (index % 2 === 0) {
+    if (index % 3 === 0) {
       return '#FF751D';
     } else {
       return '#FFDAC0';
@@ -94,14 +103,6 @@ export const ChartExpenses = ({ type }) => {
     }
     return data;
   };
-  const wrapperStyle = {
-    color: '#FF751D',
-    height: '10%',
-    letterSpacing: '0.04em',
-    fontSize: '14px',
-    fontWeight: '700',
-    lineHeight: '16px',
-  };
   const tooltipStyle = {
     color: '#071F41',
     letterSpacing: '0.04em',
@@ -109,34 +110,32 @@ export const ChartExpenses = ({ type }) => {
     fontWeight: '700',
     lineHeight: '16px',
   };
+  const CustomLabelList = props => {
+    const { x, y, value } = props;
+    return (
+      <text x={x} y={y} dy={-10} fill="#666" textAnchor="start">
+        {value} UAH
+      </text>
+    );
+  };
 
   return (
     <>
       <div className={css.chartContainer}>
         <ResponsiveContainer width="100%" height={500}>
-          <ComposedChart data={dataForRender(data)} margin={{ top: 20 }}>
+          <ComposedChart data={dataForRender(data)} margin={{ top: 30 }}>
+            <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" stroke="false" />
 
             <Tooltip wrapperStyle={tooltipStyle} />
-            <Legend
-              verticalAlign="top"
-              iconType="square"
-              wrapperStyle={wrapperStyle}
-            />
+
             <Bar
               dataKey="UAH"
-              fill="#FF751D"
-              background={{ fill: '#eee' }}
               barSize={38}
+              fill="#FF751D"
               shape={<TriangleBar />}
-            >
-              <LabelList
-                dataKey="UAH"
-                position="top"
-                fill="#52555F"
-                content="UAH"
-              ></LabelList>
-            </Bar>
+              label={<CustomLabelList />}
+            ></Bar>
           </ComposedChart>
         </ResponsiveContainer>
       </div>

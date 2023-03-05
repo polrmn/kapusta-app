@@ -1,13 +1,4 @@
-import {
-  ComposedChart,
-  Bar,
-  XAxis,
-  YAxis,
-  LabelList,
-  Legend,
-  Tooltip,
-  CartesianAxis,
-} from 'recharts';
+import { ComposedChart, Bar, XAxis, YAxis, Tooltip } from 'recharts';
 import css from '../ChartIncomeMobile/ChartIncomeMobile.module.scss';
 import { omit } from 'lodash';
 import {
@@ -17,18 +8,25 @@ import {
 import { useMemo } from 'react';
 import { selectCategoryFilter } from 'redux/categoryFilter/categoryFilterSelectors';
 import { useSelector } from 'react-redux';
+import { selectReportType } from 'redux/reportType/reportTypeSelector';
 
 export const ChartIncomeMobile = () => {
   const DataIncomes = useSelector(selectProductIncomes);
   const DataExpenses = useSelector(selectProductExpenses);
-
+  const ReportType = useSelector(selectReportType);
   const categoryFilter = useSelector(selectCategoryFilter);
 
   const data = useMemo(() => {
-    if (DataExpenses) {
-      const entriesExpenses = Object.entries(DataExpenses);
-
-      const omitedExpenses = entriesExpenses.map(item => {
+    let category = null;
+    if (ReportType === 'income') {
+      category = DataIncomes;
+    } else if (ReportType === 'expense') {
+      category = DataExpenses;
+    }
+    console.log(category);
+    if (category != null) {
+      const entries = Object.entries(category);
+      const omitedEntries = entries.map(item => {
         item[1] = omit(item[1], ['total']);
         return item;
       });
@@ -36,18 +34,22 @@ export const ChartIncomeMobile = () => {
       if (!categoryFilter) {
         return [];
       }
-      const expensesChart = omitedExpenses.find(
-        elem => elem[0] === categoryFilter
-      )[1]; // підставити замість 0 індекс обраного продукту, додати масив залежностей індекс
+
+      const chartData = omitedEntries.find(elem => elem[0] === categoryFilter);
+
+      if (chartData == null) {
+        return [];
+      }
 
       const res = [];
-      for (const key in expensesChart) {
-        res.push({ name: key, UAH: expensesChart[key] });
+      for (const key in chartData[1]) {
+        res.push({ name: key, UAH: chartData[1][key] });
       }
       return res.sort((a, b) => b.UAH - a.UAH);
+    } else {
+      return [];
     }
-  }, [DataExpenses, categoryFilter]);
-
+  }, [DataExpenses, categoryFilter, ReportType]);
   const getPath = (x, y, width, height, borderRadius = 10) => {
     const r = borderRadius || 0;
     const rTopLeft = Math.min(r, Math.min(width, height) / 2);
@@ -88,7 +90,7 @@ export const ChartIncomeMobile = () => {
     return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
   };
   const fillRender = index => {
-    if (index % 2 === 0) {
+    if (index % 3 === 0) {
       return '#FF751D';
     } else {
       return '#FFDAC0';
@@ -113,14 +115,15 @@ export const ChartIncomeMobile = () => {
 
   //   return barWidths;
   // };
-  const wrapperStyle = {
-    color: '#071F41',
-    height: '10%',
-    letterSpacing: '0.04em',
-    fontSize: '14px',
-    fontWeight: '700',
-    lineHeight: '16px',
+  const CustomLabelList = props => {
+    const { x, y, value } = props;
+    return (
+      <text x={x} y={y} dy={-10} fill="#666" textAnchor="start">
+        {value} UAH
+      </text>
+    );
   };
+
   const tooltipStyle = {
     color: '#071F41',
     letterSpacing: '0.04em',
@@ -143,7 +146,12 @@ export const ChartIncomeMobile = () => {
           left: 20,
         }}
       >
-        <XAxis type="number" stroke="false" hide="false" />
+        <XAxis
+          type="number"
+          stroke="false"
+          hide="false"
+          tickFormatter={value => `${value} UAH`}
+        />
         <YAxis
           dataKey="name"
           type="category"
@@ -152,27 +160,17 @@ export const ChartIncomeMobile = () => {
           interval="preserveEnd"
           verticalAnchor="middle"
         />
-        <CartesianAxis x="100" />
+
         <Tooltip wrapperStyle={tooltipStyle} />
-        <Legend
-          verticalAlign="top"
-          iconType="square"
-          wrapperStyle={wrapperStyle}
-        />
+
         <Bar
           dataKey="UAH"
           barSize={38}
           fill="#FF751D"
           shape={<TriangleBar />}
-          background={{ fill: '#eee' }}
-        >
-          <LabelList
-            dataKey="UAH"
-            position="right"
-            fill="#52555F"
-            content="UAH"
-          ></LabelList>
-        </Bar>
+          label={<CustomLabelList />}
+          style={{ marginRight: 25 }}
+        ></Bar>
       </ComposedChart>
     </div>
   );
