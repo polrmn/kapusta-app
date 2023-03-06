@@ -87,12 +87,12 @@ export const authSlice = createSlice({
     addCase(refreshThunk.rejected, (state, { payload }) => {
       state.error = payload;
       state.isLoading = false;
-      // console.log('refreshThunk.rejected', payload);
+      console.log('refreshThunk.rejected');
     });
     // get User
     addCase(getUserThunk.pending, (state, { payload }) => {
       state.isLoading = true;
-      // console.log('getUserThunk.pending');
+      console.log('getUserThunk.pending');
     });
     addCase(getUserThunk.fulfilled, (state, { payload }) => {
       state.userEmail = payload.email

@@ -11,6 +11,7 @@ import {
   selectTotalExpense,
   selectTotalIncome,
 } from 'redux/transaction/transactionSelectors';
+import { getIsLogin } from 'redux/auth/authSelectors';
 // import { CurrentPeriod } from 'components/CurrentPeriod/CurrentPeriod';
 
 export const ReportPage = () => {
@@ -19,9 +20,11 @@ export const ReportPage = () => {
   const reportDate = useSelector(selectDate);
   const totalIncome = useSelector(selectTotalIncome);
   const totalExpense = useSelector(selectTotalExpense);
+  const isLogin = useSelector(getIsLogin)
 
   const dispatch = useDispatch();
   useEffect(() => {
+    if (isLogin) {
     if (reportDate && reportDate.length > 0) {
         dispatch(getTransactionsThunk(reportDate));
     } else {
@@ -31,10 +34,11 @@ export const ReportPage = () => {
 
       dispatch(getTransactionsThunk(`${year}-${month}`));
     }
+  }
 
     console.log('Total expense:', totalExpense);
     console.log('Total income:', totalIncome);
-  }, [reportDate, dispatch]);
+  }, [reportDate, dispatch, isLogin]);
 
   if (isLoading) {
     return <p>Loading...</p>;

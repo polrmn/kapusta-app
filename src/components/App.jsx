@@ -14,18 +14,15 @@ import PublicRoute from './PublicRoute/PublicRoute';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserThunk } from 'redux/auth/authOperations';
-import { getAccessToken, getIsLogin } from '../redux/auth/authSelectors';
+import { getAccessToken } from '../redux/auth/authSelectors';
 import { googleAuth } from '../helpers/googleAuth';
 import { ReportPage } from 'pages/ReportPage/ReportPage';
 import { Income } from './Income/Income';
 import { getExpense, getExpenseCategoriesThunk, getIncome, getIncomeCategoriesThunk, getTransactionsThunk } from 'redux/transaction/transactionOperations';
-import { selectDate } from 'redux/selectors';
-import { setDate } from 'redux/dateSlice';
+// import { selectDate } from 'redux/selectors';
 const App = () => {
   const dispatch = useDispatch();
   const token = useSelector(getAccessToken);
-  const date = useSelector(selectDate);
-  // const isLogin = useSelector(getIsLogin)
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -35,8 +32,6 @@ const App = () => {
       dispatch(getIncomeCategoriesThunk());
       dispatch(getIncome());
       dispatch(getExpense());
-      dispatch(setDate(new Date().toISOString().slice(0, 7)));
-      dispatch(getTransactionsThunk(date));
       }
     );
     googleAuth(token, searchParams, dispatch, navigate);
