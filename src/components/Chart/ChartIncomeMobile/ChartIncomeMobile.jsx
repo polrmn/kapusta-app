@@ -141,7 +141,7 @@ export const ChartIncomeMobile = () => {
 
   return (
     <div className={css.chartContainer}>
-      <ResponsiveContainer width="100%" height={650}>
+      <ResponsiveContainer width='100%' height={650}>
         <ComposedChart
           layout="vertical"
           data={dataForRender(data)}
@@ -149,7 +149,7 @@ export const ChartIncomeMobile = () => {
             top: 20,
             right: 50,
             bottom: 25,
-            left: 45,
+            left: 45, 
           }}
           barCategoryGap="25px"
         >
@@ -164,7 +164,7 @@ export const ChartIncomeMobile = () => {
             type="category"
             // scale="band"
             stroke="false"
-            tick={{ stroke: '#52555F', strokeWidth: 1 }}
+            // tick={{ stroke: '#52555F', strokeWidth: 1 }}
           />
 
           <Tooltip wrapperStyle={tooltipStyle} />
