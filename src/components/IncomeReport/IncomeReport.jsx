@@ -20,7 +20,7 @@ export const IncomeReport = () => {
   const categories = useSelector(selectIncomeCategories);
 
   const dispatch = useDispatch();
-  
+
   const filteredCategories = categories.filter(
     category => incomes.incomesData[category]
   );
@@ -52,7 +52,7 @@ export const IncomeReport = () => {
     refs.selectedCategory = event.currentTarget;
   };
 
-  console.log('Income:', incomes);
+  // console.log('Income:', incomes);
 
   return isLoading ? (
     <p>Loading...</p>

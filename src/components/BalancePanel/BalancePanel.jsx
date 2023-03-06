@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { addBalance } from 'redux/user/userOperations';
-import { getBalance } from 'redux/user/userSelectors';
+// import { getBalance } from 'redux/user/userSelectors';
 // import { privateAPI } from 'services/http/http';
 // import { updateBalanceAPI } from 'services/transactionService';
 // import { selectBalance } from 'redux/transaction/transactionSelectors';
@@ -19,7 +19,7 @@ function BalancePanel() {
   const dispatch = useDispatch();
   const balAnce = useSelector(getUserBalance);
   const location = useLocation();
-  const newBalance = useSelector(getBalance);
+  // const newBalance = useSelector(getBalance);
 
   // useEffect(() => {
   //   dispatch(getUserThunk());

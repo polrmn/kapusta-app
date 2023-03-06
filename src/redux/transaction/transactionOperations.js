@@ -10,9 +10,9 @@ import {
 } from 'services/transactionService';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { addExpenseAPI } from './../../services/transactionService';
-import { getAccessToken } from 'redux/auth/authSelectors';
-import { useSelector } from 'react-redux';
-import { setAuthHeader } from 'services/http/http';
+// import { getAccessToken } from 'redux/auth/authSelectors';
+// import { useSelector } from 'react-redux';
+// import { setAuthHeader } from 'services/http/http';
 
 export const addExpenseTransactionThunk = createAsyncThunk(
   'expenses/addTransaction',

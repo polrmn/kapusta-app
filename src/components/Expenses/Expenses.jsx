@@ -1,26 +1,26 @@
 import { Calendar } from 'components/Calendar/Calendar';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAccessToken, getUserBalance } from '../../redux/auth/authSelectors';
+import { getUserBalance } from '../../redux/auth/authSelectors';
 import {
   selectCategory,
-  selectTransactions,
+  // selectTransactions,
 } from 'redux/transaction/transactionSelectors';
 import {
-  getExpenseCategoriesThunk,
+  // getExpenseCategoriesThunk,
   addExpenseTransactionThunk,
   delateTransactionThunk,
-  getExpenseTransactionsByThunk,
+  // getExpenseTransactionsByThunk,
 } from '../../redux/transaction/transactionOperations';
-import { setAuthHeader } from '../../services/http/http';
+// import { setAuthHeader } from '../../services/http/http';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import scss from './Expenses.module.scss';
 import SharedButton from './../../commons/sharedButton/SharedButton';
 import Summury from '../Summary/Summary';
 import { selectTransactionsExpenses } from '../../redux/transaction/transactionSelectors';
-import { getBalance } from '../../redux/user/userSelectors';
+// import { getBalance } from '../../redux/user/userSelectors';
 import { addBalance } from 'redux/user/userOperations';
 import { NavLink } from 'react-router-dom';
 export const Expenses = () => {
@@ -36,7 +36,7 @@ export const Expenses = () => {
   const [date, setDate] = useState('');
 
   const dispatch = useDispatch();
-  const token = useSelector(getAccessToken);
+  // const token = useSelector(getAccessToken);
   const categoriesArray = useSelector(selectCategory);
   const transactionsArrayExpenses = useSelector(selectTransactionsExpenses);
   const balanceCurrent = useSelector(getUserBalance);
@@ -91,7 +91,7 @@ export const Expenses = () => {
   const actions = {
     description: setDescription,
     amount: value => {
-      console.log(value.charAt(0));
+      // console.log(value.charAt(0));
       if (value.charAt(0) === '0' || value.charAt(0) === '-') {
         Notify.failure('Amount must be greater than 0');
         return;

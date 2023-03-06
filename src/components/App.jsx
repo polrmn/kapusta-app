@@ -18,7 +18,7 @@ import { getAccessToken } from '../redux/auth/authSelectors';
 import { googleAuth } from '../helpers/googleAuth';
 import { ReportPage } from 'pages/ReportPage/ReportPage';
 import { Income } from './Income/Income';
-import { getExpense, getExpenseCategoriesThunk, getIncome, getIncomeCategoriesThunk, getTransactionsThunk } from 'redux/transaction/transactionOperations';
+import { getExpense, getExpenseCategoriesThunk, getIncome, getIncomeCategoriesThunk } from 'redux/transaction/transactionOperations';
 // import { selectDate } from 'redux/selectors';
 const App = () => {
   const dispatch = useDispatch();

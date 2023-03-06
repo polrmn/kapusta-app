@@ -3,7 +3,7 @@ import { updateBalanceAPI } from 'services/transactionService';
 
 export const thunkName = createAsyncThunk(
   'signature/thunkName',
-  async (data, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
       
     } catch (error) {

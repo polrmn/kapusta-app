@@ -1,11 +1,11 @@
 import {
   Bar,
   XAxis,
-  YAxis,
+  // YAxis,
   Tooltip,
-  CartesianGrid,
+  // CartesianGrid,
   ResponsiveContainer,
-  ComposedChart,
+  // ComposedChart,
   BarChart,
 } from 'recharts';
 import { useSelector } from 'react-redux';
@@ -61,7 +61,7 @@ export const ChartExpenses = () => {
     } else {
       return [];
     }
-  }, [DataExpenses, categoryFilter, ReportType]);
+  }, [DataExpenses, categoryFilter, ReportType, DataIncomes]);
 
   const getPath = (x, y, width, height, borderRadius = 10) => {
     const r = borderRadius || 0;

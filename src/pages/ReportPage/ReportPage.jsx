@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectReportType } from 'redux/reportType/reportTypeSelector';
 import { selectDate, selectIsLoading } from 'redux/selectors';
-import { getExpense, getIncome, getTransactionsThunk } from 'redux/transaction/transactionOperations';
+import { getTransactionsThunk } from 'redux/transaction/transactionOperations';
 import {
   selectTotalExpense,
   selectTotalIncome,
@@ -36,8 +36,8 @@ export const ReportPage = () => {
     }
   }
 
-    console.log('Total expense:', totalExpense);
-    console.log('Total income:', totalIncome);
+    // console.log('Total expense:', totalExpense);
+    // console.log('Total income:', totalIncome);
   }, [reportDate, dispatch, isLogin]);
 
   if (isLoading) {

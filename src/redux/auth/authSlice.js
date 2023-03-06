@@ -23,21 +23,21 @@ export const authSlice = createSlice({
     // signUp
     addCase(signUpThunk.pending, (state, { payload }) => {
       state.isLoading = true;
-      console.log('signUpThunk.pending');
+      // console.log('signUpThunk.pending');
     });
     addCase(signUpThunk.fulfilled, (state, { payload }) => {
-      console.log('signUpThunk.fulfilled');
+      // console.log('signUpThunk.fulfilled');
       state.error = null;
     });
     addCase(signUpThunk.rejected, (state, { payload }) => {
       state.error = payload;
       state.isLoading = false;
-      console.log('signUpThunk.rejected', payload);
+      // console.log('signUpThunk.rejected', payload);
     });
     // login
     addCase(loginThunk.pending, (state, { payload }) => {
       state.isLoading = true;
-      console.log('loginThunk.pending');
+      // console.log('loginThunk.pending');
     });
     addCase(loginThunk.fulfilled, (state, { payload }) => {
       state.accessToken = payload.accessToken;
@@ -48,16 +48,16 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.isLogin = true;
       state.error = null;
-      console.log('loginThunk.fulfilled');
+      // console.log('loginThunk.fulfilled');
     });
     addCase(loginThunk.rejected, (state, { payload }) => {
       state.error = payload;
       state.isLoading = false;
-      console.log('loginThunk.rejected', payload);
+      // console.log('loginThunk.rejected', payload);
     });
     // logout
     addCase(logoutThunk.pending, (state, { payload }) => {
-      console.log('logoutThunk.pending');
+      // console.log('logoutThunk.pending');
       state.isLoading = true;
     });
     addCase(logoutThunk.fulfilled, (state, { payload }) => {
@@ -69,30 +69,30 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.isLogin = false;
       state.error = null;
-      console.log('logoutThunk.fulfilled');
+      // console.log('logoutThunk.fulfilled');
     });
     addCase(logoutThunk.rejected, (state, { payload }) => {
       state.error = payload;
       state.isLoading = false;
-      console.log('logoutThunk.rejected', payload);
+      // console.log('logoutThunk.rejected', payload);
     });
     // refresh
     addCase(refreshThunk.pending, (state, { payload }) => {
       state.isLoading = true;
     });
     addCase(refreshThunk.fulfilled, (state, { payload }) => {
-      console.log('refreshThunk.fulfilled');
+      // console.log('refreshThunk.fulfilled');
       state.error = null;
     });
     addCase(refreshThunk.rejected, (state, { payload }) => {
       state.error = payload;
       state.isLoading = false;
-      console.log('refreshThunk.rejected');
+      // console.log('refreshThunk.rejected');
     });
     // get User
     addCase(getUserThunk.pending, (state, { payload }) => {
       state.isLoading = true;
-      console.log('getUserThunk.pending');
+      // console.log('getUserThunk.pending');
     });
     addCase(getUserThunk.fulfilled, (state, { payload }) => {
       state.userEmail = payload.email
@@ -101,7 +101,7 @@ export const authSlice = createSlice({
       state.transactions = payload.transactions;
       state.balance = payload.balance;
       state.error = null;
-      console.log('getUserThunk.fulfilled');
+      // console.log('getUserThunk.fulfilled');
 
     });
     addCase(getUserThunk.rejected, (state, { payload }) => {

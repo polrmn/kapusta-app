@@ -2,24 +2,24 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
 import scss from './summary.module.scss';
-import { getIsLogin, getUserBalance } from 'redux/auth/authSelectors';
+import { getIsLogin } from 'redux/auth/authSelectors';
 import { getExpense, getIncome } from 'redux/transaction/transactionOperations';
 import {
-  currentTransaction,
+  // currentTransaction,
   selectExpenseSummary,
   selectIncomeSummary,
   selectTransactionsExpenses,
   selectTransactionsIncome,
 } from 'redux/transaction/transactionSelectors';
 import { monthTranslate } from './monthTranslatе';
-import { getBalance } from 'redux/user/userSelectors';
-import {
-  updateIncomeMonthStats,
-  updateIncomeMonthStatsAction,
-} from 'redux/transaction/transactionSlice';
+// import { getBalance } from 'redux/user/userSelectors';
+// import {
+//   updateIncomeMonthStats,
+//   updateIncomeMonthStatsAction,
+// } from 'redux/transaction/transactionSlice';
 
 let dataSum;
-let stats;
+// let stats;
 const Summury = () => {
   const dispatch = useDispatch();
   const user = useSelector(getIsLogin);
@@ -28,7 +28,7 @@ const Summury = () => {
   // const userBalans = useSelector(getBalance);
   const expences = useSelector(selectTransactionsExpenses);
   const income = useSelector(selectTransactionsIncome);
-  const data = useSelector(currentTransaction);
+  // const data = useSelector(currentTransaction);
   // console.log('data', data);
 
   // useEffect(() => {
