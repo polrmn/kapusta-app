@@ -51,7 +51,8 @@ export const Income = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (!amount) return alert('Потрібно заповнити усі поля');
+    if (!amount || !description || !category)
+      return Notify.info('Fill in all fields');
     dispatch(
       addIncomeTransactionThunk({
         description,
