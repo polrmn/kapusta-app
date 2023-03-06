@@ -1,19 +1,10 @@
-import axios from 'axios';
 import { privateAPI, publicAPI } from './http/http';
 
 // export const instance = axios.create({
 //   baseURL: 'https://kapusta-backend.goit.global/',
 // });
 
-// Utility to add JWT
-export const setAuthHeader = token => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
 
-// Utility to remove JWT
-export const clearAuthHeader = () => {
-  axios.defaults.headers.common.Authorization = '';
-};
 
 export const registerUserApi = async user => {
   const { data } = await publicAPI.post('auth/register', user);

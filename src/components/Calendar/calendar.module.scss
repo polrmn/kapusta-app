@@ -1,14 +1,23 @@
 .calendarWrapper {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
-
+.calendarIcon {
+  width: 20px;
+  height: 20px;
+  background-image: url('../../images/icons/calendar.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
 
 .calendarInput {
   width: 74px;
   height: 40px;
+
+  padding: 0;
 
   color: #52555f;
 
@@ -19,6 +28,7 @@
   align-items: center;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  background: transparent;
 
   border-color: transparent;
 

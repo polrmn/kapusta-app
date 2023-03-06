@@ -1,6 +1,7 @@
 import { privateAPI } from './http/http';
 
 export const addIncomeAPI = async incData => {
+  console.log();
   const { data } = await privateAPI.post('transaction/income', incData);
   return data;
 };
@@ -42,6 +43,7 @@ export const getPeriodDataAPI = async period => {
 };
 
 export const updateBalanceAPI = async newBalance => {
-  const { data } = await privateAPI.get('user/balance', newBalance);
+  const { data } = await privateAPI.patch('user/balance', newBalance);
   return data;
 };
+
