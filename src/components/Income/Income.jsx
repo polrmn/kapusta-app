@@ -1,5 +1,5 @@
 import { Calendar } from 'components/Calendar/Calendar';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { getUserBalance } from '../../redux/auth/authSelectors';
@@ -8,10 +8,10 @@ import {
   selectTransactionsIncome,
 } from 'redux/transaction/transactionSelectors';
 import {
-  getIncomeCategoriesThunk,
+  // getIncomeCategoriesThunk,
   addIncomeTransactionThunk,
   delateTransactionThunk,
-  getIncomeTransactionsByThunk,
+  // getIncomeTransactionsByThunk,
 } from '../../redux/transaction/transactionOperations';
 
 import scss from '../Expenses/Expenses.module.scss';

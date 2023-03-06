@@ -20,7 +20,7 @@ export const IncomeReport = () => {
   const categories = useSelector(selectIncomeCategories);
 
   const dispatch = useDispatch();
-
+  
   const filteredCategories = categories.filter(
     category => incomes.incomesData[category]
   );

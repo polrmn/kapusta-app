@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectReportType } from 'redux/reportType/reportTypeSelector';
 import { selectDate, selectIsLoading } from 'redux/selectors';
-import { getTransactionsThunk } from 'redux/transaction/transactionOperations';
+import { getExpense, getIncome, getTransactionsThunk } from 'redux/transaction/transactionOperations';
 import {
   selectTotalExpense,
   selectTotalIncome,
@@ -21,10 +21,9 @@ export const ReportPage = () => {
   const totalExpense = useSelector(selectTotalExpense);
 
   const dispatch = useDispatch();
-
   useEffect(() => {
     if (reportDate && reportDate.length > 0) {
-      dispatch(getTransactionsThunk(reportDate));
+        dispatch(getTransactionsThunk(reportDate));
     } else {
       const currentDate = new Date();
       var year = currentDate.toLocaleString('default', { year: 'numeric' });
