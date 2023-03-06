@@ -1,9 +1,5 @@
 export const selectCategory = state => state.transaction.category;
 export const selectIncomeCategories = state => state.transaction.incomeCategory;
-// export const selectTransactionsExpenses = state =>
-//   state.transaction.transactionsExpense;
-// export const selectTransactionsIncome = state =>
-//   state.transaction.transactionsIncome;
 
 export const selectTransactionsExpenses = state =>
   state.transaction.transactions.expenses;
@@ -25,5 +21,7 @@ export const selectProductExpenses = state =>
 export const selectProductIncomes = state =>
   state.transaction.incomes.incomes.incomesData;
 
-export const currentTransaction = state =>
-  state.transaction.expenses.currentState;
+export const selectTotalIncome = state =>
+  state.transaction.incomes.incomes.incomeTotal;
+export const selectTotalExpense = state =>
+  state.transaction.expenses.expenses.expenseTotal;

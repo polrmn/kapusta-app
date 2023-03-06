@@ -36,7 +36,7 @@ li {
     margin: 0 auto;
     padding: 0;
     flex-wrap: wrap;
-    gap: 10px;
+    // gap: 10px;
     justify-content: center;
     padding-bottom: 20px;
   }
@@ -55,6 +55,10 @@ li {
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media screen and (max-width: 767px){
+    border-bottom: 1px solid #E0E5EB;
+    padding: 0 5px;
+  }
 }
 
 svg:hover,
@@ -69,30 +73,50 @@ svg:focus {
   display: flex;
   justify-content: center;
   padding-top: 20px;
+  align-items: center;
 }
-
-.btn {
+.bntLeft{
+  width: 4px;
+  height: 10px;
   border: none;
-  color: #ff751d;
+  // color: #ff751d;
+  background: url('../../images/icons/balance_vector_l.svg');
+  background-position: center;
+  background-color: #fff;
+  font-size: 22px;
+}
+.btnRight {
+  width: 4px;
+  height: 10px;
+  border: none;
+  // color: #ff751d;
+  background: url('../../images/icons/balance_vector_r.svg');
+  background-position: center;
   background-color: #fff;
   font-size: 22px;
 }
 
 .box {
+  background: #ffffff;
+
+box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
   @media screen and (min-width: 320px) {
     margin: 0 auto;
     padding: 0 20px;
   }
 
-  @media screen and (min-width: 767px) {
+  @media screen and (min-width: 767px) and (max-width: 1279px) {
     width: 624px;
     box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
     border-radius: 30px;
     padding: 0 40px;
+    margin-bottom: 32px;
   }
 
   @media screen and (min-width: 1280px) {
-    width: 1034px;
+    margin-bottom: 40px;
+    box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
+    border-radius: 30px;
   }
 }
 

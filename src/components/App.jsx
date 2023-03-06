@@ -23,11 +23,15 @@ import {
   getExpenseCategoriesThunk,
   getIncome,
   getIncomeCategoriesThunk,
+  getTransactionsThunk,
 } from 'redux/transaction/transactionOperations';
+import { selectDate } from 'redux/selectors';
+import { setDate } from 'redux/dateSlice';
 const App = () => {
   const dispatch = useDispatch();
   const token = useSelector(getAccessToken);
-  const isLogin = useSelector(getIsLogin);
+  const date = useSelector(selectDate);
+  // const isLogin = useSelector(getIsLogin)
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -40,6 +44,8 @@ const App = () => {
           dispatch(getIncomeCategoriesThunk());
           dispatch(getIncome());
           dispatch(getExpense());
+          dispatch(setDate(new Date().toISOString().slice(0, 7)));
+          dispatch(getTransactionsThunk(date));
         });
     googleAuth(token, searchParams, dispatch, navigate);
     // eslint-disable-next-line

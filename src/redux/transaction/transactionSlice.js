@@ -83,15 +83,23 @@ export const transactionSlice = createSlice({
       })
       .addCase(delateTransactionThunk.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        console.log(payload);
-        const indexElemExp = state.transactionsExpense.findIndex(
+        // console.log(payload);
+        // const indexElemExp = state.transactionsExpense.findIndex(
+        //   item => item._id === payload
+        // );
+        // state.transactionsExpense.splice(indexElemExp, 1);
+        // const indexElemInc = state.transactionsIncome.findIndex(
+        //   item => item._id === payload
+        // );
+        // state.transactionsIncome.splice(indexElemInc, 1);
+        const indexElemExp = state.transactions.expenses.findIndex(
           item => item._id === payload
         );
-        state.transactionsExpense.splice(indexElemExp, 1);
-        const indexElemInc = state.transactionsIncome.findIndex(
+        state.transactions.expenses.splice(indexElemExp, 1);
+        const indexElemInc = state.transactions.incomes.findIndex(
           item => item._id === payload
         );
-        state.transactionsIncome.splice(indexElemInc, 1);
+        state.transactions.incomes.splice(indexElemInc, 1);
       })
       .addCase(delateTransactionThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -220,15 +228,15 @@ export const transactionSlice = createSlice({
       // });
       // ============================ 2 санки после логина/рефреша которые нужны для передачи транзакций
       .addCase(loginThunk.fulfilled, (state, { payload }) => {
-        state.transactions.expense = payload.userData.transactions.filter(
+        state.transactions.expenses = payload.userData.transactions.filter(
           ({ category }) => category !== 'З/П' && category !== 'Доп. доход'
         );
-        state.transactions.income = payload.userData.transactions.filter(
+        state.transactions.incomes = payload.userData.transactions.filter(
           ({ category }) => category === 'З/П' || category === 'Доп. доход'
         );
       })
       .addCase(getUserThunk.fulfilled, (state, { payload }) => {
-        console.log(payload);
+        // console.log(payload);
         // state.transactions = payload.transactions;
         state.transactions.expenses = payload.transactions.filter(
           ({ category }) => category !== 'З/П' && category !== 'Доп. доход'
