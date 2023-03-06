@@ -52,7 +52,7 @@ export const Expenses = () => {
     e.preventDefault();
     if (!amount) return alert('ffff');
     // if (balanceCurrent < amount) {
-    if ((balanceCurrent - amount) <= 1) {
+    if (balanceCurrent - amount <= 1) {
       alert('недостатньо коштів');
       return;
     }

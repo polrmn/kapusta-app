@@ -31,6 +31,7 @@ const initialState = {
   },
   expenses: {
     monthStats: {},
+
     expenses: { expenseTotal: 0, expensesData: null },
   },
 };
@@ -227,7 +228,7 @@ export const transactionSlice = createSlice({
         );
       })
       .addCase(getUserThunk.fulfilled, (state, { payload }) => {
-        console.log(payload)
+        console.log(payload);
         // state.transactions = payload.transactions;
         state.transactions.expenses = payload.transactions.filter(
           ({ category }) => category !== 'З/П' && category !== 'Доп. доход'
@@ -235,7 +236,7 @@ export const transactionSlice = createSlice({
         state.transactions.incomes = payload.transactions.filter(
           ({ category }) => category === 'З/П' || category === 'Доп. доход'
         );
-      })
+      });
   },
 });
 export const transactionReducer = transactionSlice.reducer;

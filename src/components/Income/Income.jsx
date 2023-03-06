@@ -17,13 +17,13 @@ import {
 import { setAuthHeader } from '../../services/http/http';
 import scss from './Income.module.scss';
 import { addBalance } from 'redux/user/userOperations';
+import Summury from 'components/Summary/Summary';
 
 export const Income = () => {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('');
   const [date, setDate] = useState('');
-  
 
   const dispatch = useDispatch();
   const balanceCurrent = useSelector(getUserBalance);
@@ -169,7 +169,9 @@ export const Income = () => {
               </tbody>
             </table>
           </div>
-          <div className={scss.summery}></div>
+          <div className={scss.summery}>
+            <Summury />s
+          </div>
         </div>
       </div>
     </>

@@ -18,22 +18,29 @@ import { getAccessToken, getIsLogin } from '../redux/auth/authSelectors';
 import { googleAuth } from '../helpers/googleAuth';
 import { ReportPage } from 'pages/ReportPage/ReportPage';
 import { Income } from './Income/Income';
-import { getExpense, getExpenseCategoriesThunk, getIncome, getIncomeCategoriesThunk } from 'redux/transaction/transactionOperations';
+import {
+  getExpense,
+  getExpenseCategoriesThunk,
+  getIncome,
+  getIncomeCategoriesThunk,
+} from 'redux/transaction/transactionOperations';
 const App = () => {
   const dispatch = useDispatch();
   const token = useSelector(getAccessToken);
-  const isLogin = useSelector(getIsLogin)
+  const isLogin = useSelector(getIsLogin);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    token && dispatch(getUserThunk()).unwrap().then(()=>{
-      dispatch(getExpenseCategoriesThunk());
-      dispatch(getIncomeCategoriesThunk());
-      dispatch(getIncome());
-      dispatch(getExpense());
-      }
-    );
+    token &&
+      dispatch(getUserThunk())
+        .unwrap()
+        .then(() => {
+          dispatch(getExpenseCategoriesThunk());
+          dispatch(getIncomeCategoriesThunk());
+          dispatch(getIncome());
+          dispatch(getExpense());
+        });
     googleAuth(token, searchParams, dispatch, navigate);
     // eslint-disable-next-line
   }, [token]);
