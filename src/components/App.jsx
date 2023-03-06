@@ -18,7 +18,13 @@ import { getAccessToken, getIsLogin } from '../redux/auth/authSelectors';
 import { googleAuth } from '../helpers/googleAuth';
 import { ReportPage } from 'pages/ReportPage/ReportPage';
 import { Income } from './Income/Income';
-import { getExpense, getExpenseCategoriesThunk, getIncome, getIncomeCategoriesThunk, getTransactionsThunk } from 'redux/transaction/transactionOperations';
+import {
+  getExpense,
+  getExpenseCategoriesThunk,
+  getIncome,
+  getIncomeCategoriesThunk,
+  getTransactionsThunk,
+} from 'redux/transaction/transactionOperations';
 import { selectDate } from 'redux/selectors';
 import { setDate } from 'redux/dateSlice';
 const App = () => {
@@ -30,15 +36,15 @@ const App = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    token && dispatch(getUserThunk()).unwrap().then(()=>{
-      dispatch(getExpenseCategoriesThunk());
-      dispatch(getIncomeCategoriesThunk());
-      dispatch(getIncome());
-      dispatch(getExpense());
-      dispatch(setDate(new Date().toISOString().slice(0, 7)));
-      dispatch(getTransactionsThunk(date));
-      }
-    );
+    token &&
+      dispatch(getUserThunk())
+        .unwrap()
+        .then(() => {
+          dispatch(getExpenseCategoriesThunk());
+          dispatch(getIncomeCategoriesThunk());
+          dispatch(getIncome());
+          dispatch(getExpense());
+        });
     googleAuth(token, searchParams, dispatch, navigate);
     // eslint-disable-next-line
   }, [token]);
