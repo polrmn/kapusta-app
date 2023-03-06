@@ -12,7 +12,7 @@ const Home = () => {
     if (location.pathname === '/') {
       navigate('/expenses');
     }
-  }, [location]);
+  }, [location, navigate]);
 
   return (
     <div className="main">

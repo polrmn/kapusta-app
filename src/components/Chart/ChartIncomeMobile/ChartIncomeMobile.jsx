@@ -56,7 +56,7 @@ export const ChartIncomeMobile = () => {
     } else {
       return [];
     }
-  }, [DataExpenses, categoryFilter, ReportType]);
+  }, [DataExpenses, categoryFilter, ReportType, DataIncomes]);
   const getPath = (x, y, width, height, borderRadius = 10) => {
     const r = borderRadius || 0;
     const rTopLeft = Math.min(r, Math.min(width, height) / 2);
