@@ -52,10 +52,11 @@ export const Expenses = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (!amount) return alert('ffff');
+    if (!amount || !description || !category)
+      return Notify.info('Fill in all fields');
     // if (balanceCurrent < amount) {
     if (balanceCurrent - amount <= 1) {
-      alert('недостатньо коштів');
+      Notify.warning('Insufficient funds on the balance sheet');
       return;
     }
     dispatch(

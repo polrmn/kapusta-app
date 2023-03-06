@@ -38,15 +38,12 @@
     flex-wrap: nowrap;
     padding: 0;
     margin-bottom: 60px;
-    // gap: 15px;
     justify-content: space-between;
   }
 }
 .sectionInputs {
   align-items: center;
-  //display: contents;
   flex-direction: column;
-  //border-bottom-left-radius: 30%;
   background-color: transparent;
   @media screen and (min-width: 768px) {
     display: flex;
@@ -113,18 +110,17 @@
   align-items: center;
   letter-spacing: 0.02em;
   color: #c7ccdc;
-  // color: red;
   padding: 5px 19px;
 
-  &:hover, &:focus, &:active {
+  &:hover,
+  &:focus,
+  &:active {
     font-family: inherit;
-    color: #52555F;
-    background-color: #F5F6FB;
+    color: #52555f;
+    background-color: #f5f6fb;
   }
 }
-// option:hover {
-//   background-color: yellow;
-// }
+
 .inputWrapper {
   @media screen and (min-width: 768px) {
     display: flex;
@@ -175,27 +171,19 @@
   }
 }
 /*TABLE*/
-.containerAll {
-  @media screen and (max-width: 1280px) {
-    // margin: 0 auto;
-  }
-}
+
 .tableContainer {
   width: 100%;
   display: flex;
   table-layout: fixed;
   border: none;
   overflow-x: hidden;
-  // margin-top: 40px;
   @media screen and (min-width: 768px) {
-    // flex-direction: column;
-    // gap: 30px;
     justify-content: center;
   }
   @media screen and (min-width: 1279px) {
     flex-direction: row;
     justify-content: space-between;
-    // margin-top: 60px;
   }
 }
 .table {
@@ -244,14 +232,17 @@
     width: 100%;
     overflow-y: scroll;
     height: 342px;
-    // ::-webkit-scrollbar {
-    //   width: 6px;
-    //   background-color: #f5f6fb;
-    // }
-    // ::-webkit-scrollbar-thumb {
-    //   border-radius: 2px;
-    //   background-color: #ff751d;
-    // }
+    border: none;
+    &::-webkit-scrollbar {
+      width: 6px;
+      height: 130px;
+      background-color: #f5f6fb;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 2px;
+      background-color: #ff751d;
+      outline: none;
+    }
   }
 }
 .tableRow {
