@@ -44,8 +44,6 @@ const App = () => {
           dispatch(getIncomeCategoriesThunk());
           dispatch(getIncome());
           dispatch(getExpense());
-          dispatch(setDate(new Date().toISOString().slice(0, 7)));
-          dispatch(getTransactionsThunk(date));
         });
     googleAuth(token, searchParams, dispatch, navigate);
     // eslint-disable-next-line
