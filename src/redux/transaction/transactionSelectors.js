@@ -25,3 +25,6 @@ export const selectTotalIncome = state =>
   state.transaction.incomes.incomes.incomeTotal;
 export const selectTotalExpense = state =>
   state.transaction.expenses.expenses.expenseTotal;
+
+export const currentTransaction = state =>
+  state.transaction.expenses.currentState;

@@ -31,7 +31,7 @@ const initialState = {
   },
   expenses: {
     monthStats: {},
-
+    // currentState: {},
     expenses: { expenseTotal: 0, expensesData: null },
   },
 };
@@ -39,7 +39,11 @@ const initialState = {
 export const transactionSlice = createSlice({
   name: 'transaction',
   initialState,
-  reducers: {},
+  reducers: {
+    // updateIncomeMonthStats: (state, { payload }) => {
+    //   state.incomes.monthStats = { ...state.incomes.monthStats, payload };
+    // },
+  },
   extraReducers: builder => {
     builder
       /*addTransactionThunk*/
@@ -56,6 +60,7 @@ export const transactionSlice = createSlice({
           ...state.transactions.expenses,
           payload.transaction,
         ];
+        state.expenses.currentState = payload.transaction;
       })
       .addCase(addExpenseTransactionThunk.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -248,3 +253,4 @@ export const transactionSlice = createSlice({
   },
 });
 export const transactionReducer = transactionSlice.reducer;
+// export const { updateIncomeMonthStatsAction } = transactionSlice.actions;

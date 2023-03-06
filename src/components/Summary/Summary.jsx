@@ -13,6 +13,10 @@ import {
 } from 'redux/transaction/transactionSelectors';
 import { monthTranslate } from './monthTranslatе';
 import { getBalance } from 'redux/user/userSelectors';
+import {
+  updateIncomeMonthStats,
+  updateIncomeMonthStatsAction,
+} from 'redux/transaction/transactionSlice';
 
 let dataSum;
 let stats;
@@ -25,58 +29,53 @@ const Summury = () => {
   const expences = useSelector(selectTransactionsExpenses);
   const income = useSelector(selectTransactionsIncome);
   const data = useSelector(currentTransaction);
+  // console.log('data', data);
 
   // useEffect(() => {
   //   if (user) dispatch(getIncome());
   //   if (user) dispatch(getExpense());
   // }, [dispatch, user, userBalans]);
 
-  // useEffect(() => {
-  //   if (user) dispatch(getIncome());
-  // }, [dispatch, user, income]);
+  useEffect(() => {
+    if (user) dispatch(getIncome());
+  }, [dispatch, user, income]);
 
-  // useEffect(() => {
-  //   if (user) dispatch(getExpense());
-  // }, [dispatch, user, expences]);
+  useEffect(() => {
+    if (user) dispatch(getExpense());
+  }, [dispatch, user, expences]);
 
   const location = useLocation();
 
   if (location.pathname === '/income') {
     dataSum = Object.entries(incomeData) ?? [];
   }
-  console.log(dataSum);
+
   if (location.pathname === '/expenses') {
     dataSum = Object.entries(expenseData) ?? [];
   }
-  console.log(dataSum);
-  // ======================================================================================
-  // currentState: {},
 
-  //  state.expenses.currentState = payload.transaction;
-  //  console.log('payload', payload);
+  // // ======================================================================================
 
-  const month = new Date(data.date).toLocaleString('default', {
-    month: 'long',
-  });
-  // const index = data.date.slice(5, 7);
-  const amount = data.amount;
-  console.log('month', month);
-  console.log('amount', amount);
-  // console.log('index', index);
-  stats = dataSum?.reverse().map(item => {
-    if (item[0].toLowerCase() === month) {
-      if (item[1] === 'N/A') {
-        item[1] = 0;
-      } else {
-        return (item[1] = item[1] + amount);
-      }
-      console.log('item[1]', item[1]);
-      console.log((item[1] = item[1] + amount));
-    }
-  });
-  console.log('expenseData', expenseData);
-  console.log('amount', amount);
-  console.log('stats', stats);
+  // const month = new Date(data.date).toLocaleString('default', {
+  //   month: 'long',
+  // });
+
+  // const amount = data.amount;
+
+  // stats = dataSum?.reverse().map(item => {
+  //   if (item[0].toLowerCase() === month) {
+  //     if (item[1] === 'N/A') {
+  //       item[1] = 0;
+  //     } else {
+  //       const newMonth = month[0].toUpperCase() + month.slice(1, month.length);
+  //       const newData = { [newMonth]: (item[1] = item[1] + amount) };
+
+  //       dispatch(updateIncomeMonthStatsAction(newData));
+  //       return (item[1] = item[1] + amount);
+  //     }
+  //   }
+  // });
+
   // =================================================================================
   return (
     <div>
